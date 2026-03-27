@@ -1,0 +1,90 @@
+:root {
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations modale expérience */
+@keyframes wipe-in-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes wipe-out-up {
+  from {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+}
+
+.animate-modal-in {
+  animation: 0.6s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-up both;
+}
+
+.animate-modal-out {
+  animation: 0.4s cubic-bezier(0.25, 1, 0.3, 1) wipe-out-up both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: 0.4s ease-out fade-in both;
+}
+
+/* Modal expérience visible */
+#exp-modal.visible {
+  visibility: visible;
+}
+
+#exp-modal.visible #exp-modal-content {
+  animation: 0.6s cubic-bezier(0.25, 1, 0.3, 1) wipe-in-up both;
+}
+
+#exp-modal.closing #exp-modal-content {
+  animation: 0.4s cubic-bezier(0.25, 1, 0.3, 1) wipe-out-up both;
+}
+
+/* Timeline path (optionnel) */
+.timeline-path {
+  stroke-dasharray: 6 4;
+  animation: dash-flow 1.5s linear infinite;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* Badges type entreprise */
+.badge-pme { background-color: #10b981; color: white; }
+.badge-startup { background-color: #f59e0b; color: white; }
+.badge-grand-groupe { background-color: #007abd; color: white; }
