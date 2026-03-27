@@ -301,8 +301,8 @@
     <div id="automation-card-backdrop" class="absolute inset-0 bg-slate-900/35 backdrop-blur-sm"></div>
     <div class="relative bg-white w-full max-w-4xl rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden">
       <div class="px-8 pt-8 pb-6 border-b border-slate-100 flex justify-between items-center gap-6">
-        <div class="flex items-start gap-5">
-          <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="text-left">
+        <div class="flex items-start gap-4">
+          <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="automation-project-tab text-left">
             <h2 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900">
               Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>
             </h2>
@@ -310,11 +310,12 @@
               Assistant de pilotage produit
             </p>
           </button>
+          <div class="w-px h-14 bg-slate-200 mt-1"></div>
           <button
             type="button"
             id="automation-project-tab-pos"
             data-automation-project-tab="product-os"
-            class="pl-5 border-l border-white/90 text-left hover:opacity-85 transition-all"
+            class="automation-project-tab text-left"
           >
             <h2 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900">
               Product <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Operating System</span>
@@ -350,7 +351,7 @@
         </div>
 
         <!-- Onglets agents IA -->
-        <div class="max-w-4xl mx-auto mb-4 flex flex-col items-center gap-2">
+        <div class="max-w-4xl mx-auto mb-4 flex flex-col items-center gap-2 group/agents">
           <div class="inline-flex rounded-2xl bg-slate-50 p-1 border border-slate-200 shadow-sm gap-1">
             <button
               type="button"
@@ -389,13 +390,16 @@
               PM Discovery
             </button>
           </div>
+          <p class="text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400 opacity-0 -translate-y-1 group-hover/agents:opacity-100 group-hover/agents:translate-y-0 transition-all duration-200 pointer-events-none">
+            Survolez puis cliquez pour sélectionner un agent
+          </p>
         </div>
 
         <!-- Section PM Secretary -->
         <div
           id="automation-agent-section-secretary"
           data-agent-section="pm-secretary"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -477,7 +481,7 @@
         <div
           id="automation-agent-section-strategy"
           data-agent-section="pm-strategy"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -561,7 +565,7 @@
         <div
           id="automation-agent-section-scrum"
           data-agent-section="pm-scrum"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -645,7 +649,7 @@
         <div
           id="automation-agent-section-discovery"
           data-agent-section="pm-discovery"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -745,7 +749,7 @@
             </p>
           </div>
 
-          <div class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden">
+          <div class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
             <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Cycle Operating System</p>
             <div class="relative z-10 grid grid-cols-4 gap-3 md:gap-5 text-center">

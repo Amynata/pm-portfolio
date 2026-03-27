@@ -105,9 +105,43 @@ body {
   animation: workflow-cta-blink 1.2s ease-in-out infinite;
 }
 
+.automation-project-tab {
+  position: relative;
+  padding: 0.25rem 0.5rem 0.4rem;
+  border-radius: 0.9rem;
+  opacity: 0.62;
+  transition: opacity 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.automation-project-tab:hover {
+  opacity: 0.9;
+}
+
+.automation-project-tab.is-active {
+  opacity: 1;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  transform: translateY(-1px);
+}
+
+.automation-project-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -7px;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .workflow-cta-blink {
     animation: none;
+  }
+  .automation-project-tab {
+    transition: none;
   }
 }
 

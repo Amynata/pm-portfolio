@@ -1405,12 +1405,11 @@
     function setActiveAutomationProject(projectId) {
       automationProjectTabs.forEach(function (btn) {
         var isActive = btn.getAttribute('data-automation-project-tab') === projectId;
+        btn.classList.toggle('is-active', isActive);
         if (isActive) {
-          btn.classList.remove('opacity-60');
-          btn.classList.add('opacity-100');
+          btn.setAttribute('aria-pressed', 'true');
         } else {
-          btn.classList.remove('opacity-100');
-          btn.classList.add('opacity-60');
+          btn.setAttribute('aria-pressed', 'false');
         }
       });
       automationProjectSections.forEach(function (section) {
