@@ -1406,9 +1406,11 @@
       automationProjectTabs.forEach(function (btn) {
         var isActive = btn.getAttribute('data-automation-project-tab') === projectId;
         if (isActive) {
-          btn.classList.remove('opacity-70');
+          btn.classList.remove('opacity-60');
+          btn.classList.add('opacity-100');
         } else {
-          btn.classList.add('opacity-70');
+          btn.classList.remove('opacity-100');
+          btn.classList.add('opacity-60');
         }
       });
       automationProjectSections.forEach(function (section) {
@@ -1437,10 +1439,10 @@
         var isActive = btn.getAttribute('data-agent-tab') === agentId;
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         if (isActive) {
-          btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
-          btn.classList.remove('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
+          btn.classList.add('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'shadow-sm');
+          btn.classList.remove('text-slate-500', 'hover:text-slate-900', 'hover:bg-white', 'bg-slate-900', 'text-white');
         } else {
-          btn.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+          btn.classList.remove('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'bg-slate-900', 'text-white');
           btn.classList.add('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
         }
       });

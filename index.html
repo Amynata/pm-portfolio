@@ -298,8 +298,8 @@
 
   <!-- Card Workflow Automatisé (détails Assistant IA) -->
   <div id="automation-card-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 md:p-8 invisible transition-all duration-300" aria-hidden="true">
-    <div id="automation-card-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-md"></div>
-    <div class="relative bg-white/98 backdrop-blur-xl w-full max-w-4xl rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden">
+    <div id="automation-card-backdrop" class="absolute inset-0 bg-slate-900/35 backdrop-blur-sm"></div>
+    <div class="relative bg-white w-full max-w-4xl rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden">
       <div class="px-8 pt-8 pb-6 border-b border-slate-100 flex justify-between items-center gap-6">
         <div class="flex items-start gap-5">
           <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="text-left">
@@ -351,12 +351,12 @@
 
         <!-- Onglets agents IA -->
         <div class="max-w-4xl mx-auto mb-4 flex flex-col items-center gap-2">
-          <div class="inline-flex rounded-2xl bg-slate-100/80 p-1 border border-slate-200 shadow-sm gap-1">
+          <div class="inline-flex rounded-2xl bg-slate-50 p-1 border border-slate-200 shadow-sm gap-1">
             <button
               type="button"
               id="automation-agent-tab-secretary"
               data-agent-tab="pm-secretary"
-              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl bg-slate-900 text-white shadow-sm transition-all"
+              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl bg-[#EEF2FF] text-[#6366F1] border border-[#6366F1]/25 shadow-sm transition-all"
               aria-pressed="true"
             >
               PM Secretary
@@ -395,7 +395,7 @@
         <div
           id="automation-agent-section-secretary"
           data-agent-section="pm-secretary"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -477,7 +477,7 @@
         <div
           id="automation-agent-section-strategy"
           data-agent-section="pm-strategy"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -561,7 +561,7 @@
         <div
           id="automation-agent-section-scrum"
           data-agent-section="pm-scrum"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -645,7 +645,7 @@
         <div
           id="automation-agent-section-discovery"
           data-agent-section="pm-discovery"
-          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden hidden"
         >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
@@ -745,7 +745,7 @@
             </p>
           </div>
 
-          <div class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden">
+          <div class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white shadow-sm px-6 py-8 overflow-hidden">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
             <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Cycle Operating System</p>
             <div class="relative z-10 grid grid-cols-4 gap-3 md:gap-5 text-center">
