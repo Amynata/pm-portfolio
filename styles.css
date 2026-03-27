@@ -4,11 +4,44 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Barre de statut / encoche : le header reste sous la zone sûre */
+.site-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Onglet Projet (modale expérience) : blocs Problème / Actions / Impact plus larges et lisibles */
+.exp-project-content > div.flex.gap-4 {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: rgb(248 250 252);
+  border: 1px solid rgb(241 245 249);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .exp-project-content > div.flex.gap-4 {
+    padding: 1.125rem 1.5rem;
+  }
+}
+
+.exp-project-content > h4 {
+  margin-bottom: 1rem;
 }
 
 /* Animations modale expérience */
@@ -136,12 +169,31 @@ body {
   background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
 }
 
+/* Indication sous l’orbite d’expériences (discret, sans distraire) */
+@keyframes orbit-hint-soft {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.orbit-explore-hint {
+  animation: orbit-hint-soft 4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .workflow-cta-blink {
     animation: none;
   }
   .automation-project-tab {
     transition: none;
+  }
+  .orbit-explore-hint {
+    animation: none;
+    opacity: 0.85;
   }
 }
 

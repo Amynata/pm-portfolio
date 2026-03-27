@@ -1,0 +1,12 @@
+---
+description: Ajouter des commentaires lors des modifications de code
+alwaysApply: true
+---
+
+# Commentaires lors des modifications
+
+Lorsque tu modifies du code dans ce dépôt :
+
+- Ajoute ou mets à jour des **commentaires courts** (français ou anglais, cohérent avec le fichier) pour expliquer **l’intention** ou le **pourquoi** des changements, surtout pour la logique non triviale, les états UI, les écouteurs d’événements et les sections HTML structurantes.
+- Ne commente pas l’évident ; privilégie la clarté pour un futur lecteur (ou toi-même).
+- Si tu touches à un bloc existant, harmonise le style des commentaires déjà présents dans le fichier.

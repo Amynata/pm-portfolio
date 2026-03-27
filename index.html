@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FDFBF7" />
   <title>Aminata Lissa Dia — Product Manager/Builder</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,30 +17,77 @@
     <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-amber-100/10 blur-[120px]"></div>
   </div>
 
-  <!-- Header -->
-  <header class="fixed top-0 w-full px-6 md:px-10 py-6 flex justify-between items-center z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/30">
-    <div class="flex items-center gap-3">
-      <div class="w-5 h-5 rounded-md bg-slate-900 shadow-lg"></div>
-      <span class="font-black text-sm uppercase tracking-tighter hidden sm:block" id="header-name">Aminata Lissa Dia</span>
-      <div class="h-4 w-[1px] bg-slate-200 mx-1 hidden sm:block"></div>
-      <span class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Product Manager/Builder</span>
-    </div>
-    <nav class="flex items-center gap-2 md:gap-4 text-[10px] md:text-[11px] font-black uppercase tracking-widest text-slate-600">
-      <button type="button" id="btn-lang" class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-full transition-all text-slate-800">
-        <span aria-hidden="true">🌐</span><span id="lang-label">FR</span>
+  <!-- Header : nav compacte sur mobile (hamburger), liens inchangés sur md+ -->
+  <header class="site-header fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/30">
+    <div class="flex justify-between items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-10 py-4 md:py-6 max-w-[100vw] min-w-0">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+        <div class="w-5 h-5 shrink-0 rounded-md bg-slate-900 shadow-lg"></div>
+        <span class="font-black text-xs sm:text-sm uppercase tracking-tighter truncate hidden sm:block max-w-[42vw] sm:max-w-none" id="header-name">Aminata Lissa Dia</span>
+        <div class="h-4 w-px bg-slate-200 mx-0.5 hidden sm:block shrink-0"></div>
+        <span class="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">Product Manager/Builder</span>
+      </div>
+      <button
+        type="button"
+        id="btn-nav-open"
+        class="md:hidden shrink-0 flex items-center justify-center w-11 h-11 min-w-[2.75rem] min-h-[2.75rem] rounded-xl border border-slate-200 bg-white text-slate-900 shadow-sm active:scale-[0.98]"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
-      <button type="button" id="btn-formation" class="hover:text-[#818CF8] px-2 transition-all">Formation</button>
-      <a href="#projects" class="hover:text-[#818CF8] px-2 transition-all">Projets</a>
-      <button type="button" id="btn-cv" class="hover:text-[#818CF8] px-2 transition-all">CV</button>
-      <button type="button" id="btn-contact" class="bg-slate-900 text-white px-4 md:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all">Me contacter</button>
-    </nav>
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-2 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-slate-600" aria-label="Navigation principale">
+        <button type="button" id="btn-lang" class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full transition-all text-slate-800 min-h-[2.5rem]">
+          <span aria-hidden="true">🌐</span><span id="lang-label">FR</span>
+        </button>
+        <button type="button" id="btn-formation" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Formation</button>
+        <button type="button" id="btn-projects" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Projets</button>
+        <button type="button" id="btn-cv" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">CV</button>
+        <button type="button" id="btn-contact" class="bg-slate-900 text-white px-4 lg:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all min-h-[2.5rem]">Me contacter</button>
+      </nav>
+    </div>
   </header>
 
-  <main class="flex-1 flex flex-col pt-24 pb-12 px-6">
+  <!-- Menu mobile (drawer) -->
+  <div
+    id="mobile-nav"
+    class="mobile-nav-overlay fixed inset-0 z-[85] md:hidden invisible opacity-0 pointer-events-none transition-opacity duration-200"
+    aria-hidden="true"
+  >
+    <div id="mobile-nav-backdrop" class="absolute inset-0 bg-slate-900/45 backdrop-blur-sm"></div>
+    <nav
+      id="mobile-nav-drawer"
+      class="absolute top-0 right-0 bottom-0 flex w-[min(100%,20rem)] max-w-[100vw] flex-col gap-1 border-l border-slate-100 bg-white px-5 pb-10 pt-[max(1.5rem,env(safe-area-inset-top))] shadow-2xl transform translate-x-full transition-transform duration-300 ease-out"
+      aria-label="Menu mobile"
+    >
+      <div class="mb-4 flex items-center justify-between gap-2">
+        <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Menu</span>
+        <button
+          type="button"
+          id="btn-nav-close"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 text-lg text-slate-500"
+          aria-label="Fermer le menu"
+        >
+          ✕
+        </button>
+      </div>
+      <button type="button" id="mobile-nav-lang" class="flex min-h-[3rem] items-center gap-2 rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">
+        <span aria-hidden="true">🌐</span> <span id="mobile-lang-label">FR</span>
+      </button>
+      <button type="button" id="mobile-nav-formation" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">Formation</button>
+      <button type="button" id="mobile-nav-projects" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">Projets</button>
+      <button type="button" id="mobile-nav-cv" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">CV</button>
+      <button type="button" id="mobile-nav-contact" class="mt-2 min-h-[3rem] rounded-xl bg-slate-900 px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-white hover:bg-[#818CF8]">Me contacter</button>
+    </nav>
+  </div>
+
+  <main class="site-main flex flex-col px-4 pb-10 pt-[max(5.5rem,env(safe-area-inset-top)+4.5rem)] sm:px-6 sm:pb-12 sm:pt-24 md:px-6">
     <!-- Hero -->
-    <section class="w-full max-w-[1600px] mx-auto grid lg:grid-cols-2 gap-12 xl:gap-24 items-center mb-12" id="about">
+    <section class="mx-auto mb-10 grid w-full max-w-[1600px] grid-cols-1 items-center gap-10 lg:mb-12 lg:grid-cols-2 lg:gap-12 xl:gap-24" id="about">
       <div class="order-1 flex flex-col items-center justify-center relative py-12 lg:py-0">
-        <div class="relative flex items-center justify-center w-full min-h-[400px] md:min-h-[500px]">
+        <div class="relative flex items-center justify-center w-full min-h-[400px] md:min-h-[500px]" id="hero-orbit-section" aria-describedby="click-hint">
           <div class="relative z-20 group">
             <div class="absolute top-[38%] left-1/2 -translate-x-1/2 z-40 bg-white/90 backdrop-blur-md text-slate-900 px-4 py-2 rounded-xl shadow-xl border border-slate-50 opacity-0 animate-bounce group-hover:opacity-100 transition-opacity pointer-events-none">
               <p class="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
@@ -47,7 +95,7 @@
                 Clique pour voir mes projets persos
               </p>
             </div>
-            <button type="button" id="btn-personal-projects" class="relative w-60 h-60 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] rounded-full overflow-hidden border-[12px] md:border-[16px] border-white shadow-2xl bg-white transition-all duration-500 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30 cursor-pointer" aria-label="Ouvrir mes projets persos">
+            <button type="button" id="btn-personal-projects" class="relative aspect-square w-[min(85vw,17.5rem)] max-w-[380px] sm:w-72 sm:h-72 md:h-[380px] md:w-[380px] rounded-full overflow-hidden border-[10px] sm:border-[12px] md:border-[16px] border-white shadow-2xl bg-white transition-all duration-500 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30 cursor-pointer touch-manipulation" aria-label="Ouvrir mes projets persos">
               <img src="Images/Photo_pro.jpg" alt="Portrait Aminata Lissa Dia" class="w-full h-full object-cover rounded-full grayscale opacity-95 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" />
               <span class="absolute inset-0 rounded-full bg-[#818CF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <span class="w-14 h-14 rounded-full bg-white/85 backdrop-blur-sm flex items-center justify-center border border-white/70 shadow-2xl transform transition-all duration-300 scale-90 group-hover:scale-100">
@@ -62,14 +110,17 @@
           <div id="experience-orbit" class="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
             <!-- Experience buttons injected by JS -->
           </div>
-          <svg class="absolute w-[400px] md:w-[530px] h-[400px] md:h-[500px] opacity-10 pointer-events-none z-10" aria-hidden="true" viewBox="0 0 100 100">
+          <svg class="pointer-events-none absolute z-10 h-auto w-[min(92vw,400px)] max-w-[400px] opacity-10 md:w-[530px] md:max-w-[530px]" style="aspect-ratio:100/100" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
             <!-- Cercle de base -->
             <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="16 16" class="text-indigo-200" />
             <!-- Arc clé qui traverse toutes les expériences (demi-cercle complet, violet plus soutenu) -->
             <path d="M 50 0 A 42 42 0 0 1 50 100" fill="none" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" class="opacity-80" />
           </svg>
         </div>
-        <div class="flex items-center justify-center gap-8 md:gap-12 mt-20">
+        <p id="click-hint" class="orbit-explore-hint mt-9 md:mt-11 mb-0 max-w-[19rem] mx-auto text-center text-[11px] md:text-xs text-slate-400/90 font-medium leading-snug tracking-tight px-3 transition-opacity duration-500" role="note">
+          Les cercles autour du portrait ouvrent chaque expérience.
+        </p>
+        <div class="flex items-center justify-center gap-8 md:gap-12 mt-16 md:mt-20">
           <div class="flex flex-col items-center gap-2">
             <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
               <svg viewBox="0 0 64 64" class="w-full h-full" fill="none">
@@ -124,8 +175,8 @@
           </h2>
           <div class="w-20 h-1 bg-[#818CF8] mt-8 rounded-full shadow-lg"></div>
         </div>
-        <div class="text-base md:text-lg text-slate-500 max-w-xl leading-relaxed mb-12 font-medium text-left" id="hero-desc">
-          <p class="mb-4 text-slate-900"><strong id="desc1">Ingénieure de formation</strong><span id="desc2">, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.</span></p>
+        <div class="mb-10 max-w-xl text-left text-[0.95rem] font-medium leading-relaxed text-slate-500 sm:text-base md:mb-12 md:text-lg" id="hero-desc">
+          <p class="mb-4 text-slate-900"><strong id="desc1">Ingénieure de formation</strong><span id="desc2">, forte de plus de huit ans d'expérience dans la tech, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.</span></p>
           <p class="mb-4 text-slate-700"><span id="desc3">Mon parcours a commencé dans la </span><span class="text-[#818CF8] font-bold" id="desc4">robotique et les systèmes complexes</span><span id="desc5">, mais c'est le besoin de rester </span><span class="text-slate-900 font-bold underline decoration-indigo-200" id="desc6">connectée à l'humain</span><span id="desc7"> qui m'a menée vers le </span><span class="text-slate-900 font-bold" id="desc8">Product Management.</span><span id="desc9"> Aujourd'hui, je résous des problèmes concrets en faisant le </span><span class="text-indigo-600 font-bold" id="desc10">pont entre la puissance technique et l'usage utilisateur.</span></p>
           <p class="text-slate-700"><span id="desc11">Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (</span><span class="text-[#818CF8] font-bold" id="desc12">IA, automatisation, outils internes</span><span id="desc13">) pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.</span></p>
         </div>
@@ -155,7 +206,7 @@
   </main>
 
   <footer class="border-t border-slate-200/30 bg-white/20 backdrop-blur-xl py-10 mt-auto">
-    <div class="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 sm:flex-row sm:justify-between sm:gap-10 sm:px-6 md:px-10">
       <p>© 2026 / Aminata Lissa Dia</p>
       <div class="flex gap-12">
         <a href="https://www.linkedin.com/in/aminata-lissa-dia" target="_blank" rel="noopener noreferrer" class="hover:text-[#818CF8] transition-colors">LinkedIn</a>
@@ -167,8 +218,8 @@
   <!-- Modal Détail Expérience -->
   <div id="exp-modal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6 invisible transition-all duration-300" aria-hidden="true">
     <div id="exp-modal-backdrop" class="absolute inset-0 bg-slate-900/30 backdrop-blur-md transition-opacity duration-300"></div>
-    <div id="exp-modal-content" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white shadow-2xl rounded-[2.5rem] md:rounded-[3.5rem] border border-white/50 overflow-hidden max-h-[85vh] overflow-y-auto">
-      <div class="p-8 md:p-12 relative">
+    <div id="exp-modal-content" class="absolute left-1/2 top-1/2 w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-2xl border border-white/50 bg-white shadow-2xl max-h-[85vh] sm:w-full sm:rounded-[2.5rem] md:rounded-[3.5rem]">
+      <div class="relative p-5 sm:p-8 md:p-12">
         <button type="button" id="exp-modal-close" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all border border-slate-200 z-50" aria-label="Fermer">✕</button>
         <div id="exp-modal-body">
           <!-- Rempli par JS -->
@@ -245,63 +296,12 @@
     </div>
   </div>
 
-  <!-- Modal Projets Persos -->
-  <div id="personal-projects-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 md:p-8 invisible transition-all duration-300" aria-hidden="true">
-    <div id="personal-projects-modal-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
-    <div class="relative bg-white/95 backdrop-blur-xl w-full max-w-3xl rounded-[3rem] border border-white/50 shadow-2xl overflow-y-auto max-h-[90vh]">
-      <div class="sticky top-0 bg-white/80 backdrop-blur-md z-10 px-8 py-6 border-b border-slate-100 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-[#818CF8] flex items-center justify-center text-white shadow-lg">✨</div>
-          <div>
-            <h2 class="font-bold text-xl tracking-tight text-slate-900">Projets Persos</h2>
-            <p class="text-[10px] text-[#818CF8] font-bold uppercase tracking-widest">Builder side projects</p>
-          </div>
-        </div>
-        <button type="button" id="personal-projects-modal-close" class="w-10 h-10 rounded-full bg-white hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-all border border-slate-200">✕</button>
-      </div>
-      <div class="p-6 md:p-10 grid md:grid-cols-2 gap-5 text-left">
-        <article
-          id="card-assistant-ia"
-          class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all cursor-pointer"
-          role="button"
-          tabindex="0"
-          aria-label="Ouvrir Workflow Automatisé"
-        >
-          <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-2">Produit IA</p>
-          <h3 class="text-base font-black text-slate-900 mb-2">Agents IA pour automatiser le Workflow Produit</h3>
-          <p class="text-sm text-slate-600 font-medium leading-relaxed">
-            Des assistants IA multi-agents pour automatiser les tâches récurrentes du Product Manager et libérer du temps.
-          </p>
-          <p class="mt-4 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-400 workflow-cta-blink">
-            Ouvrir le workflow automatisé
-            <span class="text-[#6366F1]" aria-hidden="true">→</span>
-          </p>
-        </article>
-        <article
-          id="card-product-os"
-          class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all cursor-pointer"
-          role="button"
-          tabindex="0"
-          aria-label="Ouvrir Product Operating System"
-        >
-          <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-2">Automation</p>
-          <h3 class="text-base font-black text-slate-900 mb-2">Product Operating System</h3>
-          <p class="text-sm text-slate-600 font-medium leading-relaxed">Automatiser le cycle produit de la discovery à la delivery (feedback, priorisation, tickets, reporting) pour réduire la friction et améliorer la continuité.</p>
-          <p class="mt-4 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-400 workflow-cta-blink">
-            Ouvrir le Product Operating System
-            <span class="text-[#6366F1]" aria-hidden="true">→</span>
-          </p>
-        </article>
-      </div>
-    </div>
-  </div>
-
   <!-- Card Workflow Automatisé (détails Assistant IA) -->
   <div id="automation-card-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 md:p-8 invisible transition-all duration-300" aria-hidden="true">
     <div id="automation-card-backdrop" class="absolute inset-0 bg-slate-900/35 backdrop-blur-sm"></div>
-    <div class="relative bg-white w-full max-w-4xl rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-y-auto max-h-[90vh]">
-      <div class="sticky top-0 bg-white/95 backdrop-blur-md z-10 border-b border-slate-100">
-        <div class="px-8 py-6 flex justify-between items-center">
+    <div class="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-slate-100 bg-white shadow-2xl sm:rounded-[2.5rem]">
+      <div class="sticky top-0 z-10 border-b border-slate-100 bg-white/95 backdrop-blur-md">
+        <div class="flex items-center justify-between gap-3 px-4 py-4 sm:px-8 sm:py-6">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-2xl bg-[#818CF8] flex items-center justify-center text-white shadow-lg">✨</div>
             <div>
@@ -312,7 +312,7 @@
           <button type="button" id="automation-card-close" class="w-10 h-10 rounded-full bg-white hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-all border border-slate-200">✕</button>
         </div>
 
-        <div class="px-8 pb-5 pt-1 flex items-start gap-4">
+        <div class="flex flex-col gap-4 px-4 pb-5 pt-1 sm:flex-row sm:items-start sm:px-8">
           <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="automation-project-tab text-left">
             <h3 class="text-lg md:text-xl font-black tracking-tight text-slate-900">
               Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>
@@ -337,7 +337,7 @@
           </button>
         </div>
       </div>
-      <div class="px-8 pt-6 pb-8 space-y-8">
+      <div class="space-y-6 px-4 pb-8 pt-4 sm:space-y-8 sm:px-8 sm:pt-6">
         <div data-automation-project-section="workflow" class="space-y-8">
         <div class="max-w-3xl mx-auto p-5 md:p-6 rounded-2xl border border-slate-200 bg-slate-50 shadow-md ring-1 ring-slate-200/70">
           <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 flex items-center gap-2">
@@ -425,7 +425,7 @@
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-violet-50 border border-violet-100 text-violet-800 font-semibold">Obsidian</span>
           </div>
           <div class="relative min-h-[200px] md:min-h-[220px]">
-            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+            <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
               <div class="space-y-3">
                 <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                 <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
@@ -509,7 +509,7 @@
             </span>
           </div>
           <div class="relative min-h-[200px] md:min-h-[220px]">
-            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+            <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
               <div class="space-y-3">
                 <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                 <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
@@ -593,7 +593,7 @@
             </span>
           </div>
           <div class="relative min-h-[200px] md:min-h-[220px]">
-            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+            <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
               <div class="space-y-3">
                 <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                 <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
@@ -677,7 +677,7 @@
             </span>
           </div>
           <div class="relative min-h-[200px] md:min-h-[220px]">
-            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+            <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
               <div class="space-y-3">
                 <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                 <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
@@ -760,7 +760,7 @@
           <div class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden">
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
             <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Cycle Operating System</p>
-            <div class="relative z-10 grid grid-cols-4 gap-3 md:gap-5 text-center">
+            <div class="relative z-10 grid grid-cols-2 gap-3 text-center sm:grid-cols-4 md:gap-5">
               <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
                 <p class="text-[10px] font-black uppercase tracking-widest text-[#6366F1]">Discovery</p>
                 <p class="text-[10px] text-slate-500 mt-1">Feedback, interviews, synthèse</p>

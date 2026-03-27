@@ -9,7 +9,9 @@
       drivenBy: 'intelligentes pour ',
       impact: 'simplifier le quotidien.',
       desc1: 'Ingénieure de formation',
-      desc2: ", j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.",
+      // Mention légère de l’ancienneté tech (8+ ans) dans la continuité du titre
+      desc2:
+        ", forte de plus de huit ans d'expérience dans la tech, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.",
       desc3: "Mon parcours a commencé dans la ",
       desc4: 'robotique et les systèmes complexes',
       desc5: ", mais c'est le besoin de rester ",
@@ -21,7 +23,9 @@
       desc11: "Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (",
       desc12: 'IA, automatisation, outils internes',
       desc13: ") pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.",
-      clickToDiscover: 'Clique pour découvrir mes expériences ⬅',
+      // Indication discrète sous l’orbite (liée à #click-hint dans index.html)
+      clickToDiscover:
+        'Les cercles autour du portrait ouvrent chaque expérience.',
       tools: 'Outils',
       certif: 'Certifications',
       tabMission: 'Mission',
@@ -55,7 +59,8 @@
       drivenBy: 'solutions to ',
       impact: 'simplify daily life.',
       desc1: 'Engineer by training',
-      desc2: ', I have realized part of my dream: transforming cutting-edge technologies into everyday tools.',
+      desc2:
+        ', with over eight years of experience in tech, I have realized part of my dream: transforming cutting-edge technologies into everyday tools.',
       desc3: 'My journey started in ',
       desc4: 'robotics and complex systems',
       desc5: ', but the need to stay ',
@@ -67,7 +72,7 @@
       desc11: 'My specialty? A natural tech appetite that drives me to build solutions (',
       desc12: 'AI, automation, internal tools',
       desc13: ') to simplify the lives of those who build and use them.',
-      clickToDiscover: 'Click to explore my experience ⬅',
+      clickToDiscover: 'The circles around the portrait open each experience.',
       tools: 'Tools',
       certif: 'Certifications',
       tabMission: 'Mission',
@@ -697,34 +702,137 @@
         },
       ],
     },
+    // Samsung MQA : contenu aligné sur la fiche mission / projet réseau (LTE, VoLTE, opérateurs)
     {
       id: 4,
-      title: { FR: 'Junior Product Manager', EN: 'Junior Product Manager' },
+      title: { FR: 'Mobile Quality Engineer – Mobile Quality Assurance', EN: 'Mobile Quality Engineer – Mobile Quality Assurance' },
       company: 'Samsung Electronics France',
       shortName: 'SAM',
       companyType: 'Grand Groupe',
       period: { FR: '2015 - 2017', EN: '2015 - 2017' },
       color: '#1428A0',
       logo: 'Images/Samsung_Orig_Wordmark_BLUE_RGB.png',
-      mission: {
-        FR: 'Accompagnement de startups dans la définition de leur MVP. Réalisation de tests utilisateurs et itérations rapides.',
-        EN: 'Supporting startups in defining their MVP. Conducting user tests and rapid iterations.',
+      missionHtml: {
+        FR:
+          '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4">Ingénieure au sein de l\'équipe <strong class="text-slate-900">Mobile Quality Assurance (MQA)</strong>, en charge de la validation et de l\'intégration des nouvelles technologies réseau (LTE, VoLTE) sur les smartphones Samsung.</p>' +
+          '<p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Responsable de</p>' +
+          '<ul class="list-disc pl-5 space-y-2 text-sm md:text-base text-slate-600 font-medium leading-relaxed">' +
+          '<li>Tester et valider l\'intégration des <strong class="text-slate-900">fonctionnalités réseau</strong> sur les appareils</li>' +
+          '<li>Assurer la <strong class="text-slate-900">compatibilité avec les opérateurs télécom</strong></li>' +
+          '<li>Analyser les anomalies et coordonner leur résolution avec les <strong class="text-slate-900">équipes techniques</strong></li>' +
+          '<li>Contribuer aux processus de <strong class="text-slate-900">certification et de validation produit</strong></li>' +
+          '</ul>',
+        EN:
+          '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4">Engineer within the <strong class="text-slate-900">Mobile Quality Assurance (MQA)</strong> team, responsible for validating and integrating new network technologies (LTE, VoLTE) on Samsung smartphones.</p>' +
+          '<p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Responsible for</p>' +
+          '<ul class="list-disc pl-5 space-y-2 text-sm md:text-base text-slate-600 font-medium leading-relaxed">' +
+          '<li>Testing and validating <strong class="text-slate-900">network feature</strong> integration on devices</li>' +
+          '<li>Ensuring <strong class="text-slate-900">compatibility with telecom operators</strong></li>' +
+          '<li>Analyzing issues and coordinating resolution with <strong class="text-slate-900">technical teams</strong></li>' +
+          '<li>Contributing to <strong class="text-slate-900">product certification and validation</strong> processes</li>' +
+          '</ul>',
       },
+      mission: {
+        FR: 'Ingénieure MQA : validation et intégration LTE/VoLTE sur smartphones Samsung, compatibilité opérateurs et certification.',
+        EN: 'MQA engineer: LTE/VoLTE validation and integration on Samsung smartphones, operator compatibility and certification.',
+      },
+      projectPages: [
+        {
+          FR:
+            '<h4 class="text-base md:text-lg font-black text-slate-900 mb-4">Assurer la fiabilité des fonctionnalités réseau sur les smartphones</h4>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">⚠</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Problème</p>' +
+            '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-3">L\'intégration de nouvelles technologies réseau (LTE, VoLTE) nécessite de garantir leur <strong class="text-slate-900">compatibilité avec les infrastructures des opérateurs</strong>.</p>' +
+            '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-2">Sans validation rigoureuse :</p>' +
+            '<ul class="list-disc pl-5 space-y-1.5 text-sm md:text-base text-slate-600 font-medium mb-3">' +
+            '<li>Les performances réseau peuvent être <strong class="text-slate-900">instables</strong></li>' +
+            '<li>Certaines fonctionnalités peuvent ne pas fonctionner <strong class="text-slate-900">selon les opérateurs</strong></li>' +
+            '<li>L\'<strong class="text-slate-900">expérience utilisateur</strong> peut être dégradée</li>' +
+            '</ul></div></div>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">✓</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Actions / Solution</p>' +
+            '<ul class="list-disc pl-5 space-y-1.5 text-sm md:text-base text-slate-600 font-medium">' +
+            '<li>Réalisation de tests <strong class="text-slate-900">end-to-end (E2E)</strong> sur les fonctionnalités réseau</li>' +
+            '<li>Analyse des problèmes de <strong class="text-slate-900">performance et de compatibilité</strong></li>' +
+            '<li>Collaboration avec les équipes techniques pour <strong class="text-slate-900">identifier et corriger les anomalies</strong></li>' +
+            '<li>Contribution aux processus de <strong class="text-slate-900">certification des appareils</strong> auprès des opérateurs</li>' +
+            '<li><strong class="text-slate-900">Documentation</strong> des résultats de tests et suivi des anomalies</li>' +
+            '</ul></div></div>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">📊</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Impact</p>' +
+            '<div class="space-y-2 text-sm md:text-base font-bold text-slate-900">' +
+            '<p>📶 Amélioration de la fiabilité des fonctionnalités réseau sur les smartphones</p>' +
+            '<p>🤝 Validation de la compatibilité avec les opérateurs télécom</p>' +
+            '<p>🚀 Contribution à des lancements produits conformes aux standards réseau</p>' +
+            '</div></div></div>' +
+            '<div class="pt-6 border-t border-slate-100"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Stack</p>' +
+            '<div class="flex flex-wrap gap-2">' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">LTE / VoLTE</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">QA / E2E</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Télécom</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Certification</span>' +
+            '</div></div>',
+          EN:
+            '<h4 class="text-base md:text-lg font-black text-slate-900 mb-4">Ensuring reliability of network features on smartphones</h4>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">⚠</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Problem</p>' +
+            '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-3">Integrating new network technologies (LTE, VoLTE) requires ensuring <strong class="text-slate-900">compatibility with carrier infrastructures</strong>.</p>' +
+            '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-2">Without rigorous validation:</p>' +
+            '<ul class="list-disc pl-5 space-y-1.5 text-sm md:text-base text-slate-600 font-medium mb-3">' +
+            '<li>Network performance may be <strong class="text-slate-900">unstable</strong></li>' +
+            '<li>Some features may not work <strong class="text-slate-900">depending on the operator</strong></li>' +
+            '<li><strong class="text-slate-900">User experience</strong> can suffer</li>' +
+            '</ul></div></div>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">✓</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Actions / Solution</p>' +
+            '<ul class="list-disc pl-5 space-y-1.5 text-sm md:text-base text-slate-600 font-medium">' +
+            '<li><strong class="text-slate-900">End-to-end (E2E)</strong> testing on network features</li>' +
+            '<li>Analysis of <strong class="text-slate-900">performance and compatibility</strong> issues</li>' +
+            '<li>Collaboration with technical teams to <strong class="text-slate-900">identify and fix defects</strong></li>' +
+            '<li>Contribution to <strong class="text-slate-900">device certification</strong> processes with operators</li>' +
+            '<li><strong class="text-slate-900">Documentation</strong> of test results and defect tracking</li>' +
+            '</ul></div></div>' +
+            '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#1428A0]/10 text-[#1428A0] font-bold text-sm">📊</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Impact</p>' +
+            '<div class="space-y-2 text-sm md:text-base font-bold text-slate-900">' +
+            '<p>📶 Improved reliability of network features on smartphones</p>' +
+            '<p>🤝 Validated compatibility with telecom operators</p>' +
+            '<p>🚀 Product launches aligned with network standards</p>' +
+            '</div></div></div>' +
+            '<div class="pt-6 border-t border-slate-100"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Stack</p>' +
+            '<div class="flex flex-wrap gap-2">' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">LTE / VoLTE</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">QA / E2E</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Telecom</span>' +
+            '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Certification</span>' +
+            '</div></div>',
+        },
+      ],
       projects: [
         {
           problem: {
-            FR: ['Incertitude sur le Product-Market Fit.'],
-            EN: ['Uncertainty regarding Product-Market Fit.'],
+            FR: [
+              'Compatibilité LTE/VoLTE avec les infrastructures opérateurs à garantir.',
+              'Sans validation : performances instables, fonctionnalités variables selon l’opérateur, UX dégradée.',
+            ],
+            EN: [
+              'LTE/VoLTE compatibility with carrier infrastructures must be ensured.',
+              'Without validation: unstable performance, operator-dependent features, degraded UX.',
+            ],
           },
           solution: {
-            FR: ['Cycles de Discovery rapides.', 'Prototypage MVP fonctionnels.'],
-            EN: ['Rapid Discovery cycles.', 'Functional MVP prototyping.'],
+            FR: [
+              'Tests E2E sur les fonctionnalités réseau.',
+              'Analyse performance / compatibilité, collaboration avec les équipes techniques.',
+              'Certification opérateurs, documentation et suivi des anomalies.',
+            ],
+            EN: [
+              'E2E testing on network features.',
+              'Performance/compatibility analysis, collaboration with technical teams.',
+              'Operator certification, documentation and defect tracking.',
+            ],
           },
           impact: {
-            FR: ['3 MVP lancés ayant levé plus de 1M€.'],
-            EN: ['3 MVPs launched raising over €1M.'],
+            FR: [
+              'Fiabilité renforcée des fonctionnalités réseau et lancements conformes aux standards.',
+            ],
+            EN: ['Stronger network feature reliability and launches aligned with standards.'],
           },
-          techStack: ['Miro', 'Notion', 'Figma', 'Automation'],
+          techStack: ['LTE / VoLTE', 'QA / E2E', 'Télécom', 'Certification'],
         },
       ],
     },
@@ -798,7 +906,9 @@
     const container = document.getElementById('experience-orbit');
     if (!container) return;
     const total = experiences.length;
-    const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 150 : window.innerWidth < 1024 ? 190 : 250;
+    // Rayons plus petits sur très petits écrans pour éviter que les pastilles sortent du viewport
+    var vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
+    var radius = vw < 380 ? 118 : vw < 640 ? 150 : vw < 1024 ? 190 : 250;
     container.innerHTML = '';
     container.classList.remove('pointer-events-auto');
     container.classList.add('pointer-events-none');
@@ -1013,7 +1123,8 @@
             : '<p class="text-sm md:text-base font-medium leading-relaxed italic">"' + escapeHtml(exp.mission[lang]) + '"</p>') +
           '</div>'
         : (exp.projectPages
-          ? '<div>' + exp.projectPages[activeProjectPage][lang] + '</div>'
+          ? // Conteneur .exp-project-content : styles cartes dans styles.css
+          '<div class="exp-project-content w-full min-w-0">' + exp.projectPages[activeProjectPage][lang] + '</div>'
           : '<div class="space-y-6">' +
           '<div><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">' +
           escapeHtml(t('labelProblem')) +
@@ -1144,8 +1255,9 @@
             : '<p class="text-sm md:text-lg text-slate-600 font-medium leading-relaxed italic">"' + escapeHtml(exp.mission[lang]) + '"</p>') +
           '</div></div>'
         : (exp.projectPages
-          ? '<div>' + exp.projectPages[activeProjectPage][lang] + '</div>'
-          : '<div class="space-y-8">' +
+          ? '<div class="exp-project-content w-full min-w-0">' + exp.projectPages[activeProjectPage][lang] + '</div>'
+          : // fallback sans projectPages
+          '<div class="space-y-8">' +
           '<div class="flex gap-4"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 opacity-10" style="background-color:' +
           exp.color +
           '">⚠</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">' +
@@ -1203,6 +1315,8 @@
   function applyTranslations() {
     document.getElementById('header-name').textContent = t('name');
     document.getElementById('lang-label').textContent = lang;
+    var mobileLangEl = document.getElementById('mobile-lang-label');
+    if (mobileLangEl) mobileLangEl.textContent = lang;
     document.getElementById('hero-vision').textContent = t('vision');
     document.getElementById('hero-driven').textContent = t('drivenBy');
     document.getElementById('hero-impact').textContent = t('impact');
@@ -1213,12 +1327,20 @@
     });
     var clickHintEl = document.getElementById('click-hint');
     if (clickHintEl) {
-      clickHintEl.innerHTML = t('clickToDiscover');
+      clickHintEl.textContent = t('clickToDiscover');
     }
     var navFormation = document.getElementById('btn-formation');
     if (navFormation) navFormation.textContent = t('about');
-    var navProjects = document.querySelector('nav a[href="#projects"]');
+    var mobileFormation = document.getElementById('mobile-nav-formation');
+    if (mobileFormation) mobileFormation.textContent = t('about');
+    var navProjects = document.getElementById('btn-projects');
     if (navProjects) navProjects.textContent = t('projects');
+    var mobileProjects = document.getElementById('mobile-nav-projects');
+    if (mobileProjects) mobileProjects.textContent = t('projects');
+    var mobileCv = document.getElementById('mobile-nav-cv');
+    if (mobileCv) mobileCv.textContent = 'CV';
+    var mobileContact = document.getElementById('mobile-nav-contact');
+    if (mobileContact) mobileContact.textContent = t('contactMe');
     document.getElementById('cv-modal-title').textContent = t('cvTitle');
     document.getElementById('contact-modal-title').textContent = t('contactMe');
     var sub = document.getElementById('contact-modal-subtitle');
@@ -1243,17 +1365,21 @@
     const list = document.getElementById('tools-list');
     if (!list) return;
 
+    // Ligne du haut (index 0–2) : tooltip au-dessus (bottom-full). Ligne du bas (3–5) : tooltip en dessous (top-full).
     list.innerHTML =
       '<div class="flex flex-wrap gap-x-5 gap-y-8 justify-center lg:justify-start">' +
       tools
         .map(function (item, idx) {
-          return (
-            '<div class="tool-wrap group relative flex flex-col items-center" data-tool-idx="' +
-            idx +
-            '">' +
-            '<span class="tool-hover-label absolute -top-20 left-1/2 z-30 w-[min(240px,calc(100vw-3rem))] -translate-x-1/2 px-3 py-2.5 rounded-2xl text-center ' +
+          var tooltipUp = idx < 3;
+          var labelClasses =
+            'tool-hover-label absolute left-1/2 z-30 w-[min(240px,calc(100vw-3rem))] -translate-x-1/2 px-3 py-2.5 rounded-2xl text-center ' +
             'bg-white/85 backdrop-blur-md border border-white/70 shadow-xl ' +
-            'transition-all duration-300 ease-out opacity-0 scale-90 translate-y-4 flex flex-col items-center gap-1">' +
+            'transition-all duration-300 ease-out opacity-0 scale-90 translate-y-4 flex flex-col items-center gap-1 ' +
+            (tooltipUp ? 'bottom-full mb-2' : 'top-full mt-2');
+          var labelHtml =
+            '<span class="' +
+            labelClasses +
+            '">' +
             '<span class="text-[10px] font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">' +
             escapeHtml(item.name) +
             '</span>' +
@@ -1263,7 +1389,8 @@
             '<span class="text-[8px] font-semibold text-slate-600 leading-snug max-w-[220px]">' +
             escapeHtml(item.desc[lang]) +
             '</span>' +
-            '</span>' +
+            '</span>';
+          var btnHtml =
             '<button type="button" class="tool-btn relative w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white transition-all duration-300 hover:scale-110" style="background-color:' +
             item.color +
             '">' +
@@ -1272,7 +1399,16 @@
             '">' +
             item.icon +
             '</div>' +
-            '</button>' +
+            '</button>';
+          var inner =
+            '<div class="relative inline-flex flex-col items-center">' +
+            (tooltipUp ? labelHtml + btnHtml : btnHtml + labelHtml) +
+            '</div>';
+          return (
+            '<div class="tool-wrap group relative flex flex-col items-center" data-tool-idx="' +
+            idx +
+            '">' +
+            inner +
             '</div>'
           );
         })
@@ -1356,23 +1492,30 @@
       document.getElementById('contact-modal').setAttribute('aria-hidden', 'true');
     });
 
-    var assistantCard = document.getElementById('card-assistant-ia');
+    var personalProjectsBtn = document.getElementById('btn-personal-projects');
+    var headerProjectsBtn = document.getElementById('btn-projects');
     function openAutomationWorkflowModal() {
       var modal = document.getElementById('automation-card-modal');
       if (!modal) return;
       modal.classList.remove('invisible');
       modal.setAttribute('aria-hidden', 'false');
     }
-    if (assistantCard) {
-      assistantCard.addEventListener('click', function () {
+    if (personalProjectsBtn) {
+      personalProjectsBtn.addEventListener('click', function () {
         openAutomationWorkflowModal();
         setActiveAutomationProject('workflow');
       });
-      assistantCard.addEventListener('keydown', function (e) {
+      personalProjectsBtn.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          assistantCard.click();
+          personalProjectsBtn.click();
         }
+      });
+    }
+    if (headerProjectsBtn) {
+      headerProjectsBtn.addEventListener('click', function () {
+        openAutomationWorkflowModal();
+        setActiveAutomationProject('workflow');
       });
     }
     var autoClose = document.getElementById('automation-card-close');
@@ -1385,20 +1528,6 @@
     }
     if (autoClose) autoClose.addEventListener('click', closeAutomationCard);
     if (autoBackdrop) autoBackdrop.addEventListener('click', closeAutomationCard);
-
-    var productOsCard = document.getElementById('card-product-os');
-    if (productOsCard) {
-      productOsCard.addEventListener('click', function () {
-        openAutomationWorkflowModal();
-        setActiveAutomationProject('product-os');
-      });
-      productOsCard.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          productOsCard.click();
-        }
-      });
-    }
 
     var automationProjectTabs = document.querySelectorAll('[data-automation-project-tab]');
     var automationProjectSections = document.querySelectorAll('[data-automation-project-section]');
@@ -1463,20 +1592,63 @@
       // état par défaut
       setActiveAutomationAgent('pm-secretary');
     }
-    document.getElementById('btn-personal-projects').addEventListener('click', function () {
-      document.getElementById('personal-projects-modal').classList.remove('invisible');
-      document.getElementById('personal-projects-modal').setAttribute('aria-hidden', 'false');
-    });
-    document.getElementById('personal-projects-modal-close').addEventListener('click', function () {
-      document.getElementById('personal-projects-modal').classList.add('invisible');
-      document.getElementById('personal-projects-modal').setAttribute('aria-hidden', 'true');
-    });
-    document.getElementById('personal-projects-modal-backdrop').addEventListener('click', function () {
-      document.getElementById('personal-projects-modal').classList.add('invisible');
-      document.getElementById('personal-projects-modal').setAttribute('aria-hidden', 'true');
-    });
+    // Navigation mobile : drawer + délégation vers les boutons desktop (réutilise modales / langue)
+    function closeMobileNav() {
+      var overlay = document.getElementById('mobile-nav');
+      var drawer = document.getElementById('mobile-nav-drawer');
+      var openBtn = document.getElementById('btn-nav-open');
+      if (!overlay || !drawer) return;
+      overlay.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+      overlay.classList.remove('opacity-100');
+      overlay.setAttribute('aria-hidden', 'true');
+      drawer.classList.add('translate-x-full');
+      drawer.classList.remove('translate-x-0');
+      document.body.classList.remove('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+    }
+    function openMobileNav() {
+      var overlay = document.getElementById('mobile-nav');
+      var drawer = document.getElementById('mobile-nav-drawer');
+      var openBtn = document.getElementById('btn-nav-open');
+      if (!overlay || !drawer) return;
+      overlay.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+      overlay.classList.add('opacity-100');
+      overlay.setAttribute('aria-hidden', 'false');
+      drawer.classList.remove('translate-x-full');
+      drawer.classList.add('translate-x-0');
+      document.body.classList.add('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    }
+    (function wireMobileNav() {
+      var openBtn = document.getElementById('btn-nav-open');
+      var closeBtn = document.getElementById('btn-nav-close');
+      var backdrop = document.getElementById('mobile-nav-backdrop');
+      if (openBtn) openBtn.addEventListener('click', openMobileNav);
+      if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
+      if (backdrop) backdrop.addEventListener('click', closeMobileNav);
+      // Réutilise les boutons desktop (même logique modales / langue)
+      [
+        ['mobile-nav-lang', 'btn-lang'],
+        ['mobile-nav-formation', 'btn-formation'],
+        ['mobile-nav-projects', 'btn-projects'],
+        ['mobile-nav-cv', 'btn-cv'],
+        ['mobile-nav-contact', 'btn-contact'],
+      ].forEach(function (pair) {
+        var m = document.getElementById(pair[0]);
+        if (!m) return;
+        m.addEventListener('click', function () {
+          var t = document.getElementById(pair[1]);
+          if (t) t.click();
+          closeMobileNav();
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMobileNav();
+      });
+    })();
 
     window.addEventListener('resize', function () {
+      if (window.innerWidth >= 768) closeMobileNav();
       renderOrbit();
       updateOrbitActiveState();
     });
