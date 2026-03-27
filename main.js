@@ -1357,12 +1357,22 @@
     });
 
     var assistantCard = document.getElementById('card-assistant-ia');
+    function openAutomationWorkflowModal() {
+      var modal = document.getElementById('automation-card-modal');
+      if (!modal) return;
+      modal.classList.remove('invisible');
+      modal.setAttribute('aria-hidden', 'false');
+    }
     if (assistantCard) {
       assistantCard.addEventListener('click', function () {
-        var modal = document.getElementById('automation-card-modal');
-        if (!modal) return;
-        modal.classList.remove('invisible');
-        modal.setAttribute('aria-hidden', 'false');
+        openAutomationWorkflowModal();
+        setActiveAutomationProject('workflow');
+      });
+      assistantCard.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          assistantCard.click();
+        }
       });
     }
     var autoClose = document.getElementById('automation-card-close');
@@ -1376,6 +1386,82 @@
     if (autoClose) autoClose.addEventListener('click', closeAutomationCard);
     if (autoBackdrop) autoBackdrop.addEventListener('click', closeAutomationCard);
 
+    var productOsCard = document.getElementById('card-product-os');
+    if (productOsCard) {
+      productOsCard.addEventListener('click', function () {
+        openAutomationWorkflowModal();
+        setActiveAutomationProject('product-os');
+      });
+      productOsCard.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          productOsCard.click();
+        }
+      });
+    }
+
+    var automationProjectTabs = document.querySelectorAll('[data-automation-project-tab]');
+    var automationProjectSections = document.querySelectorAll('[data-automation-project-section]');
+    function setActiveAutomationProject(projectId) {
+      automationProjectTabs.forEach(function (btn) {
+        var isActive = btn.getAttribute('data-automation-project-tab') === projectId;
+        if (isActive) {
+          btn.classList.remove('opacity-70');
+        } else {
+          btn.classList.add('opacity-70');
+        }
+      });
+      automationProjectSections.forEach(function (section) {
+        if (section.getAttribute('data-automation-project-section') === projectId) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    }
+    if (automationProjectTabs.length && automationProjectSections.length) {
+      automationProjectTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var projectId = btn.getAttribute('data-automation-project-tab');
+          if (projectId) setActiveAutomationProject(projectId);
+        });
+      });
+      setActiveAutomationProject('workflow');
+    }
+
+    // Onglets agents IA (Workflow automatisé)
+    var automationAgentTabs = document.querySelectorAll('[data-agent-tab]');
+    var automationAgentSections = document.querySelectorAll('[data-agent-section]');
+    function setActiveAutomationAgent(agentId) {
+      automationAgentTabs.forEach(function (btn) {
+        var isActive = btn.getAttribute('data-agent-tab') === agentId;
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm');
+          btn.classList.remove('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
+        } else {
+          btn.classList.remove('bg-slate-900', 'text-white', 'shadow-sm');
+          btn.classList.add('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
+        }
+      });
+      automationAgentSections.forEach(function (section) {
+        if (section.getAttribute('data-agent-section') === agentId) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    }
+    if (automationAgentTabs.length && automationAgentSections.length) {
+      automationAgentTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var agentId = btn.getAttribute('data-agent-tab');
+          if (agentId) setActiveAutomationAgent(agentId);
+        });
+      });
+      // état par défaut
+      setActiveAutomationAgent('pm-secretary');
+    }
     document.getElementById('btn-personal-projects').addEventListener('click', function () {
       document.getElementById('personal-projects-modal').classList.remove('invisible');
       document.getElementById('personal-projects-modal').setAttribute('aria-hidden', 'false');

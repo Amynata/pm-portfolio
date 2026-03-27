@@ -260,17 +260,37 @@
         <button type="button" id="personal-projects-modal-close" class="w-10 h-10 rounded-full bg-white hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-all border border-slate-200">✕</button>
       </div>
       <div class="p-6 md:p-10 grid md:grid-cols-2 gap-5 text-left">
-        <article id="card-assistant-ia" class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all cursor-pointer">
+        <article
+          id="card-assistant-ia"
+          class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all cursor-pointer"
+          role="button"
+          tabindex="0"
+          aria-label="Ouvrir Workflow Automatisé"
+        >
           <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-2">Produit IA</p>
-          <h3 class="text-base font-black text-slate-900 mb-2">Assistant de pilotage produit</h3>
+          <h3 class="text-base font-black text-slate-900 mb-2">Agents IA pour automatiser le Workflow Produit</h3>
           <p class="text-sm text-slate-600 font-medium leading-relaxed">
-            Assistant IA multi-agents pour automatiser les tâches récurrentes du PM (notes de réunion, to-do, tickets, synthèses) et libérer du temps pour la décision produit.
+            Des assistants IA multi-agents pour automatiser les tâches récurrentes du Product Manager et libérer du temps.
+          </p>
+          <p class="mt-4 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-400 workflow-cta-blink">
+            Ouvrir le workflow automatisé
+            <span class="text-[#6366F1]" aria-hidden="true">→</span>
           </p>
         </article>
-        <article class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all">
+        <article
+          id="card-product-os"
+          class="rounded-2xl border border-slate-100 bg-white/80 p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-all cursor-pointer"
+          role="button"
+          tabindex="0"
+          aria-label="Ouvrir Product Operating System"
+        >
           <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-2">Automation</p>
-          <h3 class="text-base font-black text-slate-900 mb-2">Ops automatisées pour PM</h3>
-          <p class="text-sm text-slate-600 font-medium leading-relaxed">Automatisation des routines de suivi KPI, génération de synthèses et reporting hebdomadaire.</p>
+          <h3 class="text-base font-black text-slate-900 mb-2">Product Operating System</h3>
+          <p class="text-sm text-slate-600 font-medium leading-relaxed">Automatiser le cycle produit de la discovery à la delivery (feedback, priorisation, tickets, reporting) pour réduire la friction et améliorer la continuité.</p>
+          <p class="mt-4 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-slate-400 workflow-cta-blink">
+            Ouvrir le Product Operating System
+            <span class="text-[#6366F1]" aria-hidden="true">→</span>
+          </p>
         </article>
       </div>
     </div>
@@ -280,20 +300,36 @@
   <div id="automation-card-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 md:p-8 invisible transition-all duration-300" aria-hidden="true">
     <div id="automation-card-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-md"></div>
     <div class="relative bg-white/98 backdrop-blur-xl w-full max-w-4xl rounded-[2.5rem] border border-slate-100 shadow-2xl overflow-hidden">
-      <div class="px-8 pt-8 pb-6 border-b border-slate-100 flex justify-between items-center">
-        <div>
-          <h2 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900">
-            Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>
-          </h2>
-          <p class="mt-2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
-            Assistant de pilotage produit
-          </p>
+      <div class="px-8 pt-8 pb-6 border-b border-slate-100 flex justify-between items-center gap-6">
+        <div class="flex items-start gap-5">
+          <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="text-left">
+            <h2 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900">
+              Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>
+            </h2>
+            <p class="mt-2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+              Assistant de pilotage produit
+            </p>
+          </button>
+          <button
+            type="button"
+            id="automation-project-tab-pos"
+            data-automation-project-tab="product-os"
+            class="pl-5 border-l border-white/90 text-left hover:opacity-85 transition-all"
+          >
+            <h2 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900">
+              Product <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Operating System</span>
+            </h2>
+            <p class="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+              Automation Discovery → Delivery
+            </p>
+          </button>
         </div>
         <button type="button" id="automation-card-close" class="w-10 h-10 rounded-full bg-white hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-all border border-slate-200">
           ✕
         </button>
       </div>
       <div class="px-8 pt-6 pb-8 space-y-8">
+        <div data-automation-project-section="workflow" class="space-y-8">
         <div class="max-w-3xl mx-auto p-5 md:p-6 rounded-2xl border border-slate-100 bg-slate-50/70">
           <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 flex items-center gap-2">
             <span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🎯</span>
@@ -303,11 +339,64 @@
             Ce système vise à <span class="font-semibold text-slate-900">automatiser les actions à faible valeur ajoutée</span> qui ralentissent la prise de décision.
             En déléguant les tâches répétitives à des agents IA spécialisés et connectés à mon environnement
             (<span class="font-semibold">Obsidian</span>, <span class="font-semibold">Jira</span>, <span class="font-semibold">Google Workspace</span>),
-            je libère mon attention pour la <span class="font-semibold text-slate-900">stratégie produit</span> et la résolution de problèmes complexes.
+          </p>
+          <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-4 mb-2 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 text-xs">✅</span>
+            Résultat du projet
+          </p>
+          <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+            Libère mon attention pour la <span class="font-semibold text-slate-900">stratégie produit</span> et la résolution de problèmes complexes.
           </p>
         </div>
 
-        <div class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden">
+        <!-- Onglets agents IA -->
+        <div class="max-w-4xl mx-auto mb-4 flex flex-col items-center gap-2">
+          <div class="inline-flex rounded-2xl bg-slate-100/80 p-1 border border-slate-200 shadow-sm gap-1">
+            <button
+              type="button"
+              id="automation-agent-tab-secretary"
+              data-agent-tab="pm-secretary"
+              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl bg-slate-900 text-white shadow-sm transition-all"
+              aria-pressed="true"
+            >
+              PM Secretary
+            </button>
+            <button
+              type="button"
+              id="automation-agent-tab-strategy"
+              data-agent-tab="pm-strategy"
+              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl text-slate-500 hover:text-slate-900 hover:bg-white transition-all"
+              aria-pressed="false"
+            >
+              PM Stratégie
+            </button>
+            <button
+              type="button"
+              id="automation-agent-tab-scrum"
+              data-agent-tab="pm-scrum"
+              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl text-slate-500 hover:text-slate-900 hover:bg-white transition-all"
+              aria-pressed="false"
+            >
+              PM PO-Scrum
+            </button>
+            <button
+              type="button"
+              id="automation-agent-tab-discovery"
+              data-agent-tab="pm-discovery"
+              class="px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] rounded-2xl text-slate-500 hover:text-slate-900 hover:bg-white transition-all"
+              aria-pressed="false"
+            >
+              PM Discovery
+            </button>
+          </div>
+        </div>
+
+        <!-- Section PM Secretary -->
+        <div
+          id="automation-agent-section-secretary"
+          data-agent-section="pm-secretary"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden"
+        >
           <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
           <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
           <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
@@ -324,46 +413,359 @@
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-violet-50 border border-violet-100 text-violet-800 font-semibold">Obsidian</span>
           </div>
           <div class="relative min-h-[200px] md:min-h-[220px]">
-          <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
-            <div class="space-y-3">
-              <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
-              <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">📝</div>
-                <p class="text-[11px] font-semibold text-slate-900 leading-tight">Notes Meeting</p>
-                <p class="text-[10px] text-slate-400 leading-tight">Compte rendu brut</p>
+            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">📝</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Notes Meeting</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Compte rendu brut</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Récupérées depuis <span class="font-semibold text-slate-700">Google Workspace</span> (Calendar / Meet / Docs)
+                </p>
               </div>
-              <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">Récupérées depuis <span class="font-semibold text-slate-700">Google Workspace</span> (Calendar / Meet / Docs)</p>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Agent IA</p>
+                <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                  <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🤖</div>
+                  <p class="text-[11px] font-black text-slate-900 leading-tight">PM Secretary</p>
+                  <p class="text-[10px] text-slate-500 leading-snug">
+                    Se connecte à <span class="font-semibold text-slate-700">Google Workspace</span> pour lire les notes, puis pousse la
+                    <span class="font-semibold text-slate-700">to‑do</span> dans <span class="font-semibold text-violet-700">Obsidian</span>.
+                  </p>
+                </div>
+                <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                  <span class="text-[#4285F4]">← Connexion Google Workspace</span>
+                  <span class="text-violet-600">→ Publication Obsidian</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">✅</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">To‑Do List</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Tâches prêtes à exécuter</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Affichée et tenue à jour dans <span class="font-semibold text-violet-700">Obsidian</span>
+                </p>
+              </div>
             </div>
-            <div class="space-y-3">
-              <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Agent IA</p>
-              <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
-                <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🤖</div>
-                <p class="text-[11px] font-black text-slate-900 leading-tight">PM Secretary</p>
-                <p class="text-[10px] text-slate-500 leading-snug">Se connecte à <span class="font-semibold text-slate-700">Google Workspace</span> pour lire les notes, puis pousse la <span class="font-semibold text-slate-700">to‑do</span> dans <span class="font-semibold text-violet-700">Obsidian</span>.</p>
-              </div>
-              <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
-                <span class="text-[#4285F4]">← Connexion Google Workspace</span>
-                <span class="text-violet-600">→ Publication Obsidian</span>
-              </div>
-            </div>
-            <div class="space-y-3">
-              <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
-              <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">✅</div>
-                <p class="text-[11px] font-semibold text-slate-900 leading-tight">To‑Do List</p>
-                <p class="text-[10px] text-slate-400 leading-tight">Tâches prêtes à exécuter</p>
-              </div>
-              <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">Affichée et tenue à jour dans <span class="font-semibold text-violet-700">Obsidian</span></p>
+            <!-- Ligne pointillée animée : derrière les 3 cartes uniquement -->
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+              <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                <line
+                  x1="12%"
+                  y1="50%"
+                  x2="88%"
+                  y2="50%"
+                  class="text-slate-600/70"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-dasharray="5 6"
+                  stroke-linecap="round"
+                >
+                  <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                </line>
+              </svg>
             </div>
           </div>
-          <!-- Ligne pointillée animée : derrière les 3 cartes uniquement -->
-          <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
-            <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
-              <line x1="12%" y1="50%" x2="88%" y2="50%" class="text-slate-600/70" stroke="currentColor" stroke-width="3" stroke-dasharray="5 6" stroke-linecap="round">
-                <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
-              </line>
-            </svg>
+        </div>
+
+        <!-- Section PM Stratégie -->
+        <div
+          id="automation-agent-section-strategy"
+          data-agent-section="pm-strategy"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+        >
+          <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+          <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
+          <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+              Ébauche de stratégie
+            </span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Quoi / Pourquoi / Contexte</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-[#6366F1] font-black">PM Stratégie</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Template & challenge</span>
+            <span class="text-slate-400">→</span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">
+              Note de stratégie
+            </span>
           </div>
+          <div class="relative min-h-[200px] md:min-h-[220px]">
+            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">💡</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Ébauche de stratégie</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Quoi, Pourquoi, Contexte</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Idées brutes, hypothèses, signaux marché, contraintes internes.
+                </p>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Agent IA</p>
+                <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                  <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🤖</div>
+                  <p class="text-[11px] font-black text-slate-900 leading-tight">PM Stratégie</p>
+                  <p class="text-[10px] text-slate-500 leading-snug">
+                    S'appuie sur les cadres de <span class="font-semibold text-slate-900">Marty Cagan</span> et d'autres auteurs produit pour
+                    challenger la stratégie et structurer une note claire.
+                  </p>
+                </div>
+                <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                  <span>Cadres produit (Inspiration Cagan)</span>
+                  <span class="text-emerald-600">→ Template de stratégie</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                <div class="mx-auto w-32 md:w-36 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">📝</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Note de stratégie</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Partageable avec l'équipe</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Support prêt pour revue stakeholder, arbitrage et alignement produit.
+                </p>
+              </div>
+            </div>
+            <!-- Ligne pointillée animée : derrière les 3 cartes uniquement -->
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+              <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                <line
+                  x1="12%"
+                  y1="50%"
+                  x2="88%"
+                  y2="50%"
+                  class="text-slate-600/70"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-dasharray="5 6"
+                  stroke-linecap="round"
+                >
+                  <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                </line>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section PM PO-Scrum -->
+        <div
+          id="automation-agent-section-scrum"
+          data-agent-section="pm-scrum"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+        >
+          <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+          <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
+          <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+              Idée / Objectif de ticket
+            </span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Contexte, valeur, critères</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-[#6366F1] font-black">PM PO-Scrum</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Template user story</span>
+            <span class="text-slate-400">→</span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#0052CC]/10 border border-[#0052CC]/30 text-[#0052CC] font-semibold">
+              Ticket Jira + Sprint
+            </span>
+          </div>
+          <div class="relative min-h-[200px] md:min-h-[220px]">
+            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">🧩</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Idée de ticket</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Problème / besoin / objectif</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Description courte, contexte produit, impact attendu.
+                </p>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Agent IA</p>
+                <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                  <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🤖</div>
+                  <p class="text-[11px] font-black text-slate-900 leading-tight">PM PO-Scrum</p>
+                  <p class="text-[10px] text-slate-500 leading-snug">
+                    Transforme l'idée en <span class="font-semibold text-slate-900">user story claire</span>, avec critères d'acceptation, puis
+                    suggère un <span class="font-semibold text-slate-900">placement de sprint</span> dans <span class="font-semibold text-slate-900">Jira Software</span>.
+                  </p>
+                </div>
+                <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                  <span class="text-[#0052CC]">Connexion Jira Software</span>
+                  <span class="text-emerald-600">→ Backlog structuré & sprint</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                <div class="mx-auto w-32 md:w-36 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-[#0052CC]/10 flex items-center justify-center text-[#0052CC] text-lg">🎯</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Ticket Jira prêt</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">User story + sprint suggéré</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Aligné avec la capacité de l'équipe et les objectifs du sprint.
+                </p>
+              </div>
+            </div>
+            <!-- Ligne pointillée animée : derrière les 3 cartes uniquement -->
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+              <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                <line
+                  x1="12%"
+                  y1="50%"
+                  x2="88%"
+                  y2="50%"
+                  class="text-slate-600/70"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-dasharray="5 6"
+                  stroke-linecap="round"
+                >
+                  <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                </line>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section PM Discovery -->
+        <div
+          id="automation-agent-section-discovery"
+          data-agent-section="pm-discovery"
+          class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden hidden"
+        >
+          <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+          <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
+          <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+              Notes / Transcriptions
+            </span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Interviews utilisateurs</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-[#6366F1] font-black">PM Discovery</span>
+            <span class="text-slate-400">→</span>
+            <span class="text-slate-600 font-medium">Synthèse & quantification</span>
+            <span class="text-slate-400">→</span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">
+              Hypothèses + Tickets discovery
+            </span>
+          </div>
+          <div class="relative min-h-[200px] md:min-h-[220px]">
+            <div class="relative grid grid-cols-3 gap-4 md:gap-8 items-center text-center z-10">
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">🎙️</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Notes d'interviews</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Verbatims & transcriptions</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Stockées dans <span class="font-semibold text-slate-900">Airtable</span> / docs, par session et segment.
+                </p>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Agent IA</p>
+                <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                  <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🤖</div>
+                  <p class="text-[11px] font-black text-slate-900 leading-tight">PM Discovery</p>
+                  <p class="text-[10px] text-slate-500 leading-snug">
+                    Utilise un <span class="font-semibold text-slate-900">RAG</span> basé sur les travaux de <span class="font-semibold text-slate-900">Teresa Torres</span> et les données
+                    <span class="font-semibold text-slate-900">Airtable</span> pour faire émerger patterns, opportunités et risques.
+                  </p>
+                </div>
+                <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                  <span class="text-slate-600">Cadres Continuous Discovery</span>
+                  <span class="text-emerald-600">→ Score, priorisation, impact</span>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                <div class="mx-auto w-32 md:w-36 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">📌</div>
+                  <p class="text-[11px] font-semibold text-slate-900 leading-tight">Hypothèses + tickets</p>
+                  <p class="text-[10px] text-slate-400 leading-tight">Backlog discovery actionnable</p>
+                </div>
+                <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[9rem] mx-auto">
+                  Synthèse chiffrée, prête à être partagée et rejouée dans le temps.
+                </p>
+              </div>
+            </div>
+            <!-- Ligne pointillée animée : derrière les 3 cartes uniquement -->
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+              <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                <line
+                  x1="12%"
+                  y1="50%"
+                  x2="88%"
+                  y2="50%"
+                  class="text-slate-600/70"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-dasharray="5 6"
+                  stroke-linecap="round"
+                >
+                  <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                </line>
+              </svg>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div data-automation-project-section="product-os" class="space-y-8 hidden">
+          <div class="max-w-3xl mx-auto p-5 md:p-6 rounded-2xl border border-slate-100 bg-slate-50/70">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🎯</span>
+              Objectif du projet
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              J'ai conçu un <span class="font-semibold text-slate-900">Product Operating System</span> pour automatiser le cycle produit de bout en bout :
+              feedback, priorisation, tickets Jira, planification sprint et reporting décisionnel.
+            </p>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-4 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 text-xs">✅</span>
+              Résultat du projet
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              Moins de friction entre équipes et une continuité forte entre discovery et delivery.
+            </p>
+          </div>
+
+          <div class="relative max-w-4xl mx-auto rounded-3xl border border-slate-100 bg-white/70 shadow-inner px-6 py-8 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+            <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Cycle Operating System</p>
+            <div class="relative z-10 grid grid-cols-4 gap-3 md:gap-5 text-center">
+              <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
+                <p class="text-[10px] font-black uppercase tracking-widest text-[#6366F1]">Discovery</p>
+                <p class="text-[10px] text-slate-500 mt-1">Feedback, interviews, synthèse</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
+                <p class="text-[10px] font-black uppercase tracking-widest text-[#6366F1]">Priorisation</p>
+                <p class="text-[10px] text-slate-500 mt-1">Scoring impact / effort / risque</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
+                <p class="text-[10px] font-black uppercase tracking-widest text-[#6366F1]">Delivery</p>
+                <p class="text-[10px] text-slate-500 mt-1">Tickets Jira + sprint planning</p>
+              </div>
+              <div class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
+                <p class="text-[10px] font-black uppercase tracking-widest text-[#6366F1]">Reporting</p>
+                <p class="text-[10px] text-slate-500 mt-1">KPI, risques, décisions</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

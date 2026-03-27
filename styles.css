@@ -88,3 +88,26 @@ body {
 .badge-pme { background-color: #10b981; color: white; }
 .badge-startup { background-color: #f59e0b; color: white; }
 .badge-grand-groupe { background-color: #007abd; color: white; }
+
+@keyframes workflow-cta-blink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translateX(1px);
+  }
+}
+
+.workflow-cta-blink {
+  animation: workflow-cta-blink 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-cta-blink {
+    animation: none;
+  }
+}
+
