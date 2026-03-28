@@ -41,6 +41,7 @@
       subjectLabel: 'Objet',
       messageLabel: 'Message',
       send: 'Envoyer le message',
+      cvDownload: 'Télécharger le CV',
       placeholderName: 'Votre nom',
       placeholderObj: 'Opportunité...',
       placeholderMsg: 'Votre message...',
@@ -51,6 +52,14 @@
       projectsTitle: 'Projets & Expériences',
       about: 'Formation',
       projects: 'Projets persos',
+      formationSubtitle: 'Parcours académique',
+      personalProjectsHover: 'Clique pour voir mes projets persos',
+      personalProjectsAria: 'Ouvrir mes projets persos',
+      contactPhoneLabel: 'Téléphone',
+      contactCopyTitle: 'Copier',
+      automationModalSub: 'Builder side projects',
+      automationTabWorkflowDesc: 'Assistant de pilotage produit',
+      automationTabPosDesc: 'Automation Discovery → Delivery',
     },
     EN: {
       name: 'Aminata Lissa Dia',
@@ -88,6 +97,7 @@
       subjectLabel: 'Subject',
       messageLabel: 'Message',
       send: 'Send message',
+      cvDownload: 'Download resume',
       placeholderName: 'Your name',
       placeholderObj: 'Opportunity...',
       placeholderMsg: 'Your message...',
@@ -98,8 +108,75 @@
       projectsTitle: 'Projects & Experience',
       about: 'Education',
       projects: 'Personal projects',
+      formationSubtitle: 'Academic path',
+      personalProjectsHover: 'Click to open my personal projects',
+      personalProjectsAria: 'Open my personal projects',
+      contactPhoneLabel: 'Phone',
+      contactCopyTitle: 'Copy',
+      automationModalSub: 'Builder side projects',
+      automationTabWorkflowDesc: 'Product steering assistant',
+      automationTabPosDesc: 'Automation Discovery → Delivery',
     },
   };
+
+  const formationEntries = [
+    {
+      date: { FR: 'Novembre 2024', EN: 'November 2024' },
+      title: 'Woman Leadership',
+      school: { name: 'HEC Paris', href: 'https://www.hec.edu/fr' },
+      desc: {
+        FR: 'Grande école de commerce française, reconnue mondialement pour ses programmes en management, stratégie et leadership.',
+        EN: 'Leading French business school, globally recognized for management, strategy, and leadership programs.',
+      },
+      logo: 'Images/HEC.png',
+      logoAlt: 'HEC Paris',
+      logoFallback: 'HEC',
+    },
+    {
+      date: { FR: 'Octobre 2024', EN: 'October 2024' },
+      title: 'Lead Product Manager – Certified',
+      school: { name: 'Thiga Academy', href: 'https://www.thiga.academy/' },
+      desc: {
+        FR: 'École spécialisée dans les métiers du produit : formation de Product Managers, discovery, delivery et culture agile.',
+        EN: 'School focused on product roles: Product Manager training, discovery, delivery, and agile culture.',
+      },
+      logo: 'Images/Thiga_Logo.png',
+      logoAlt: 'Thiga Academy',
+      logoFallback: 'THIGA',
+    },
+    {
+      date: { FR: 'Novembre 2022 - Mars 2023', EN: 'November 2022 – March 2023' },
+      title: 'Product Manager',
+      school: {
+        name: { FR: 'Maestro - Ecole du Product Management', EN: 'Maestro – Product Management School' },
+        href: 'https://www.maestro.fr/',
+      },
+      desc: {
+        FR: 'Organisme de formation centré sur le métier de Product Manager, la vision produit et les pratiques agiles en entreprise.',
+        EN: 'Training organization focused on the Product Manager role, product vision, and agile practices in companies.',
+      },
+      logo: 'Images/maestro_logo.png',
+      logoAlt: 'Maestro',
+      logoFallback: 'MAESTRO',
+    },
+    {
+      date: { FR: '2011 – 2016', EN: '2011 – 2016' },
+      title: 'Master Degree in Computer Science',
+      lines: [
+        { FR: 'Spécialisation Systèmes Embarqués', EN: 'Specialization in Embedded Systems' },
+        { FR: 'Graduated with Honors', EN: 'Graduated with Honors' },
+      ],
+      school: { name: 'ESIEE Paris – Engineering School', href: 'https://www.esiee.fr/' },
+      desc: {
+        FR: 'Grande école d’ingénieurs du numérique (CY Tech / UGE), forte en informatique, électronique et systèmes embarqués.',
+        EN: 'Leading engineering school in digital technology (CY Tech / UGE), strong in computer science, electronics, and embedded systems.',
+      },
+      logo: 'Images/Logo-esiee-Paris-UGE.svg',
+      logoAlt: 'ESIEE Paris',
+      logoFallback: 'ESIEE',
+      last: true,
+    },
+  ];
 
   const experiences = [
     {
@@ -890,6 +967,7 @@
   let activeProjIdx = 0;
   let activeProjectPage = 0;
   let hasInteracted = false;
+  let lastAutomationAgentId = 'pm-secretary';
 
   function t(key) {
     return translations[lang][key] || key;
@@ -900,6 +978,17 @@
     if (companyType === 'Scale-up') return 'bg-violet-500 text-white';
     if (companyType === 'Startup') return 'bg-amber-500 text-white';
     return 'bg-emerald-500 text-white'; // PME
+  }
+
+  function companyTypeForLang(type) {
+    var map = {
+      'Grand Groupe': { FR: 'Grand Groupe', EN: 'Enterprise' },
+      'Scale-up': { FR: 'Scale-up', EN: 'Scale-up' },
+      PME: { FR: 'PME', EN: 'SME' },
+      Startup: { FR: 'Startup', EN: 'Startup' },
+    };
+    var row = map[type];
+    return row ? row[lang] : type;
   }
 
   function renderOrbit() {
@@ -1018,6 +1107,140 @@
     return div.innerHTML;
   }
 
+  function schoolLinkName(school) {
+    if (!school) return '';
+    return typeof school.name === 'string' ? school.name : school.name[lang];
+  }
+
+  function renderFormationModal() {
+    var wrap = document.getElementById('formation-modal-body');
+    if (!wrap) return;
+    wrap.innerHTML = formationEntries
+      .map(function (e) {
+        var timeline =
+          '<div class="flex flex-col items-center">' +
+          '<div class="w-3 h-3 rounded-full bg-[#818CF8] shadow-md"></div>' +
+          (e.last ? '' : '<div class="w-0.5 flex-1 bg-slate-200 mt-1"></div>') +
+          '</div>';
+        var mainClass = e.last ? 'flex-1 flex items-start justify-between gap-4' : 'flex-1 pb-2 flex items-start justify-between gap-4';
+        var innerTitle =
+          '<p class="text-base font-black text-slate-900 leading-tight">' + escapeHtml(e.title) + '</p>';
+        if (e.lines) {
+          innerTitle +=
+            '<p class="text-sm text-slate-600 font-medium">' + escapeHtml(e.lines[0][lang]) + '</p>' +
+            '<p class="text-sm font-bold text-slate-900 mt-1">' + escapeHtml(e.lines[1][lang]) + '</p>';
+        }
+        var sdName = schoolLinkName(e.school);
+        return (
+          '<div class="flex gap-4">' +
+          timeline +
+          '<div class="' +
+          mainClass +
+          '">' +
+          '<div>' +
+          '<p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-1">' +
+          escapeHtml(e.date[lang]) +
+          '</p>' +
+          innerTitle +
+          '<a href="' +
+          escapeHtml(e.school.href) +
+          '" target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-[#818CF8]">' +
+          escapeHtml(sdName) +
+          '<span aria-hidden="true" class="text-slate-300">•</span>' +
+          '</a>' +
+          '<p class="mt-2 max-w-prose text-xs leading-relaxed text-slate-500">' +
+          escapeHtml(e.desc[lang]) +
+          '</p>' +
+          '</div>' +
+          '<div class="flex h-10 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white px-2 shadow-sm">' +
+          '<img src="' +
+          escapeHtml(e.logo) +
+          '" alt="' +
+          escapeHtml(e.logoAlt) +
+          '" class="max-w-full max-h-full object-contain" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'block\';" />' +
+          '<span class="text-[8px] font-black text-slate-400 hidden">' +
+          escapeHtml(e.logoFallback) +
+          '</span>' +
+          '</div>' +
+          '</div>' +
+          '</div>'
+        );
+      })
+      .join('');
+  }
+
+  function getAutomationModal() {
+    return document.getElementById('automation-card-modal');
+  }
+
+  function getVisibleAutomationRoot() {
+    var modal = getAutomationModal();
+    if (!modal) return null;
+    var roots = modal.querySelectorAll('.automation-modal-lang-root');
+    for (var i = 0; i < roots.length; i++) {
+      if (!roots[i].classList.contains('hidden')) return roots[i];
+    }
+    return roots.length ? roots[0] : null;
+  }
+
+  function syncPortfolioLangBlocks() {
+    document.querySelectorAll('[data-portfolio-lang]').forEach(function (el) {
+      el.classList.toggle('hidden', el.getAttribute('data-portfolio-lang') !== lang);
+    });
+  }
+
+  function syncAutomationModalLang() {
+    var modal = getAutomationModal();
+    if (!modal) return;
+    modal.querySelectorAll('.automation-modal-lang-root').forEach(function (el) {
+      var L = el.getAttribute('data-automation-lang');
+      el.classList.toggle('hidden', L !== lang);
+    });
+  }
+
+  function setActiveAutomationProject(projectId) {
+    var modal = getAutomationModal();
+    if (!modal) return;
+    modal.querySelectorAll('[data-automation-project-tab]').forEach(function (btn) {
+      var isActive = btn.getAttribute('data-automation-project-tab') === projectId;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    modal.querySelectorAll('.automation-modal-lang-root').forEach(function (root) {
+      root.querySelectorAll('[data-automation-project-section]').forEach(function (section) {
+        if (section.getAttribute('data-automation-project-section') === projectId) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  function setActiveAutomationAgent(agentId, root) {
+    lastAutomationAgentId = agentId;
+    if (!root) root = getVisibleAutomationRoot();
+    if (!root) return;
+    root.querySelectorAll('[data-agent-tab]').forEach(function (btn) {
+      var isActive = btn.getAttribute('data-agent-tab') === agentId;
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      if (isActive) {
+        btn.classList.add('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'shadow-sm');
+        btn.classList.remove('text-slate-500', 'hover:text-slate-900', 'hover:bg-white', 'bg-slate-900', 'text-white');
+      } else {
+        btn.classList.remove('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'bg-slate-900', 'text-white');
+        btn.classList.add('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
+      }
+    });
+    root.querySelectorAll('[data-agent-section]').forEach(function (section) {
+      if (section.getAttribute('data-agent-section') === agentId) {
+        section.classList.remove('hidden');
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+  }
+
   function selectExp(index) {
     selectedExp = index;
     activeProjIdx = 0;
@@ -1055,7 +1278,7 @@
         '<span class="inline-block mt-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase ' +
         getBadgeClass(exp.companyType) +
         '">' +
-        escapeHtml(exp.companyType) +
+        escapeHtml(companyTypeForLang(exp.companyType)) +
         '</span>';
       card.addEventListener('click', function () {
         selectExp(index);
@@ -1089,7 +1312,7 @@
       '<span class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase ' +
       getBadgeClass(exp.companyType) +
       '">' +
-      escapeHtml(exp.companyType) +
+      escapeHtml(companyTypeForLang(exp.companyType)) +
       '</span>' +
       '</div>' +
       '<div class="flex items-center justify-between mb-6">' +
@@ -1210,7 +1433,7 @@
       '<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase ' +
       getBadgeClass(exp.companyType) +
       '">' +
-      escapeHtml(exp.companyType) +
+      escapeHtml(companyTypeForLang(exp.companyType)) +
       '</span>' +
       '</div>' +
       '<h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-tight mb-2 pr-8">' +
@@ -1346,6 +1569,40 @@
     document.getElementById('contact-modal-title').textContent = t('contactMe');
     var sub = document.getElementById('contact-modal-subtitle');
     if (sub) sub.textContent = t('directSend');
+    var contactPhoneLbl = document.getElementById('contact-label-phone');
+    if (contactPhoneLbl) contactPhoneLbl.textContent = t('contactPhoneLabel');
+    document.querySelectorAll('.contact-copy-btn').forEach(function (btn) {
+      btn.setAttribute('title', t('contactCopyTitle'));
+    });
+    syncPortfolioLangBlocks();
+    syncAutomationModalLang();
+    var formationTitleEl = document.getElementById('formation-modal-title');
+    if (formationTitleEl) formationTitleEl.textContent = t('about');
+    var formationSubEl = document.getElementById('formation-modal-subtitle');
+    if (formationSubEl) formationSubEl.textContent = t('formationSubtitle');
+    renderFormationModal();
+    var autoHeading = document.getElementById('automation-modal-heading');
+    if (autoHeading) autoHeading.textContent = t('projects');
+    var autoTag = document.getElementById('automation-modal-tagline');
+    if (autoTag) autoTag.textContent = t('automationModalSub');
+    var wfH3 = document.getElementById('automation-tab-workflow-h3');
+    if (wfH3) {
+      if (lang === 'FR') {
+        wfH3.innerHTML =
+          'Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>';
+      } else {
+        wfH3.innerHTML =
+          '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automated</span> Workflow';
+      }
+    }
+    var wfTabDesc = document.getElementById('automation-tab-workflow-desc');
+    if (wfTabDesc) wfTabDesc.textContent = t('automationTabWorkflowDesc');
+    var posTabDesc = document.getElementById('automation-tab-pos-desc');
+    if (posTabDesc) posTabDesc.textContent = t('automationTabPosDesc');
+    var personalBtn = document.getElementById('btn-personal-projects');
+    if (personalBtn) personalBtn.setAttribute('aria-label', t('personalProjectsAria'));
+    var visAutoRoot = getVisibleAutomationRoot();
+    if (visAutoRoot) setActiveAutomationAgent(lastAutomationAgentId, visAutoRoot);
     renderCVModalBody();
   }
 
@@ -1358,7 +1615,9 @@
       '<iframe src="' + pdfPath + '" class="w-full rounded-2xl border border-slate-100" style="height:70vh" frameborder="0"></iframe>' +
       '</div>' +
       '<div class="flex justify-center mt-6">' +
-      '<a href="' + pdfPath + '" download class="inline-flex items-center gap-2 bg-slate-900 text-white font-black uppercase tracking-widest text-xs px-6 py-3 rounded-2xl shadow-xl hover:bg-[#818CF8] transition-all">Télécharger le CV</a>' +
+      '<a href="' + pdfPath + '" download class="inline-flex items-center gap-2 bg-slate-900 text-white font-black uppercase tracking-widest text-xs px-6 py-3 rounded-2xl shadow-xl hover:bg-[#818CF8] transition-all">' +
+      escapeHtml(t('cvDownload')) +
+      '</a>' +
       '</div>';
   }
 
@@ -1445,6 +1704,7 @@
     document.getElementById('btn-lang').addEventListener('click', function () {
       lang = lang === 'FR' ? 'EN' : 'FR';
       applyTranslations();
+      renderOrbit();
       renderProjectsList();
       renderProjectDetailPanel();
       renderTools();
@@ -1530,27 +1790,20 @@
     if (autoClose) autoClose.addEventListener('click', closeAutomationCard);
     if (autoBackdrop) autoBackdrop.addEventListener('click', closeAutomationCard);
 
-    var automationProjectTabs = document.querySelectorAll('[data-automation-project-tab]');
-    var automationProjectSections = document.querySelectorAll('[data-automation-project-section]');
-    function setActiveAutomationProject(projectId) {
-      automationProjectTabs.forEach(function (btn) {
-        var isActive = btn.getAttribute('data-automation-project-tab') === projectId;
-        btn.classList.toggle('is-active', isActive);
-        if (isActive) {
-          btn.setAttribute('aria-pressed', 'true');
-        } else {
-          btn.setAttribute('aria-pressed', 'false');
-        }
-      });
-      automationProjectSections.forEach(function (section) {
-        if (section.getAttribute('data-automation-project-section') === projectId) {
-          section.classList.remove('hidden');
-        } else {
-          section.classList.add('hidden');
-        }
+    var autoModalNode = getAutomationModal();
+    if (autoModalNode) {
+      autoModalNode.addEventListener('click', function (e) {
+        var agentBtn = e.target.closest('[data-agent-tab]');
+        if (!agentBtn || !autoModalNode.contains(agentBtn)) return;
+        var root = agentBtn.closest('.automation-modal-lang-root');
+        if (!root || root.classList.contains('hidden')) return;
+        var agentId = agentBtn.getAttribute('data-agent-tab');
+        if (agentId) setActiveAutomationAgent(agentId, root);
       });
     }
-    if (automationProjectTabs.length && automationProjectSections.length) {
+
+    var automationProjectTabs = document.querySelectorAll('[data-automation-project-tab]');
+    if (automationProjectTabs.length) {
       automationProjectTabs.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var projectId = btn.getAttribute('data-automation-project-tab');
@@ -1558,40 +1811,8 @@
         });
       });
       setActiveAutomationProject('workflow');
-    }
-
-    // Onglets agents IA (Workflow automatisé)
-    var automationAgentTabs = document.querySelectorAll('[data-agent-tab]');
-    var automationAgentSections = document.querySelectorAll('[data-agent-section]');
-    function setActiveAutomationAgent(agentId) {
-      automationAgentTabs.forEach(function (btn) {
-        var isActive = btn.getAttribute('data-agent-tab') === agentId;
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        if (isActive) {
-          btn.classList.add('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'shadow-sm');
-          btn.classList.remove('text-slate-500', 'hover:text-slate-900', 'hover:bg-white', 'bg-slate-900', 'text-white');
-        } else {
-          btn.classList.remove('bg-[#EEF2FF]', 'text-[#6366F1]', 'border', 'border-[#6366F1]/25', 'bg-slate-900', 'text-white');
-          btn.classList.add('text-slate-500', 'hover:text-slate-900', 'hover:bg-white');
-        }
-      });
-      automationAgentSections.forEach(function (section) {
-        if (section.getAttribute('data-agent-section') === agentId) {
-          section.classList.remove('hidden');
-        } else {
-          section.classList.add('hidden');
-        }
-      });
-    }
-    if (automationAgentTabs.length && automationAgentSections.length) {
-      automationAgentTabs.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var agentId = btn.getAttribute('data-agent-tab');
-          if (agentId) setActiveAutomationAgent(agentId);
-        });
-      });
-      // état par défaut
-      setActiveAutomationAgent('pm-secretary');
+      var r0 = getVisibleAutomationRoot();
+      if (r0) setActiveAutomationAgent(lastAutomationAgentId, r0);
     }
     // Navigation mobile : drawer + délégation vers les boutons desktop (réutilise modales / langue)
     function closeMobileNav() {
