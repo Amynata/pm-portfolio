@@ -314,27 +314,41 @@
           <button type="button" id="automation-card-close" class="w-10 h-10 rounded-full bg-white hover:bg-slate-50 flex items-center justify-center text-slate-400 transition-all border border-slate-200">✕</button>
         </div>
 
-        <div class="flex flex-col gap-4 px-4 pb-5 pt-1 sm:flex-row sm:items-start sm:px-8">
-          <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="automation-project-tab text-left">
-            <h3 class="text-lg md:text-xl font-black tracking-tight text-slate-900" id="automation-tab-workflow-h3">
+        <div class="flex flex-row flex-nowrap items-stretch gap-1 sm:gap-2 md:gap-4 px-4 pb-5 pt-1 sm:px-8 min-w-0">
+          <button type="button" id="automation-project-tab-workflow" data-automation-project-tab="workflow" class="automation-project-tab text-left min-w-0 flex-1 basis-0">
+            <h3 class="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 leading-snug" id="automation-tab-workflow-h3">
               Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>
             </h3>
-            <p class="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400" id="automation-tab-workflow-desc">
+            <p class="mt-1 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.14em] sm:tracking-[0.2em] text-slate-400 leading-snug" id="automation-tab-workflow-desc">
               Assistant de pilotage produit
             </p>
           </button>
-          <div class="w-px h-12 bg-slate-200 mt-1"></div>
+          <div class="w-px h-11 sm:h-12 bg-slate-200 shrink-0 self-center" aria-hidden="true"></div>
           <button
             type="button"
             id="automation-project-tab-pos"
             data-automation-project-tab="product-os"
-            class="automation-project-tab text-left"
+            class="automation-project-tab text-left min-w-0 flex-1 basis-0"
           >
-            <h3 class="text-lg md:text-xl font-black tracking-tight text-slate-900">
+            <h3 class="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 leading-snug">
               Product <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Operating System</span>
             </h3>
-            <p class="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400" id="automation-tab-pos-desc">
+            <p class="mt-1 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.14em] sm:tracking-[0.2em] text-slate-400 leading-snug" id="automation-tab-pos-desc">
               Automation Discovery → Delivery
+            </p>
+          </button>
+          <div class="w-px h-11 sm:h-12 bg-slate-200 shrink-0 self-center" aria-hidden="true"></div>
+          <button
+            type="button"
+            id="automation-project-tab-portfolio"
+            data-automation-project-tab="ai-portfolio"
+            class="automation-project-tab text-left min-w-0 flex-1 basis-0"
+          >
+            <h3 class="text-sm sm:text-base md:text-lg font-black tracking-tight text-slate-900 leading-snug" id="automation-tab-portfolio-h3">
+              AI-Powered <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Portfolio</span>
+            </h3>
+            <p class="mt-1 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.14em] sm:tracking-[0.2em] text-slate-400 leading-snug" id="automation-tab-portfolio-desc">
+              Design & développement
             </p>
           </button>
         </div>
@@ -767,22 +781,39 @@
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
             <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
             <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">Airtable</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+                <img src="Images/logo-airtable.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Airtable
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-slate-600 font-medium">Qualification / priorisation</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-600 font-medium">
+                <img src="Images/icon-views-rules.svg" alt="" class="h-4 w-4 shrink-0 object-contain opacity-90" width="16" height="16" decoding="async" />
+                Qualification / priorisation
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-[#6366F1] font-black">Jira Discovery</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#6366F1]/25 shadow-sm text-[#6366F1] font-black">
+                <img src="Images/logo-jira.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Jira Discovery
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-slate-600 font-medium">Tickets delivery</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+                <img src="Images/logo-jira.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Tickets delivery
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">Dashboard</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">
+                <img src="Images/icon-dashboard-flow.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Dashboard
+              </span>
             </div>
             <div class="relative min-h-[200px] md:min-h-[220px]">
               <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                   <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">📥</div>
+                    <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100">
+                      <img src="Images/logo-airtable.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-semibold text-slate-900 leading-tight">Feedback utilisateurs</p>
                     <p class="text-[10px] text-slate-400 leading-tight">Airtable</p>
                   </div>
@@ -793,7 +824,11 @@
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Intégration</p>
                   <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
-                    <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🔗</div>
+                    <div class="flex items-center justify-center gap-1.5 rounded-2xl bg-white px-2.5 py-2 shadow-md ring-1 ring-[#6366F1]/15">
+                      <img src="Images/logo-airtable.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                      <span class="text-[10px] font-black text-slate-300">+</span>
+                      <img src="Images/logo-jira.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-black text-slate-900 leading-tight">Discovery → Delivery</p>
                     <p class="text-[10px] text-slate-500 leading-snug">
                       Vues &amp; règles <span class="font-semibold text-slate-700">Airtable</span>, <span class="font-semibold text-slate-700">Jira Discovery</span> et
@@ -808,7 +843,9 @@
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
                   <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">✅</div>
+                    <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+                      <img src="Images/icon-dashboard-flow.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-semibold text-slate-900 leading-tight">Backlog &amp; visibilité</p>
                     <p class="text-[10px] text-slate-400 leading-tight">Dashboard / reporting</p>
                   </div>
@@ -838,6 +875,120 @@
             <p class="relative z-10 mt-6 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400">Détail du parcours</p>
             <p class="relative z-10 mt-2 text-[10px] leading-relaxed text-slate-500 text-center max-w-2xl mx-auto px-1">
               Feedback utilisateurs (Airtable) → qualification / priorisation (vues &amp; règles) → opportunities &amp; insights (Jira Discovery) → tickets delivery (Jira Software) → backlog structuré / visibilité parties prenantes (dashboard).
+            </p>
+          </div>
+        </div>
+
+        <div data-automation-project-section="ai-portfolio" class="space-y-8 hidden">
+          <div class="max-w-3xl mx-auto p-5 md:p-6 rounded-2xl border border-slate-200 bg-slate-50 shadow-md ring-1 ring-slate-200/70">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🎯</span>
+              Design &amp; développement
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              J’ai conçu et développé ce portfolio comme un <span class="font-semibold text-slate-900">produit à part entière</span>, en utilisant des outils
+              <span class="font-semibold text-slate-900">AI-native</span> pour structurer, concevoir et accélérer le développement, du design au déploiement.
+            </p>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-4 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 text-xs">✅</span>
+              Résultat du projet
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              Un portfolio cohérent avec mon approche <span class="font-semibold text-slate-900">« product builder »</span>, démontrant concrètement l’utilisation de l’IA pour concevoir et livrer un produit de bout en bout.
+            </p>
+          </div>
+
+          <div
+            class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden"
+          >
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+            <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Flux données</p>
+            <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold text-center max-w-[9.5rem]">
+                <span class="text-[9px] leading-tight">Ideas / contenu</span>
+                <span class="text-[8px] font-medium text-slate-500 leading-tight">Projets, expériences, contenus</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-900 font-semibold text-center max-w-[9.5rem]">
+                <span class="inline-flex items-center gap-1 text-[9px] leading-tight"><span class="text-[#4285F4] font-black">G</span> Gemini Canvas</span>
+                <span class="text-[8px] font-medium text-blue-700/90 leading-tight">Maquettage &amp; structuration</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-[#EEF2FF] border border-[#6366F1]/25 text-[#6366F1] font-black text-center max-w-[10rem]">
+                <span class="text-[9px] leading-tight">Cursor + Warp</span>
+                <span class="text-[8px] font-semibold text-slate-600 leading-tight font-sans normal-case tracking-normal">Agent — dev assisté par IA</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-slate-900 text-white font-semibold text-center max-w-[9rem]">
+                <span class="text-[9px] leading-tight">GitHub Pages</span>
+                <span class="text-[8px] font-medium text-slate-300 leading-tight">Déploiement</span>
+              </span>
+            </div>
+            <div class="relative min-h-[200px] md:min-h-[220px]">
+              <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                  <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 text-lg">💡</div>
+                    <p class="text-[11px] font-semibold text-slate-900 leading-tight">Ideas / contenu</p>
+                    <p class="text-[10px] text-slate-400 leading-tight">Projets, expériences</p>
+                  </div>
+                  <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[11rem] mx-auto">
+                    Matière brute : messages, structure de page, ton et preuves à mettre en avant.
+                  </p>
+                </div>
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">IA &amp; agent</p>
+                  <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                    <div class="flex items-center justify-center gap-1 rounded-2xl bg-white px-2 py-1.5 shadow-md ring-1 ring-[#6366F1]/15 text-[9px] font-black text-slate-800">
+                      <span class="text-[#4285F4]">G</span>
+                      <span class="text-slate-300">+</span>
+                      <span>⌘</span>
+                    </div>
+                    <p class="text-[11px] font-black text-slate-900 leading-tight">Canvas → code</p>
+                    <p class="text-[10px] text-slate-500 leading-snug">
+                      <span class="font-semibold text-slate-700">Gemini Canvas</span> pour itérer sur la forme, puis
+                      <span class="font-semibold text-[#6366F1]">Cursor</span> &amp; <span class="font-semibold text-slate-700">Warp</span> pour produire et intégrer le site.
+                    </p>
+                  </div>
+                  <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                    <span class="text-blue-700/80">Maquettes &amp; arborescence</span>
+                    <span class="text-[#6366F1]">→ Implémentation guidée</span>
+                  </div>
+                </div>
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                  <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white text-sm font-black">gh</div>
+                    <p class="text-[11px] font-semibold text-slate-900 leading-tight">Site en ligne</p>
+                    <p class="text-[10px] text-slate-400 leading-tight">GitHub Pages</p>
+                  </div>
+                  <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[11rem] mx-auto">
+                    Déploiement statique, URL publique et itérations continues depuis le dépôt.
+                  </p>
+                </div>
+              </div>
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+                <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                  <line
+                    x1="12%"
+                    y1="50%"
+                    x2="88%"
+                    y2="50%"
+                    class="text-slate-600/70"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-dasharray="5 6"
+                    stroke-linecap="round"
+                  >
+                    <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                  </line>
+                </svg>
+              </div>
+            </div>
+            <p class="relative z-10 mt-6 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400">Synthèse du flux</p>
+            <p class="relative z-10 mt-2 text-[10px] leading-relaxed text-slate-500 text-center max-w-2xl mx-auto px-1">
+              Ideas / contenu → Gemini Canvas (maquettage &amp; structuration) → Cursor + Warp (agent, développement assisté par IA) → GitHub Pages (déploiement).
             </p>
           </div>
         </div>
@@ -1261,22 +1412,39 @@
             <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
             <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Data flow</p>
             <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">Airtable</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+                <img src="Images/logo-airtable.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Airtable
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-slate-600 font-medium">Triage / prioritization</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-600 font-medium">
+                <img src="Images/icon-views-rules.svg" alt="" class="h-4 w-4 shrink-0 object-contain opacity-90" width="16" height="16" decoding="async" />
+                Triage / prioritization
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-[#6366F1] font-black">Jira Discovery</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#6366F1]/25 shadow-sm text-[#6366F1] font-black">
+                <img src="Images/logo-jira.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Jira Discovery
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="text-slate-600 font-medium">Delivery tickets</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold">
+                <img src="Images/logo-jira.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Delivery tickets
+              </span>
               <span class="text-slate-400">→</span>
-              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">Dashboard</span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-semibold">
+                <img src="Images/icon-dashboard-flow.svg" alt="" class="h-4 w-4 shrink-0 object-contain" width="16" height="16" decoding="async" />
+                Dashboard
+              </span>
             </div>
             <div class="relative min-h-[200px] md:min-h-[220px]">
               <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
                   <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 text-lg">📥</div>
+                    <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100">
+                      <img src="Images/logo-airtable.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-semibold text-slate-900 leading-tight">User feedback</p>
                     <p class="text-[10px] text-slate-400 leading-tight">Airtable</p>
                   </div>
@@ -1287,7 +1455,11 @@
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Integration</p>
                   <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
-                    <div class="w-9 h-9 rounded-2xl bg-[#6366F1] flex items-center justify-center text-white text-lg shadow-md">🔗</div>
+                    <div class="flex items-center justify-center gap-1.5 rounded-2xl bg-white px-2.5 py-2 shadow-md ring-1 ring-[#6366F1]/15">
+                      <img src="Images/logo-airtable.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                      <span class="text-[10px] font-black text-slate-300">+</span>
+                      <img src="Images/logo-jira.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-black text-slate-900 leading-tight">Discovery → Delivery</p>
                     <p class="text-[10px] text-slate-500 leading-snug">
                       <span class="font-semibold text-slate-700">Airtable</span> views &amp; rules, <span class="font-semibold text-slate-700">Jira Discovery</span>, and
@@ -1302,7 +1474,9 @@
                 <div class="space-y-3">
                   <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
                   <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500 text-lg">✅</div>
+                    <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+                      <img src="Images/icon-dashboard-flow.svg" alt="" class="h-5 w-5 object-contain" width="20" height="20" decoding="async" />
+                    </div>
                     <p class="text-[11px] font-semibold text-slate-900 leading-tight">Backlog &amp; visibility</p>
                     <p class="text-[10px] text-slate-400 leading-tight">Dashboard / reporting</p>
                   </div>
@@ -1332,6 +1506,120 @@
             <p class="relative z-10 mt-6 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400">Step-by-step</p>
             <p class="relative z-10 mt-2 text-[10px] leading-relaxed text-slate-500 text-center max-w-2xl mx-auto px-1">
               User feedback (Airtable) → triage / prioritization (views &amp; rules) → opportunities &amp; insights (Jira Discovery) → delivery tickets (Jira Software) → structured backlog / stakeholder visibility (dashboard).
+            </p>
+          </div>
+        </div>
+
+        <div data-automation-project-section="ai-portfolio" class="space-y-8 hidden">
+          <div class="max-w-3xl mx-auto p-5 md:p-6 rounded-2xl border border-slate-200 bg-slate-50 shadow-md ring-1 ring-slate-200/70">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🎯</span>
+              Design &amp; development workflow
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              I designed and built this portfolio as a <span class="font-semibold text-slate-900">product in its own right</span>, using
+              <span class="font-semibold text-slate-900">AI-native</span> tools to structure, design, and accelerate development—from design through deployment.
+            </p>
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mt-4 mb-2 flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 text-xs">✅</span>
+              Project outcome
+            </p>
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+              A cohesive portfolio aligned with my <span class="font-semibold text-slate-900">“product builder”</span> approach—showing concrete use of AI to design and ship an end-to-end product.
+            </p>
+          </div>
+
+          <div
+            class="relative max-w-4xl mx-auto rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-6 py-8 overflow-hidden"
+          >
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image:radial-gradient(#000 1px,transparent 1px);background-size:22px 22px;"></div>
+            <p class="relative z-10 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4">Data flow</p>
+            <div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-6 text-[10px]">
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-semibold text-center max-w-[9.5rem]">
+                <span class="text-[9px] leading-tight">Ideas / content</span>
+                <span class="text-[8px] font-medium text-slate-500 leading-tight">Projects, experience, site copy</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-900 font-semibold text-center max-w-[9.5rem]">
+                <span class="inline-flex items-center gap-1 text-[9px] leading-tight"><span class="text-[#4285F4] font-black">G</span> Gemini Canvas</span>
+                <span class="text-[8px] font-medium text-blue-700/90 leading-tight">Mockups &amp; structure</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-[#EEF2FF] border border-[#6366F1]/25 text-[#6366F1] font-black text-center max-w-[10rem]">
+                <span class="text-[9px] leading-tight">Cursor + Warp</span>
+                <span class="text-[8px] font-semibold text-slate-600 leading-tight font-sans normal-case tracking-normal">Agent — AI-assisted dev</span>
+              </span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full bg-slate-900 text-white font-semibold text-center max-w-[9rem]">
+                <span class="text-[9px] leading-tight">GitHub Pages</span>
+                <span class="text-[8px] font-medium text-slate-300 leading-tight">Deployment</span>
+              </span>
+            </div>
+            <div class="relative min-h-[200px] md:min-h-[220px]">
+              <div class="relative z-10 grid grid-cols-1 items-center gap-6 text-center sm:grid-cols-3 sm:gap-4 md:gap-8">
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Input</p>
+                  <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 text-lg">💡</div>
+                    <p class="text-[11px] font-semibold text-slate-900 leading-tight">Ideas / content</p>
+                    <p class="text-[10px] text-slate-400 leading-tight">Projects &amp; experience</p>
+                  </div>
+                  <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[11rem] mx-auto">
+                    Raw material: messaging, page structure, tone, and proof points to highlight.
+                  </p>
+                </div>
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">AI &amp; agent</p>
+                  <div class="mx-auto w-32 md:w-40 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white shadow-xl border border-[#6366F1]/20 px-4 py-4 flex flex-col items-center gap-2">
+                    <div class="flex items-center justify-center gap-1 rounded-2xl bg-white px-2 py-1.5 shadow-md ring-1 ring-[#6366F1]/15 text-[9px] font-black text-slate-800">
+                      <span class="text-[#4285F4]">G</span>
+                      <span class="text-slate-300">+</span>
+                      <span>⌘</span>
+                    </div>
+                    <p class="text-[11px] font-black text-slate-900 leading-tight">Canvas → code</p>
+                    <p class="text-[10px] text-slate-500 leading-snug">
+                      <span class="font-semibold text-slate-700">Gemini Canvas</span> to iterate on layout, then
+                      <span class="font-semibold text-[#6366F1]">Cursor</span> &amp; <span class="font-semibold text-slate-700">Warp</span> to build and wire up the site.
+                    </p>
+                  </div>
+                  <div class="flex flex-col gap-1 text-[8px] font-bold uppercase tracking-widest text-slate-400">
+                    <span class="text-blue-700/80">Mockups &amp; structure</span>
+                    <span class="text-[#6366F1]">→ Guided implementation</span>
+                  </div>
+                </div>
+                <div class="space-y-3">
+                  <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Output</p>
+                  <div class="mx-auto w-28 md:w-32 rounded-2xl bg-white shadow-lg border border-slate-100 px-4 py-3 flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white text-sm font-black">gh</div>
+                    <p class="text-[11px] font-semibold text-slate-900 leading-tight">Live site</p>
+                    <p class="text-[10px] text-slate-400 leading-tight">GitHub Pages</p>
+                  </div>
+                  <p class="text-[9px] text-slate-500 font-medium leading-snug max-w-[11rem] mx-auto">
+                    Static hosting, public URL, and continuous iteration from the repo.
+                  </p>
+                </div>
+              </div>
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-0">
+                <svg class="w-full h-[72px] md:h-[80px]" style="max-width:860px;">
+                  <line
+                    x1="12%"
+                    y1="50%"
+                    x2="88%"
+                    y2="50%"
+                    class="text-slate-600/70"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-dasharray="5 6"
+                    stroke-linecap="round"
+                  >
+                    <animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" />
+                  </line>
+                </svg>
+              </div>
+            </div>
+            <p class="relative z-10 mt-6 text-center text-[9px] font-bold uppercase tracking-widest text-slate-400">Flow summary</p>
+            <p class="relative z-10 mt-2 text-[10px] leading-relaxed text-slate-500 text-center max-w-2xl mx-auto px-1">
+              Ideas / content → Gemini Canvas (mockups &amp; structure) → Cursor + Warp (agent, AI-assisted development) → GitHub Pages (deployment).
             </p>
           </div>
         </div>

@@ -60,6 +60,7 @@
       automationModalSub: 'Builder side projects',
       automationTabWorkflowDesc: 'Assistant de pilotage produit',
       automationTabPosDesc: 'Automation Discovery → Delivery',
+      automationTabPortfolioDesc: 'Design & développement',
     },
     EN: {
       name: 'Aminata Lissa Dia',
@@ -116,6 +117,7 @@
       automationModalSub: 'Builder side projects',
       automationTabWorkflowDesc: 'Product steering assistant',
       automationTabPosDesc: 'Automation Discovery → Delivery',
+      automationTabPortfolioDesc: 'Design & development',
     },
   };
 
@@ -1599,6 +1601,8 @@
     if (wfTabDesc) wfTabDesc.textContent = t('automationTabWorkflowDesc');
     var posTabDesc = document.getElementById('automation-tab-pos-desc');
     if (posTabDesc) posTabDesc.textContent = t('automationTabPosDesc');
+    var portfolioTabDesc = document.getElementById('automation-tab-portfolio-desc');
+    if (portfolioTabDesc) portfolioTabDesc.textContent = t('automationTabPortfolioDesc');
     var personalBtn = document.getElementById('btn-personal-projects');
     if (personalBtn) personalBtn.setAttribute('aria-label', t('personalProjectsAria'));
     var visAutoRoot = getVisibleAutomationRoot();
