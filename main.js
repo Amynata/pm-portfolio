@@ -50,7 +50,7 @@
       selectProject: 'Sélectionnez un projet pour afficher les détails.',
       projectsTitle: 'Projets & Expériences',
       about: 'Formation',
-      projects: 'Projets',
+      projects: 'Projets persos',
     },
     EN: {
       name: 'Aminata Lissa Dia',
@@ -97,7 +97,7 @@
       selectProject: 'Select a project to view details.',
       projectsTitle: 'Projects & Experience',
       about: 'Education',
-      projects: 'Projects',
+      projects: 'Personal projects',
     },
   };
 
@@ -929,8 +929,9 @@
       btn.type = 'button';
       btn.dataset.expIndex = index;
       btn.className = 'exp-orbit-btn flex flex-col items-center group relative text-slate-900';
+      // Libellé au-dessus de la pastille : mb-1 = léger décalage vers le haut par rapport à mb-0.5
       btn.innerHTML =
-        '<span class="exp-orbit-label absolute -top-20 text-center transition-all duration-300 opacity-0 scale-90 translate-y-4 flex flex-col items-center gap-0.5">' +
+        '<span class="exp-orbit-label absolute bottom-full left-1/2 mb-1 -translate-x-1/2 flex flex-col items-center gap-0.5 text-center transition-all duration-300 opacity-0 translate-y-2 scale-90">' +
         '<span class="text-[10px] font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">' + escapeHtml(exp.company) + '</span>' +
         '<span class="text-[8px] font-bold text-[#818CF8] uppercase tracking-widest whitespace-nowrap">' + escapeHtml(exp.period[lang]) + '</span>' +
         '</span>' +
@@ -955,7 +956,7 @@
       btn.addEventListener('mouseenter', function () {
         var labelEl = btn.querySelector('.exp-orbit-label');
         var dotEl = btn.querySelector('.exp-orbit-dot');
-        labelEl.classList.remove('opacity-0', 'scale-90', 'translate-y-4');
+        labelEl.classList.remove('opacity-0', 'scale-90', 'translate-y-2');
         labelEl.classList.add('opacity-100', 'scale-100');
         dotEl.classList.add('scale-110');
         dotEl.style.boxShadow = '0 0 0 3px ' + exp.color + '33, 0 18px 30px rgba(15,23,42,0.35)';
@@ -964,7 +965,7 @@
         var labelEl = btn.querySelector('.exp-orbit-label');
         var dotEl = btn.querySelector('.exp-orbit-dot');
         var isActive = selectedExp === index;
-        labelEl.classList.add('opacity-0', 'scale-90', 'translate-y-4');
+        labelEl.classList.add('opacity-0', 'scale-90', 'translate-y-2');
         labelEl.classList.remove('opacity-100', 'scale-100');
         dotEl.classList.remove('scale-110');
         if (!isActive) {
@@ -998,14 +999,14 @@
         // dot.style.backgroundColor = exp.color;
         dot.classList.add('text-white', 'scale-110');
         dot.classList.remove('bg-white/95', 'text-slate-400', 'bg-slate-800');
-        btn.querySelector('.exp-orbit-label').classList.remove('opacity-0', 'scale-90', 'translate-y-4');
+        btn.querySelector('.exp-orbit-label').classList.remove('opacity-0', 'scale-90', 'translate-y-2');
         btn.querySelector('.exp-orbit-label').classList.add('opacity-100', 'scale-100');
       } else {
         dot.style.backgroundColor = '';
         dot.classList.remove('scale-110', 'text-white');
         dot.classList.add('bg-white/95', 'text-slate-400');
         if (btn.matches(':hover')) return;
-        btn.querySelector('.exp-orbit-label').classList.add('opacity-0', 'scale-90', 'translate-y-4');
+        btn.querySelector('.exp-orbit-label').classList.add('opacity-0', 'scale-90', 'translate-y-2');
         btn.querySelector('.exp-orbit-label').classList.remove('opacity-100', 'scale-100');
       }
     });

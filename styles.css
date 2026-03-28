@@ -24,7 +24,7 @@ body {
   touch-action: manipulation;
 }
 
-/* Onglet Projet (modale expérience) : blocs Problème / Actions / Impact plus larges et lisibles */
+/* Onglet « Projets persos » (modale expérience) : blocs Problème / Actions / Impact plus larges et lisibles */
 .exp-project-content > div.flex.gap-4 {
   width: 100%;
   padding: 1rem 1.25rem;

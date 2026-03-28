@@ -43,7 +43,7 @@
           <span aria-hidden="true">🌐</span><span id="lang-label">FR</span>
         </button>
         <button type="button" id="btn-formation" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Formation</button>
-        <button type="button" id="btn-projects" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Projets</button>
+        <button type="button" id="btn-projects" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Projets persos</button>
         <button type="button" id="btn-cv" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">CV</button>
         <button type="button" id="btn-contact" class="bg-slate-900 text-white px-4 lg:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all min-h-[2.5rem]">Me contacter</button>
       </nav>
@@ -77,7 +77,7 @@
         <span aria-hidden="true">🌐</span> <span id="mobile-lang-label">FR</span>
       </button>
       <button type="button" id="mobile-nav-formation" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">Formation</button>
-      <button type="button" id="mobile-nav-projects" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">Projets</button>
+      <button type="button" id="mobile-nav-projects" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">Projets persos</button>
       <button type="button" id="mobile-nav-cv" class="min-h-[3rem] rounded-xl px-4 py-3 text-left text-sm font-black uppercase tracking-widest text-slate-800 hover:bg-slate-50">CV</button>
       <button type="button" id="mobile-nav-contact" class="mt-2 min-h-[3rem] rounded-xl bg-slate-900 px-4 py-3 text-center text-sm font-black uppercase tracking-widest text-white hover:bg-[#818CF8]">Me contacter</button>
     </nav>
@@ -107,7 +107,8 @@
               </span>
             </button>
           </div>
-          <div id="experience-orbit" class="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+          <!-- z-[55] > header (z-50) pour que les labels au survol (ex. Decathlon en haut de l’arc) ne passent pas derrière la barre fixe -->
+          <div id="experience-orbit" class="pointer-events-none absolute inset-0 z-[55] flex items-center justify-center">
             <!-- Experience buttons injected by JS -->
           </div>
           <svg class="pointer-events-none absolute z-10 h-auto w-[min(92vw,400px)] max-w-[400px] opacity-10 md:w-[530px] md:max-w-[530px]" style="aspect-ratio:100/100" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
@@ -784,10 +785,10 @@
     </div>
   </div>
 
-  <!-- Modal Formation -->
+  <!-- Modal Formation : max-w-3xl pour une carte plus large ; descriptions par établissement -->
   <div id="formation-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 md:p-8 invisible transition-all duration-300" aria-hidden="true">
     <div id="formation-modal-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
-    <div id="formation-modal-content" class="relative bg-white/95 backdrop-blur-xl w-full max-w-lg rounded-[3rem] border border-white/50 shadow-2xl overflow-y-auto max-h-[90vh]">
+    <div id="formation-modal-content" class="relative w-full max-w-3xl overflow-y-auto rounded-[3rem] border border-white/50 bg-white/95 shadow-2xl backdrop-blur-xl max-h-[90vh]">
       <div class="sticky top-0 bg-white/80 backdrop-blur-md z-10 px-8 py-6 border-b border-slate-100 flex justify-between items-center">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-[#818CF8] flex items-center justify-center text-white shadow-lg">🎓</div>
@@ -808,12 +809,13 @@
             <div>
               <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-1">Novembre 2024</p>
               <p class="text-base font-black text-slate-900 leading-tight">Woman Leadership</p>
-              <a href="https://www.hec.edu/fr" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 font-medium mt-1 inline-flex items-center gap-1 hover:text-[#818CF8] transition-colors">
+              <a href="https://www.hec.edu/fr" target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-[#818CF8]">
                 HEC Paris
                 <span aria-hidden="true" class="text-slate-300">•</span>
               </a>
+              <p class="mt-2 max-w-prose text-xs leading-relaxed text-slate-500">Grande école de commerce française, reconnue mondialement pour ses programmes en management, stratégie et leadership.</p>
             </div>
-            <div class="w-16 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center px-2">
+            <div class="flex h-10 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white px-2 shadow-sm">
               <img src="Images/HEC.png" alt="HEC Paris" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
               <span class="text-[9px] font-black text-slate-400 hidden">HEC</span>
             </div>
@@ -828,12 +830,13 @@
             <div>
               <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-1">Octobre 2024</p>
               <p class="text-base font-black text-slate-900 leading-tight">Lead Product Manager – Certified</p>
-              <a href="https://www.thiga.academy/" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 font-medium mt-1 inline-flex items-center gap-1 hover:text-[#818CF8] transition-colors">
+              <a href="https://www.thiga.academy/" target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-[#818CF8]">
                 Thiga Academy
                 <span aria-hidden="true" class="text-slate-300">•</span>
               </a>
+              <p class="mt-2 max-w-prose text-xs leading-relaxed text-slate-500">École spécialisée dans les métiers du produit : formation de Product Managers, discovery, delivery et culture agile.</p>
             </div>
-            <div class="w-16 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center px-2">
+            <div class="flex h-10 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white px-2 shadow-sm">
               <img src="Images/Thiga_Logo.png" alt="Thiga Academy" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
               <span class="text-[8px] font-black text-slate-400 hidden">THIGA</span>
             </div>
@@ -848,12 +851,13 @@
             <div>
               <p class="text-[10px] font-black uppercase tracking-widest text-[#818CF8] mb-1">Novembre 2022 - Mars 2023</p>
               <p class="text-base font-black text-slate-900 leading-tight">Product Manager</p>
-              <a href="https://www.maestro.fr/" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 font-medium mt-1 inline-flex items-center gap-1 hover:text-[#818CF8] transition-colors">
+              <a href="https://www.maestro.fr/" target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-[#818CF8]">
                 Maestro - Ecole du Product Management
                 <span aria-hidden="true" class="text-slate-300">•</span>
               </a>
+              <p class="mt-2 max-w-prose text-xs leading-relaxed text-slate-500">Organisme de formation centré sur le métier de Product Manager, la vision produit et les pratiques agiles en entreprise.</p>
             </div>
-            <div class="w-16 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center px-2">
+            <div class="flex h-10 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white px-2 shadow-sm">
               <img src="Images/maestro_logo.png" alt="Maestro" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
               <span class="text-[8px] font-black text-slate-400 hidden">MAESTRO</span>
             </div>
@@ -869,12 +873,13 @@
               <p class="text-base font-black text-slate-900 leading-tight">Master Degree in Computer Science</p>
               <p class="text-sm text-slate-600 font-medium">Spécialisation Systèmes Embarqués</p>
               <p class="text-sm font-bold text-slate-900 mt-1">Graduated with Honors</p>
-              <a href="https://www.esiee.fr/" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 font-medium mt-0.5 inline-flex items-center gap-1 hover:text-[#818CF8] transition-colors">
+              <a href="https://www.esiee.fr/" target="_blank" rel="noopener noreferrer" class="mt-0.5 inline-flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-[#818CF8]">
                 ESIEE Paris – Engineering School
                 <span aria-hidden="true" class="text-slate-300">•</span>
               </a>
+              <p class="mt-2 max-w-prose text-xs leading-relaxed text-slate-500">Grande école d’ingénieurs du numérique (CY Tech / UGE), forte en informatique, électronique et systèmes embarqués.</p>
             </div>
-            <div class="w-16 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center px-2">
+            <div class="flex h-10 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-white px-2 shadow-sm">
               <img src="Images/Logo-esiee-Paris-UGE.svg" alt="ESIEE Paris" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
               <span class="text-[8px] font-black text-slate-400 hidden">ESIEE</span>
             </div>
