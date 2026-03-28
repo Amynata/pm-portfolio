@@ -920,10 +920,6 @@
   // Icônes SVG des outils (reprennent la maquette React)
   const miroIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.462c-3.564 0-6.462-2.898-6.462-6.462S8.436 5.538 12 5.538s6.462 2.898 6.462 6.462-2.898 6.462-6.462 6.462zM9.231 9.231h5.538v5.538H9.231V9.231z" /></svg>`;
   const replitIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M2 10h10v4H2v-4zm5-5h10v4H7V5zm5 10h10v4H12v-4z" /></svg>`;
-  const jiraIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M11.58 2.25c-.23 0-.46.06-.66.19L2.66 7.4c-.4.26-.66.72-.66 1.21v10.78c0 .49.26.95.66 1.21l8.26 4.96c.4.24.91.24 1.32 0l8.26-4.96c.4-.26.66-.72.66-1.21V8.61c0-.49-.26-.95-.66-1.21l-8.26-4.96c-.2-.13-.43-.19-.66-.19z" /></svg>`;
-  const datadogIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.12 16.5c-.32.48-.96.64-1.44.32-.48-.32-.64-.96-.32-1.44.32-.48.96-.64 1.44-.32.48.32.64.96.32 1.44zm-2.08-1.76c-.32.48-.96.64-1.44.32-.48-.32-.64-.96-.32-1.44.32-.48.96-.64 1.44-.32.48.32.64.96.32 1.44zm-2.56 1.76c-.32.48-.96.64-1.44.32-.48-.32-.64-.96-.32-1.44.32-.48.96-.64 1.44-.32.48.32.64.96.32 1.44zM7.2 12.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm2.4-5.6c-.88 0-1.6-.72-1.6-1.6s.72-1.6 1.6-1.6 1.6.72 1.6 1.6-.72 1.6-1.6 1.6z"/></svg>`;
-  const notionIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M4.459 4.208c.746.606 1.026.56 2.428.402l11.67-1.392c.28 0-.047-.28-.138-.321L17.33 1.59c-.495-.247-.737-.495-1.033-.742l-4.875-3.534c-.434-.371-.99-.464-1.486-.092L4.459 4.208zm0 .607v16.81c0 .651.467 1.172 1.119 1.172h16.422c.651 0 1.172-.521 1.172-1.172V7.405c0-.698-.606-1.212-1.26-1.172L5.578 5.841c-.651-.047-1.119.474-1.119 1.172v.002zm4.36 1.633c-.046-.651.468-1.119 1.172-1.119h12.047c.697 0 1.259.468 1.212 1.119v11.214c0 .697-.468 1.259-1.119 1.212H10.091c-.697 0-1.259-.468-1.212-1.172V6.448z"/></svg>`;
-
   const tools = [
     { name: 'Miro', color: '#FFD02F', textColor: 'text-black', icon: miroIcon, level: 5,
       desc: { FR: 'Workshop & Discovery', EN: 'Workshop & Discovery' },
@@ -933,19 +929,19 @@
       desc: { FR: 'Prototypage rapide', EN: 'Rapid prototyping' },
       detail: { FR: 'Prototypage rapide de MVPs et proof-of-concepts. Développement d\'outils internes et d\'assistants IA pour accélérer les cycles discovery.', EN: 'Rapid prototyping of MVPs and proof-of-concepts. Building internal tools and AI assistants to accelerate discovery cycles.' }
     },
-    { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: jiraIcon, level: 5,
+    { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_software.svg', level: 5, neutralLogoBtn: true,
       desc: { FR: 'Backlog & Agile Ops', EN: 'Backlog & Agile Ops' },
       detail: { FR: 'Gestion du backlog produit, pilotage des sprints et suivi delivery. Structuration des epics, stories et critères d\'acceptance.', EN: 'Product backlog management, sprint planning and delivery tracking. Structuring epics, stories and acceptance criteria.' }
     },
-    { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: jiraIcon, level: 4,
+    { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_discovery.svg', level: 4, neutralLogoBtn: true,
       desc: { FR: 'Discovery & Priorisation', EN: 'Discovery & Prioritisation' },
       detail: { FR: 'Collecte et priorisation des opportunités produit. Scoring d\'impact, gestion des insights utilisateurs et alignement stratégique.', EN: 'Collecting and prioritizing product opportunities. Impact scoring, user insights management and strategic alignment.' }
     },
-    { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: datadogIcon, level: 4,
+    { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 4, neutralLogoBtn: true,
       desc: { FR: 'Observabilité', EN: 'Observability' },
       detail: { FR: 'Monitoring de la performance produit, suivi des métriques d\'usage en temps réel et mise en place de dashboards d\'observabilité data.', EN: 'Product performance monitoring, real-time usage metrics tracking and setting up data observability dashboards.' }
     },
-    { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: notionIcon, level: 5,
+    { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: '', iconSrc: 'Images/notion_logo.png', level: 5,
       desc: { FR: 'Docs & suivi produit', EN: 'Docs & product tracking' },
       detail: { FR: 'Documentation produit, roadmaps, specs et bases de connaissance partagées avec les équipes.', EN: 'Product documentation, roadmaps, specs and shared knowledge bases with teams.' }
     },
@@ -1631,7 +1627,7 @@
 
     // Ligne du haut (index 0–2) : tooltip au-dessus (bottom-full). Ligne du bas (3–5) : tooltip en dessous (top-full).
     list.innerHTML =
-      '<div class="flex flex-wrap gap-x-5 gap-y-8 justify-center lg:justify-start">' +
+      '<div class="grid w-full grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 justify-items-center">' +
       tools
         .map(function (item, idx) {
           var tooltipUp = idx < 3;
@@ -1654,16 +1650,32 @@
             escapeHtml(item.desc[lang]) +
             '</span>' +
             '</span>';
+          var imgSizeClass = item.neutralLogoBtn ? 'w-8 h-8 max-w-[2rem] max-h-[2rem]' : 'w-5 h-5';
+          var imgWh = item.neutralLogoBtn ? '32' : '20';
+          var iconMarkup = item.iconSrc
+            ? '<img src="' +
+              escapeHtml(item.iconSrc) +
+              '" alt="" class="' +
+              imgSizeClass +
+              ' object-contain object-center pointer-events-none" width="' +
+              imgWh +
+              '" height="' +
+              imgWh +
+              '" decoding="async" />'
+            : '<div class="' + item.textColor + '">' + item.icon + '</div>';
+          var btnClass =
+            'tool-btn relative rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 ';
+          var btnStyle = '';
+          if (item.neutralLogoBtn) {
+            btnClass +=
+              'w-12 h-12 bg-white border border-slate-200 shadow-md ring-1 ring-slate-100';
+          } else {
+            btnClass += 'w-11 h-11 shadow-lg border-2 border-white';
+            btnStyle = 'background-color:' + item.color;
+          }
+          var styleAttr = btnStyle ? ' style="' + btnStyle + '"' : '';
           var btnHtml =
-            '<button type="button" class="tool-btn relative w-11 h-11 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white transition-all duration-300 hover:scale-110" style="background-color:' +
-            item.color +
-            '">' +
-            '<div class="' +
-            item.textColor +
-            '">' +
-            item.icon +
-            '</div>' +
-            '</button>';
+            '<button type="button" class="' + btnClass + '"' + styleAttr + '>' + iconMarkup + '</button>';
           var inner =
             '<div class="relative inline-flex flex-col items-center">' +
             (tooltipUp ? labelHtml + btnHtml : btnHtml + labelHtml) +
