@@ -136,10 +136,16 @@
         <div
           class="portfolio-photo-stage w-full max-w-[min(100%,calc(100vw-1rem))] sm:max-w-[min(100%,38rem)] lg:max-w-none lg:w-full mx-auto px-1 py-6 sm:px-2 sm:py-8 lg:mx-0 lg:px-0 lg:-ml-10 xl:-ml-14 2xl:-ml-16"
         >
-          <!-- Piliers centrés au-dessus du cercle (comme maquette) ; rangée : cercle + boutons latéraux -->
+          <!-- Piliers au-dessus du portrait uniquement : même axe horizontal que le cercle (pas décalés par les boutons latéraux) -->
           <div class="hub-visual-group relative z-[1] flex w-full flex-col items-center">
-            <div class="hub-pillars mb-5 flex w-full flex-wrap items-center justify-center gap-4 md:gap-5">
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2 px-2 py-1">
+            <div
+              class="relative z-[1] flex w-full flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-4"
+              id="hero-hub-row"
+              aria-live="polite"
+            >
+              <div class="flex min-w-0 flex-col items-center gap-5">
+                <div class="hub-pillars flex w-full flex-wrap items-center justify-center gap-4 md:gap-5">
+              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
                 <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
                   <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
                     <rect x="28" y="8" width="8" height="36" rx="4" fill="#F59E0B" />
@@ -151,7 +157,7 @@
                 </div>
                 <span class="text-[7px] font-black uppercase tracking-widest text-amber-500 md:text-[8px]">Automation</span>
               </div>
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2 px-2 py-1">
+              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
                 <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
                   <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
                     <rect x="14" y="16" width="36" height="32" rx="8" fill="#818CF8" />
@@ -162,7 +168,7 @@
                 </div>
                 <span class="text-[7px] font-black uppercase tracking-widest text-[#818CF8] md:text-[8px]">Robotics</span>
               </div>
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2 px-2 py-1">
+              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
                 <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
                   <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
                     <circle cx="32" cy="28" r="14" fill="#E0E7FF" />
@@ -173,13 +179,7 @@
                 </div>
                 <span class="text-[7px] font-black uppercase tracking-widest text-indigo-500 md:text-[8px]">IA Agents</span>
               </div>
-            </div>
-
-            <div
-              class="relative z-[1] flex w-full flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-4"
-              id="hero-hub-row"
-              aria-live="polite"
-            >
+                </div>
               <div
                 class="portfolio-photo-gradient-ring hub-photo-ring group/portrait shrink-0 cursor-pointer rounded-full transition-[transform,filter] duration-200 ease-out will-change-transform hover:scale-[1.02] hover:shadow-[0_20px_50px_-12px_rgb(99_102_241_/_0.35)]"
               >
@@ -206,44 +206,58 @@
                       </button>
                     </div>
                   </div>
+                  <!-- Rail vertical Outils / Certifs : translateY fluide (effet smooth scroll dans le cercle) -->
                   <div
-                    id="hub-layer-tools"
-                    class="hub-layer pointer-events-auto absolute inset-0 z-[12] flex scale-95 flex-col items-stretch overflow-hidden rounded-full bg-slate-50/95 p-2 pb-9 opacity-0 transition-all duration-300 ease-out sm:p-3 sm:pb-10"
+                    id="hub-tools-certs-portal"
+                    class="hub-tools-certs-portal pointer-events-none absolute inset-0 z-[12] overflow-hidden rounded-full opacity-0 transition-opacity duration-300 ease-out"
                     hidden
                   >
-                    <!-- Titre descendu davantage pour mieux équilibrer la zone sous le bord du cercle -->
-                    <p
-                      id="hub-tools-heading"
-                      class="pointer-events-none flex-shrink-0 pt-6 text-center text-[10px] font-black uppercase tracking-[0.18em] text-[#818CF8] sm:pt-8 sm:text-[11px]"
+                    <div
+                      id="hub-tools-certs-track"
+                      class="flex h-[200%] w-full flex-col will-change-transform"
                     >
-                      Maîtrise technique
-                    </p>
-                    <!-- Grille outils : zone scroll centrée pour regrouper les tuiles au milieu du cercle -->
-                    <div id="hub-tools-stack" class="flex min-h-0 w-full flex-1 flex-col gap-0.5 pt-0.5">
-                      <div
-                        class="hub-tools-grid-scroll flex min-h-0 w-full flex-1 items-center justify-center overflow-y-auto overflow-x-hidden px-0.5"
-                      >
+                      <div class="flex h-1/2 min-h-0 w-full flex-col">
                         <div
-                          id="hub-tools-grid"
-                          class="hub-tools-grid-inner grid w-full max-w-[13.5rem] grid-cols-3 justify-items-center gap-x-0 gap-y-1 px-0 py-0.5 sm:max-w-[15rem]"
-                        ></div>
+                          id="hub-layer-tools"
+                          class="hub-layer pointer-events-auto relative z-10 flex h-full min-h-0 flex-col items-stretch overflow-hidden rounded-full bg-slate-50/95 p-2 pb-9 sm:p-3 sm:pb-10"
+                        >
+                          <!-- Titre descendu davantage pour mieux équilibrer la zone sous le bord du cercle -->
+                          <p
+                            id="hub-tools-heading"
+                            class="pointer-events-none flex-shrink-0 pt-6 text-center text-[10px] font-black uppercase tracking-[0.18em] text-[#818CF8] sm:pt-8 sm:text-[11px]"
+                          >
+                            Maîtrise technique
+                          </p>
+                          <!-- Grille outils : zone scroll centrée pour regrouper les tuiles au milieu du cercle -->
+                          <div id="hub-tools-stack" class="flex min-h-0 w-full flex-1 flex-col gap-0.5 pt-0.5">
+                            <div
+                              class="hub-tools-grid-scroll flex min-h-0 w-full flex-1 items-center justify-center overflow-y-auto overflow-x-hidden px-0.5"
+                            >
+                              <div
+                                id="hub-tools-grid"
+                                class="hub-tools-grid-inner grid w-full max-w-[13.5rem] grid-cols-3 justify-items-center gap-x-0 gap-y-1 px-0 py-0.5 sm:max-w-[15rem]"
+                              ></div>
+                            </div>
+                            <div
+                              id="hub-tool-hover"
+                              class="hub-tool-detail hidden flex-shrink-0 rounded-lg border border-slate-200/90 bg-white/95 px-2 py-1.5 text-center shadow-sm"
+                              aria-live="polite"
+                            ></div>
+                          </div>
+                        </div>
                       </div>
-                      <div
-                        id="hub-tool-hover"
-                        class="hub-tool-detail hidden flex-shrink-0 rounded-lg border border-slate-200/90 bg-white/95 px-2 py-1.5 text-center shadow-sm"
-                        aria-live="polite"
-                      ></div>
+                      <div class="flex h-1/2 min-h-0 w-full flex-col">
+                        <div
+                          id="hub-layer-certs"
+                          class="hub-layer pointer-events-auto relative z-10 flex h-full min-h-0 flex-col items-stretch overflow-hidden rounded-full bg-white p-2 pb-9 sm:p-3 sm:pb-10"
+                        >
+                          <ul
+                            id="hub-certs-list"
+                            class="hub-certs-list flex min-h-0 w-full min-w-0 max-w-full flex-1 flex-col items-stretch justify-center gap-[0.1875rem] overflow-y-auto overflow-x-hidden px-1.5 py-2 sm:gap-1 sm:px-2"
+                          ></ul>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    id="hub-layer-certs"
-                    class="hub-layer pointer-events-auto absolute inset-0 z-[12] flex scale-95 flex-col items-stretch overflow-hidden rounded-full bg-white p-2 pb-9 opacity-0 transition-all duration-300 ease-out sm:p-3 sm:pb-10"
-                    hidden
-                  >
-                    <ul
-                      id="hub-certs-list"
-                      class="hub-certs-list flex min-h-0 w-full min-w-0 max-w-full flex-1 flex-col items-stretch justify-center gap-[0.1875rem] overflow-y-auto overflow-x-hidden px-1.5 py-2 sm:gap-1 sm:px-2"
-                    ></ul>
                   </div>
                   <button
                     type="button"
@@ -256,6 +270,7 @@
                   </button>
                 </div>
               </div>
+            </div>
               <div class="flex shrink-0 flex-col justify-center gap-2.5 sm:gap-3">
                 <button
                   type="button"

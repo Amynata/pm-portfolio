@@ -1141,16 +1141,59 @@
     else if (view === 'certs') lr.textContent = t('hubViewCertsAnnounce');
   }
 
+  /** Positionne le rail Outils/Certifs (translateY) ; animation fluide uniquement entre les deux onglets. */
+  function setHubTrackPosition(showCerts, animate) {
+    var track = document.getElementById('hub-tools-certs-track');
+    if (!track) return;
+    var reduce =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var instant = !animate || reduce;
+    if (instant) {
+      track.classList.add('hub-track-no-transition');
+    }
+    track.style.transform = showCerts ? 'translateY(-50%)' : 'translateY(0)';
+    if (instant) {
+      void track.offsetHeight;
+      track.classList.remove('hub-track-no-transition');
+    }
+  }
+
+  /** Panneau non visible : pas de clic ; aria pour lecteurs d’écran. */
+  function updateHubSubviewPointerAndAria() {
+    var tools = document.getElementById('hub-layer-tools');
+    var certs = document.getElementById('hub-layer-certs');
+    if (!tools || !certs) return;
+    if (hubView === 'tools') {
+      tools.style.pointerEvents = 'auto';
+      certs.style.pointerEvents = 'none';
+      tools.setAttribute('aria-hidden', 'false');
+      certs.setAttribute('aria-hidden', 'true');
+    } else if (hubView === 'certs') {
+      tools.style.pointerEvents = 'none';
+      certs.style.pointerEvents = 'auto';
+      tools.setAttribute('aria-hidden', 'true');
+      certs.setAttribute('aria-hidden', 'false');
+    } else {
+      tools.style.pointerEvents = 'none';
+      certs.style.pointerEvents = 'none';
+      tools.setAttribute('aria-hidden', 'true');
+      certs.setAttribute('aria-hidden', 'true');
+    }
+  }
+
   function setHubView(next) {
     if (next !== 'photo' && next !== 'tools' && next !== 'certs') return;
     var photo = document.getElementById('hub-layer-photo');
     var tools = document.getElementById('hub-layer-tools');
     var certs = document.getElementById('hub-layer-certs');
+    var portal = document.getElementById('hub-tools-certs-portal');
     var back = document.getElementById('hub-back-btn');
     var btnTools = document.getElementById('hub-btn-tools');
     var btnCerts = document.getElementById('hub-btn-certs');
     if (!photo || !tools || !certs) return;
 
+    var prev = hubView;
     hubView = next;
     var showPhoto = next === 'photo';
     var showTools = next === 'tools';
@@ -1171,26 +1214,26 @@
     if (!showTools) {
       clearHubToolsUI();
     }
+    if (showTools) {
+      clearHubToolsUI();
+    }
 
-    function deactivateLayer(layer) {
-      if (!layer) return;
-      layer.classList.remove('z-20', 'opacity-100', 'scale-100');
-      layer.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
+    function hidePortalSoon() {
+      if (!portal) return;
+      portal.classList.remove('opacity-100', 'pointer-events-auto');
+      portal.classList.add('opacity-0', 'pointer-events-none');
       window.setTimeout(function () {
-        if (
-          (layer === tools && hubView !== 'tools') ||
-          (layer === certs && hubView !== 'certs')
-        ) {
-          layer.hidden = true;
+        if (hubView === 'photo') {
+          portal.hidden = true;
         }
       }, 320);
     }
 
     if (showPhoto) {
-      deactivateLayer(tools);
-      deactivateLayer(certs);
+      hidePortalSoon();
       photo.classList.remove('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
       photo.classList.add('z-10', 'opacity-100', 'scale-100');
+      updateHubSubviewPointerAndAria();
       announceHubView('photo');
       return;
     }
@@ -1198,28 +1241,32 @@
     photo.classList.remove('z-10', 'opacity-100', 'scale-100');
     photo.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
 
-    if (showTools) {
-      clearHubToolsUI();
-      deactivateLayer(certs);
-      tools.hidden = false;
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          tools.classList.remove('z-0', 'opacity-0', 'scale-95', 'pointer-events-none');
-          tools.classList.add('z-20', 'opacity-100', 'scale-100');
-        });
-      });
-      announceHubView('tools');
-    } else if (showCerts) {
-      deactivateLayer(tools);
-      certs.hidden = false;
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          certs.classList.remove('z-0', 'opacity-0', 'scale-95', 'pointer-events-none');
-          certs.classList.add('z-20', 'opacity-100', 'scale-100');
-        });
-      });
-      announceHubView('certs');
+    var animateTrack =
+      (prev === 'tools' && showCerts) || (prev === 'certs' && showTools);
+
+    if (showTools || showCerts) {
+      if (portal) {
+        var portalWasHidden = portal.hidden;
+        portal.hidden = false;
+        setHubTrackPosition(showCerts, animateTrack);
+        if (portalWasHidden) {
+          portal.classList.remove('opacity-100', 'pointer-events-auto');
+          portal.classList.add('opacity-0', 'pointer-events-none');
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              portal.classList.remove('opacity-0', 'pointer-events-none');
+              portal.classList.add('opacity-100', 'pointer-events-auto');
+            });
+          });
+        } else {
+          portal.classList.remove('opacity-0', 'pointer-events-none');
+          portal.classList.add('opacity-100', 'pointer-events-auto');
+        }
+      }
+      announceHubView(showTools ? 'tools' : 'certs');
     }
+
+    updateHubSubviewPointerAndAria();
   }
 
   function renderHubCerts() {
