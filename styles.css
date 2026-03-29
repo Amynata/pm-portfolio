@@ -203,8 +203,8 @@ body {
   .portfolio-hero-panel:hover {
     transform: none;
   }
-  .hub-side-btn-neo:hover,
-  .hub-side-btn-neo:active {
+  .hub-side-btn:hover,
+  .hub-side-btn:active {
     transform: none;
   }
   .portfolio-photo-gradient-ring.hub-photo-ring,
@@ -371,41 +371,48 @@ body {
   background: linear-gradient(180deg, rgb(255 255 255 / 0.5) 0%, rgb(253 251 247 / 0.85) 100%);
 }
 
-/* Hero CTA : pilules discrets, bordure pointillée (maquette) */
+/* Hero CTA : Mes projets / CV — plus grands et lisibles (contraste, fond léger, ombre) */
 .hero-cta-dash {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.375rem;
-  padding: 0.45rem 1.1rem;
+  min-height: 2.875rem;
+  padding: 0.6rem 1.45rem;
   border-radius: 9999px;
-  border: 1px dashed rgb(180 190 200);
-  background: transparent;
-  font-size: 0.625rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  border: 1px dashed rgb(148 163 184);
+  background: rgb(255 255 255 / 0.94);
+  box-shadow:
+    0 2px 8px -2px rgb(15 23 42 / 0.1),
+    0 1px 0 0 rgb(255 255 255 / 0.95) inset;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgb(51 65 85);
+  color: rgb(30 41 59);
   transition:
     border-color 0.2s ease,
     color 0.2s ease,
     background-color 0.2s ease,
+    box-shadow 0.2s ease,
     transform 0.15s ease;
 }
 
 @media (min-width: 640px) {
   .hero-cta-dash {
-    min-height: 2.5rem;
-    padding: 0.5rem 1.35rem;
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
+    min-height: 3.125rem;
+    padding: 0.7rem 1.85rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.13em;
   }
 }
 
 .hero-cta-dash:hover {
-  border-color: rgb(165 180 252);
-  color: rgb(79 70 229);
-  background: rgb(99 102 241 / 0.04);
+  border-color: rgb(129 140 248);
+  color: rgb(67 56 202);
+  background: rgb(99 102 241 / 0.08);
+  box-shadow:
+    0 4px 14px -4px rgb(99 102 241 / 0.28),
+    0 1px 0 0 rgb(255 255 255 / 0.95) inset;
 }
 
 .hero-cta-dash:active {
@@ -417,55 +424,104 @@ body {
   outline-offset: 2px;
 }
 
-/* Hub : boutons latéraux — néo-brutaliste (ombre décalée) + états actifs */
+/* Hub Outils / Certifs : même langage que la modale Projets (carte blanche, pastille #818CF8, sous-titre violet, ligne active type onglets) */
 .hub-side-btn {
+  position: relative;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
-    color 0.2s ease,
     box-shadow 0.2s ease,
     transform 0.15s ease;
 }
 
-.hub-side-btn-neo {
-  box-shadow: 5px 5px 0 0 rgb(15 23 42);
+.hub-side-btn:hover {
+  border-color: rgb(226 232 240) !important;
+  box-shadow:
+    0 10px 28px -12px rgb(15 23 42 / 0.15),
+    0 4px 14px -4px rgb(99 102 241 / 0.18) !important;
+  transform: translateY(-2px);
 }
 
-.hub-side-btn-neo:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 0 rgb(15 23 42);
-}
-
-.hub-side-btn-neo:active {
-  transform: translate(4px, 4px);
-  box-shadow: 1px 1px 0 0 rgb(15 23 42);
+.hub-side-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .hub-side-btn:focus-visible {
-  outline: 2px solid rgb(99 102 241 / 0.5);
-  outline-offset: 3px;
+  outline: 2px solid rgb(99 102 241 / 0.45);
+  outline-offset: 2px;
+}
+
+.hub-side-btn-icon {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1;
+  color: rgb(255 255 255);
+}
+
+/* Pastille type en-tête modale (icône ✨) */
+.hub-side-btn-icon--tools {
+  background: rgb(129 140 248);
+  box-shadow: 0 4px 14px -3px rgb(99 102 241 / 0.55);
+}
+
+/* Dégradé indigo → émeraude comme les titres d’onglets dans la modale */
+.hub-side-btn-icon--certs {
+  background: linear-gradient(135deg, rgb(99 102 241) 0%, rgb(16 185 129) 100%);
+  box-shadow: 0 4px 14px -3px rgb(16 185 129 / 0.45);
 }
 
 .hub-side-btn-active-tools {
-  border-color: rgb(79 70 229) !important;
-  background: rgb(238 242 255 / 0.98) !important;
-  color: rgb(55 48 163) !important;
-  box-shadow: 5px 5px 0 0 rgb(99 102 241) !important;
+  border-color: rgb(199 210 254) !important;
+  background: rgb(248 250 255 / 0.98) !important;
+  padding-bottom: 0.65rem !important;
+  box-shadow:
+    0 4px 18px -6px rgb(99 102 241 / 0.35),
+    0 0 0 1px rgb(99 102 241 / 0.1) inset !important;
 }
 
-.hub-side-btn-active-tools:hover {
-  box-shadow: 3px 3px 0 0 rgb(99 102 241) !important;
+.hub-side-btn-active-tools .hub-side-btn-textblock span:first-child {
+  color: rgb(49 46 129) !important;
+}
+
+.hub-side-btn-active-tools::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0.35rem;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(99 102 241) 0%, rgb(16 185 129) 100%);
 }
 
 .hub-side-btn-active-certs {
-  border-color: rgb(5 122 85) !important;
+  border-color: rgb(167 243 208) !important;
   background: rgb(236 253 245 / 0.98) !important;
-  color: rgb(6 78 59) !important;
-  box-shadow: 5px 5px 0 0 rgb(16 185 129) !important;
+  padding-bottom: 0.65rem !important;
+  box-shadow:
+    0 4px 18px -6px rgb(16 185 129 / 0.32),
+    0 0 0 1px rgb(16 185 129 / 0.1) inset !important;
 }
 
-.hub-side-btn-active-certs:hover {
-  box-shadow: 3px 3px 0 0 rgb(16 185 129) !important;
+.hub-side-btn-active-certs .hub-side-btn-textblock span:first-child {
+  color: rgb(6 78 59) !important;
+}
+
+.hub-side-btn-active-certs::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0.35rem;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(99 102 241) 0%, rgb(16 185 129) 100%);
 }
 
 #hub-back-btn:focus-visible,
@@ -487,15 +543,94 @@ body {
   transform: scale(1.05);
 }
 
-/* Timeline horizontale : ligne pointillée fine + pulse plus étroit */
+/* Certifications hub : Inter + tons slate/indigo comme le reste du site (#FDFBF7, labels uppercase / font-black) */
+.hub-cert-badge {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  /* Marge droite = moitié de l’ancien 0.35rem pour rapprocher texte ↔ picto */
+  padding: 0.4rem 0.175rem 0.4rem 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(99 102 241 / 0.14);
+  background: linear-gradient(
+    165deg,
+    rgb(253 251 247 / 0.98) 0%,
+    rgb(255 255 255 / 0.95) 45%,
+    rgb(238 242 255 / 0.35) 100%
+  );
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.95) inset,
+    0 1px 2px rgb(99 102 241 / 0.06);
+}
+
+.hub-cert-badge-label {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family:
+    'Inter',
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  font-size: 0.4375rem;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-feature-settings:
+    'liga' 1,
+    'kern' 1;
+  color: rgb(30 41 59);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hub-cert-badge-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: rgb(129 140 248);
+  /* Compense le blanc interne du SVG ; un cran de plus pour coller au libellé (espace divisé ~2) */
+  margin-inline-start: -0.25rem;
+}
+
+.hub-cert-badge-medal {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .hub-cert-badge {
+    padding: 0.45rem 0.2rem 0.45rem 0.75rem;
+    border-radius: 0.85rem;
+  }
+
+  .hub-cert-badge-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.11em;
+  }
+
+  .hub-cert-badge-medal {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* Timeline horizontale : pointillés un peu plus serrés, couleur indigo légèrement plus marquée */
 .timeline-path-horizontal {
-  stroke-dasharray: 4 5;
+  stroke-dasharray: 3 3;
   animation: dash-flow-horizontal 1.5s linear infinite;
 }
 
 @keyframes dash-flow-horizontal {
   to {
-    stroke-dashoffset: -18;
+    stroke-dashoffset: -6;
   }
 }
 

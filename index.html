@@ -106,12 +106,12 @@
                 <span class="hero-headline-underline text-slate-800" id="hero-impact">simplifier le quotidien.</span>
               </h2>
             </div>
-            <div class="mb-10 max-w-xl text-left text-[0.95rem] leading-relaxed text-slate-600 sm:text-base md:mb-10 md:text-[1.05rem] md:leading-[1.65]" id="hero-desc">
+            <div class="mb-4 max-w-xl text-left text-[0.95rem] leading-relaxed text-slate-600 sm:text-base sm:mb-5 md:mb-5 md:text-[1.05rem] md:leading-[1.65]" id="hero-desc">
               <p class="mb-4 text-slate-900"><strong id="desc1">Ingénieure de formation</strong><span id="desc2">, forte de plus de huit ans d'expérience dans la tech, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.</span></p>
               <p class="mb-4 text-slate-700"><span id="desc3">Mon parcours a commencé dans la </span><span class="text-[#818CF8] font-bold" id="desc4">robotique et les systèmes complexes</span><span id="desc5">, mais c'est le besoin de rester </span><span class="text-slate-900 font-bold underline decoration-indigo-200" id="desc6">connectée à l'humain</span><span id="desc7"> qui m'a menée vers le </span><span class="text-slate-900 font-bold" id="desc8">Product Management.</span><span id="desc9"> Aujourd'hui, je résous des problèmes concrets en faisant le </span><span class="text-indigo-600 font-bold" id="desc10">pont entre la puissance technique et l'usage utilisateur.</span></p>
               <p class="text-slate-700"><span id="desc11">Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (</span><span class="text-[#818CF8] font-bold" id="desc12">IA, automatisation, outils internes</span><span id="desc13">) pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.</span></p>
             </div>
-            <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4">
               <button
                 type="button"
                 id="btn-hero-projects"
@@ -211,14 +211,23 @@
                     class="hub-layer pointer-events-auto absolute inset-0 z-[12] flex scale-95 flex-col items-stretch overflow-hidden rounded-full bg-slate-50/95 p-2 pb-9 opacity-0 transition-all duration-300 ease-out sm:p-3 sm:pb-10"
                     hidden
                   >
+                    <!-- Titre descendu davantage pour mieux équilibrer la zone sous le bord du cercle -->
                     <p
                       id="hub-tools-heading"
-                      class="pointer-events-none flex-shrink-0 pt-1 text-center text-[8px] font-black uppercase tracking-[0.2em] text-[#818CF8]/90 sm:text-[9px]"
+                      class="pointer-events-none flex-shrink-0 pt-6 text-center text-[10px] font-black uppercase tracking-[0.18em] text-[#818CF8] sm:pt-8 sm:text-[11px]"
                     >
                       Maîtrise technique
                     </p>
-                    <div id="hub-tools-stack" class="flex min-h-0 w-full flex-1 flex-col gap-1 pt-1">
-                      <div id="hub-tools-grid" class="hub-tools-grid-inner grid min-h-0 w-full flex-1 grid-cols-3 gap-x-1 gap-y-2 overflow-y-auto px-0.5"></div>
+                    <!-- Grille outils : zone scroll centrée pour regrouper les tuiles au milieu du cercle -->
+                    <div id="hub-tools-stack" class="flex min-h-0 w-full flex-1 flex-col gap-0.5 pt-0.5">
+                      <div
+                        class="hub-tools-grid-scroll flex min-h-0 w-full flex-1 items-center justify-center overflow-y-auto overflow-x-hidden px-0.5"
+                      >
+                        <div
+                          id="hub-tools-grid"
+                          class="hub-tools-grid-inner grid w-full max-w-[13.5rem] grid-cols-3 justify-items-center gap-x-0 gap-y-1 px-0 py-0.5 sm:max-w-[15rem]"
+                        ></div>
+                      </div>
                       <div
                         id="hub-tool-hover"
                         class="hub-tool-detail hidden flex-shrink-0 rounded-lg border border-slate-200/90 bg-white/95 px-2 py-1.5 text-center shadow-sm"
@@ -228,10 +237,13 @@
                   </div>
                   <div
                     id="hub-layer-certs"
-                    class="hub-layer pointer-events-auto absolute inset-0 z-[12] flex scale-95 flex-col items-stretch justify-between overflow-hidden rounded-full bg-white p-3 pb-10 opacity-0 transition-all duration-300 ease-out sm:p-4 sm:pb-11"
+                    class="hub-layer pointer-events-auto absolute inset-0 z-[12] flex scale-95 flex-col items-stretch overflow-hidden rounded-full bg-white p-2 pb-9 opacity-0 transition-all duration-300 ease-out sm:p-3 sm:pb-10"
                     hidden
                   >
-                    <ul id="hub-certs-list" class="min-h-0 w-full flex-1 space-y-2 overflow-y-auto py-1 text-center text-[9px] font-bold uppercase tracking-widest text-slate-600"></ul>
+                    <ul
+                      id="hub-certs-list"
+                      class="hub-certs-list flex min-h-0 w-full min-w-0 max-w-full flex-1 flex-col items-stretch justify-center gap-[0.1875rem] overflow-y-auto overflow-x-hidden px-1.5 py-2 sm:gap-1 sm:px-2"
+                    ></ul>
                   </div>
                   <button
                     type="button"
@@ -248,20 +260,38 @@
                 <button
                   type="button"
                   id="hub-btn-tools"
-                  class="hub-side-btn hub-side-btn-neo flex min-w-[4.75rem] flex-col items-center gap-1 rounded-xl border-[3px] border-slate-900 bg-white px-2.5 py-2.5 text-[8px] font-black uppercase tracking-widest text-slate-900 sm:min-w-[5.75rem] sm:px-3 sm:py-3 sm:text-[9px]"
+                  class="hub-side-btn hub-side-btn--tools flex min-w-[5.5rem] flex-col items-center gap-1.5 rounded-2xl border border-slate-100 bg-white px-2.5 pb-2 pt-2.5 text-left shadow-md ring-1 ring-slate-200/70 sm:min-w-[6.25rem] sm:px-3 sm:pb-2.5 sm:pt-3"
                   aria-pressed="false"
                 >
-                  <span class="text-sm sm:text-base" aria-hidden="true">⚙</span>
-                  <span id="hub-btn-tools-label">Outils</span>
+                  <span class="hub-side-btn-icon hub-side-btn-icon--tools" aria-hidden="true">⚙</span>
+                  <span class="hub-side-btn-textblock flex w-full flex-col items-center gap-0.5 text-center">
+                    <span
+                      id="hub-btn-tools-label"
+                      class="text-[9px] font-black uppercase tracking-tight text-slate-900 sm:text-[10px]"
+                      >Outils</span>
+                    <span
+                      id="hub-btn-tools-sub"
+                      class="text-[7px] font-bold uppercase tracking-[0.12em] text-[#818CF8] sm:text-[8px] sm:tracking-[0.14em]"
+                    ></span>
+                  </span>
                 </button>
                 <button
                   type="button"
                   id="hub-btn-certs"
-                  class="hub-side-btn hub-side-btn-neo flex min-w-[4.75rem] flex-col items-center gap-1 rounded-xl border-[3px] border-slate-900 bg-white px-2.5 py-2.5 text-[8px] font-black uppercase tracking-widest text-slate-900 sm:min-w-[5.75rem] sm:px-3 sm:py-3 sm:text-[9px]"
+                  class="hub-side-btn hub-side-btn--certs flex min-w-[5.5rem] flex-col items-center gap-1.5 rounded-2xl border border-slate-100 bg-white px-2.5 pb-2 pt-2.5 text-left shadow-md ring-1 ring-slate-200/70 sm:min-w-[6.25rem] sm:px-3 sm:pb-2.5 sm:pt-3"
                   aria-pressed="false"
                 >
-                  <span class="text-sm sm:text-base" aria-hidden="true">🏅</span>
-                  <span id="hub-btn-certs-label">Certifs</span>
+                  <span class="hub-side-btn-icon hub-side-btn-icon--certs" aria-hidden="true">🏅</span>
+                  <span class="hub-side-btn-textblock flex w-full flex-col items-center gap-0.5 text-center">
+                    <span
+                      id="hub-btn-certs-label"
+                      class="text-[9px] font-black uppercase tracking-tight text-slate-900 sm:text-[10px]"
+                      >Certifs</span>
+                    <span
+                      id="hub-btn-certs-sub"
+                      class="text-[7px] font-bold uppercase tracking-[0.12em] text-[#818CF8] sm:text-[8px] sm:tracking-[0.14em]"
+                    ></span>
+                  </span>
                 </button>
               </div>
             </div>
@@ -279,19 +309,18 @@
           Les pastilles en bas ouvrent chaque expérience.
         </p>
         <div class="experience-timeline relative mx-auto max-w-5xl px-2 pb-6 pt-2 sm:px-6" id="experience-timeline">
-          <div class="experience-timeline-line-bg pointer-events-none absolute left-[12%] right-[12%] top-[1.75rem] z-0 h-[2px] sm:left-[10%] sm:right-[10%]" aria-hidden="true">
-            <svg class="h-[2px] w-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 400 4" xmlns="http://www.w3.org/2000/svg">
+          <div class="experience-timeline-line-bg pointer-events-none absolute left-[12%] right-[12%] top-[2rem] z-0 h-[3px] sm:left-[10%] sm:right-[10%] sm:top-[2.125rem]" aria-hidden="true">
+            <svg class="h-[3px] w-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 400 6" xmlns="http://www.w3.org/2000/svg">
               <line
-                class="timeline-path-horizontal text-slate-300"
+                class="timeline-path-horizontal text-indigo-400/90"
                 x1="0"
-                y1="2"
+                y1="3"
                 x2="400"
-                y2="2"
+                y2="3"
                 fill="none"
                 stroke="currentColor"
-                stroke-dasharray="4 5"
                 stroke-linecap="round"
-                stroke-width="1"
+                stroke-width="1.35"
               />
             </svg>
             <div class="experience-timeline-travel-pulse" aria-hidden="true"></div>

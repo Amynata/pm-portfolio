@@ -31,6 +31,8 @@
       hubBackProfile: 'Retour au profil',
       hubBackShort: 'Retour',
       hubToolsHeading: 'Maîtrise technique',
+      hubBtnToolsSub: 'Stack & méthodes',
+      hubBtnCertsSub: 'Titres & labels',
       hubViewToolsAnnounce: 'Vue outils',
       hubViewCertsAnnounce: 'Vue certifications',
       heroBadge: 'Builder produit',
@@ -97,6 +99,8 @@
       hubBackProfile: 'Back to profile',
       hubBackShort: 'Back',
       hubToolsHeading: 'Technical mastery',
+      hubBtnToolsSub: 'Stack & methods',
+      hubBtnCertsSub: 'Credentials',
       hubViewToolsAnnounce: 'Tools view',
       hubViewCertsAnnounce: 'Certifications view',
       heroBadge: 'Product builder',
@@ -965,11 +969,11 @@
   ];
 
   const certEntries = [
-    { FR: 'PSM I — Scrum.org', EN: 'PSM I — Scrum.org' },
-    { FR: 'ISTQB — Testeur certifié', EN: 'ISTQB — Certified Tester' },
-    { FR: 'CESAM', EN: 'CESAM' },
-    { FR: 'Maestro — École du Product Management', EN: 'Maestro — Product Management School' },
-    { FR: 'Thiga Academy', EN: 'Thiga Academy' },
+    { FR: 'PSM (SCRUM MASTER)', EN: 'PSM (SCRUM MASTER)' },
+    { FR: 'ISTQB FONDATION', EN: 'ISTQB FOUNDATION' },
+    { FR: 'CESAM (ARCHITECTURE SYSTÈMES)', EN: 'CESAM (SYSTEMS ARCHITECTURE)' },
+    { FR: 'MAESTRO (PRODUCT)', EN: 'MAESTRO (PRODUCT)' },
+    { FR: 'THIGA ACADEMY', EN: 'THIGA ACADEMY' },
   ];
 
   function renderStars(level, maxStars) {
@@ -1032,8 +1036,9 @@
       btn.style.setProperty('--exp-index', String(index));
       btn.style.setProperty('--exp-denom', String(denom));
 
+      // Pastilles légèrement plus grandes pour équilibrer la timeline avec la ligne
       btn.innerHTML =
-        '<span class="exp-orbit-dot flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white bg-white/95 text-sm font-black uppercase tracking-tighter text-slate-400 shadow-xl backdrop-blur-md transition-all duration-300 sm:h-14 sm:w-14 sm:rounded-[1.6rem] sm:text-base">' +
+        '<span class="exp-orbit-dot flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[1.4rem] border border-white bg-white/95 text-sm font-black uppercase tracking-tighter text-slate-400 shadow-xl backdrop-blur-md transition-all duration-300 sm:h-16 sm:w-16 sm:rounded-[1.75rem] sm:text-base">' +
         escapeHtml(exp.shortName) +
         '</span>' +
         '<span class="exp-timeline-caption mt-2 max-w-full px-0.5 text-center transition-colors duration-200">' +
@@ -1052,7 +1057,7 @@
           escapeHtml(exp.logo) +
           '" alt="' +
           escapeHtml(exp.company) +
-          ' logo" class="h-9 w-9 object-contain sm:h-11 sm:w-11" />';
+          ' logo" class="h-10 w-10 object-contain sm:h-12 sm:w-12" />';
       }
 
       container.appendChild(btn);
@@ -1220,11 +1225,22 @@
   function renderHubCerts() {
     var ul = document.getElementById('hub-certs-list');
     if (!ul) return;
+    // Format maquette : carte rectangulaire arrondie, libellé à gauche, picto médaille en contour à droite
+    var medalSvg =
+      '<svg class="hub-cert-badge-medal" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+      '<circle cx="12" cy="8" r="5.5" stroke="currentColor" stroke-width="1.5" fill="none" />' +
+      '<polyline points="8 14 6.5 22 12 18.5 17.5 22 16 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />' +
+      '</svg>';
     ul.innerHTML = certEntries
       .map(function (c) {
         return (
-          '<li class="rounded-lg border border-slate-200/90 bg-white/90 px-2 py-2 leading-snug text-slate-700">' +
+          '<li class="hub-cert-badge">' +
+          '<span class="hub-cert-badge-label">' +
           escapeHtml(c[lang]) +
+          '</span>' +
+          '<span class="hub-cert-badge-icon" aria-hidden="true">' +
+          medalSvg +
+          '</span>' +
           '</li>'
         );
       })
@@ -1245,6 +1261,7 @@
     }
   }
 
+  /** Clic sur une tuile (hub) : affiche la description sous la grille ; second clic sur la même tuile ferme */
   function wireHubToolClicks(gridContainer) {
     var host = document.getElementById('hub-tool-hover');
     if (!host || !gridContainer) return;
@@ -1313,8 +1330,9 @@
             btnStyle = 'background-color:' + item.color;
           }
           var styleAttr = btnStyle ? ' style="' + btnStyle + '"' : '';
+          // Hub cercle : espacement vertical réduit entre icône et libellé (grille resserrée dans le HTML)
           return (
-            '<div class="tool-hub-wrap flex min-w-0 flex-col items-center gap-1 text-center" data-tool-idx="' +
+            '<div class="tool-hub-wrap flex min-w-0 flex-col items-center gap-0.5 text-center" data-tool-idx="' +
             idx +
             '">' +
             '<button type="button" class="' +
@@ -1324,7 +1342,7 @@
             '>' +
             iconMarkup +
             '</button>' +
-            '<span class="line-clamp-2 min-h-[1.5em] text-[6px] font-black uppercase leading-tight tracking-tight text-slate-700 sm:text-[7px]">' +
+            '<span class="line-clamp-2 min-h-[1.35em] text-[7px] font-black uppercase leading-tight tracking-tight text-slate-700 sm:text-[8px]">' +
             escapeHtml(item.name) +
             '</span>' +
             '</div>'
@@ -1888,8 +1906,12 @@
     if (heroBadgeEl) heroBadgeEl.textContent = t('heroBadge');
     var hubToolsLbl = document.getElementById('hub-btn-tools-label');
     if (hubToolsLbl) hubToolsLbl.textContent = t('tools');
+    var hubToolsSub = document.getElementById('hub-btn-tools-sub');
+    if (hubToolsSub) hubToolsSub.textContent = t('hubBtnToolsSub');
     var hubCertsLbl = document.getElementById('hub-btn-certs-label');
     if (hubCertsLbl) hubCertsLbl.textContent = t('hubCertifsShort');
+    var hubCertsSub = document.getElementById('hub-btn-certs-sub');
+    if (hubCertsSub) hubCertsSub.textContent = t('hubBtnCertsSub');
     var heroProjBtn = document.getElementById('btn-hero-projects');
     if (heroProjBtn) heroProjBtn.textContent = t('heroCtaProjects');
     var heroCvBtn = document.getElementById('btn-hero-cv');
@@ -1987,6 +2009,7 @@
       renderExperienceTimeline();
       renderProjectsList();
       renderProjectDetailPanel();
+      clearHubToolsUI();
       renderTools();
       renderHubCerts();
       if (selectedExp != null) renderExpModalBody();
