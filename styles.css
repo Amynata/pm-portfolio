@@ -203,44 +203,42 @@ body {
   .portfolio-hero-panel:hover {
     transform: none;
   }
+  .hub-side-btn-neo:hover,
+  .hub-side-btn-neo:active {
+    transform: none;
+  }
+  .portfolio-photo-gradient-ring.hub-photo-ring,
+  .hub-photo-frame,
+  .portrait-photo-img,
+  .hub-photo-projects-btn {
+    transition: none !important;
+  }
+  .portfolio-photo-gradient-ring.hub-photo-ring:hover {
+    transform: none !important;
+  }
 }
 
-/* Cohérence visuelle avec la modale Projets persos (cartes, grain, dégradé) */
+/* Grain discret (réutilisable ailleurs ; hero sans carte = sans overlay) */
 .portfolio-dot-grid {
   background-image: radial-gradient(rgb(15 23 42 / 0.12) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
+/* Hero texte : fond page, sans carte (maquette blanche aérée) */
 .portfolio-hero-panel {
   position: relative;
-  overflow: hidden;
-  border-radius: 1.75rem;
-  border: 1px solid rgb(99 102 241 / 0.18);
-  background: rgb(255 255 255 / 0.88);
-  box-shadow:
-    0 1px 0 0 rgb(255 255 255 / 0.8) inset,
-    0 24px 48px -12px rgb(15 23 42 / 0.08),
-    0 0 0 1px rgb(99 102 241 / 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition:
-    box-shadow 0.45s ease,
-    border-color 0.45s ease,
-    transform 0.45s ease;
-}
-
-@media (min-width: 768px) {
-  .portfolio-hero-panel {
-    border-radius: 2.25rem;
-  }
+  overflow: visible;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .portfolio-hero-panel:hover {
-  border-color: rgb(99 102 241 / 0.28);
-  box-shadow:
-    0 1px 0 0 rgb(255 255 255 / 0.9) inset,
-    0 28px 56px -12px rgb(99 102 241 / 0.12),
-    0 0 0 1px rgb(16 185 129 / 0.08);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .portfolio-hero-panel-inner {
@@ -262,8 +260,8 @@ body {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.5rem;
-  background: rgb(99 102 241 / 0.1);
-  color: #6366f1;
+  background: transparent;
+  color: rgb(148 163 184);
   font-size: 0.65rem;
   line-height: 1;
 }
@@ -276,23 +274,18 @@ body {
 }
 
 .portfolio-pillar-card {
-  border-radius: 1rem;
-  border: 1px solid rgb(255 255 255 / 0.85);
-  background: rgb(255 255 255 / 0.55);
-  box-shadow: 0 4px 20px -4px rgb(15 23 42 / 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.65rem 0.85rem;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  transition: opacity 0.2s ease;
 }
 
 .portfolio-pillar-card:hover {
-  transform: translateY(-2px);
-  border-color: rgb(99 102 241 / 0.2);
-  box-shadow: 0 12px 28px -8px rgb(99 102 241 / 0.15);
+  opacity: 0.92;
 }
 
 .cert-chip {
@@ -313,49 +306,295 @@ body {
 }
 
 .hero-accent-bar {
-  height: 0.25rem;
-  width: 5rem;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
-  box-shadow: 0 4px 14px -2px rgb(99 102 241 / 0.45);
+  height: 0.3rem;
+  width: 6.5rem;
+  max-width: 55%;
+  border-radius: 2px;
+  background: #818cf8;
+  box-shadow: none;
 }
 
-/* Bloc photo / orbite : même ADN que la carte hero droite */
+/* Soulignement lavande épais sur la 2e ligne du titre (maquette) */
+.hero-headline-underline {
+  text-decoration: underline;
+  text-decoration-color: rgb(196 181 253);
+  text-decoration-thickness: clamp(0.18em, 0.32em, 0.45rem);
+  text-underline-offset: 0.14em;
+  text-decoration-skip-ink: none;
+}
+
+/* Colonne hub : pas de carte, contenu sur le fond de page */
 .portfolio-photo-stage {
   position: relative;
   overflow: visible;
-  border-radius: 1.75rem;
-  border: 1px solid rgb(99 102 241 / 0.16);
-  background: rgb(255 255 255 / 0.55);
-  box-shadow:
-    0 1px 0 0 rgb(255 255 255 / 0.75) inset,
-    0 20px 40px -16px rgb(15 23 42 / 0.1),
-    0 0 0 1px rgb(99 102 241 / 0.05);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-@media (min-width: 768px) {
-  .portfolio-photo-stage {
-    border-radius: 2.25rem;
-  }
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .portfolio-photo-gradient-ring {
   border-radius: 9999px;
+}
+
+/* Contour dégradé lavande → turquoise (référence portrait) */
+.portfolio-photo-gradient-ring.hub-photo-ring {
   padding: 3px;
-  background: linear-gradient(135deg, #6366f1 0%, #818cf8 45%, #34d399 100%);
-  box-shadow: 0 12px 32px -8px rgb(99 102 241 / 0.35);
+  background: linear-gradient(
+    135deg,
+    #9288f8 0%,
+    #818cf8 28%,
+    #5eead4 72%,
+    #2dbdb1 100%
+  );
+  box-shadow:
+    0 18px 44px -14px rgb(146 136 248 / 0.38),
+    0 10px 28px -12px rgb(45 189 177 / 0.22);
 }
 
 @media (min-width: 640px) {
-  .portfolio-photo-gradient-ring {
+  .portfolio-photo-gradient-ring.hub-photo-ring {
     padding: 4px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-photo-gradient-ring.hub-photo-ring {
+    padding: 5px;
   }
 }
 
 .portfolio-footer-glow {
   border-top-color: rgb(99 102 241 / 0.12);
   background: linear-gradient(180deg, rgb(255 255 255 / 0.5) 0%, rgb(253 251 247 / 0.85) 100%);
+}
+
+/* Hero CTA : pilules discrets, bordure pointillée (maquette) */
+.hero-cta-dash {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.375rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px dashed rgb(180 190 200);
+  background: transparent;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(51 65 85);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+@media (min-width: 640px) {
+  .hero-cta-dash {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.35rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+.hero-cta-dash:hover {
+  border-color: rgb(165 180 252);
+  color: rgb(79 70 229);
+  background: rgb(99 102 241 / 0.04);
+}
+
+.hero-cta-dash:active {
+  transform: scale(0.98);
+}
+
+.hero-cta-dash:focus-visible {
+  outline: 2px solid rgb(99 102 241 / 0.45);
+  outline-offset: 2px;
+}
+
+/* Hub : boutons latéraux — néo-brutaliste (ombre décalée) + états actifs */
+.hub-side-btn {
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.hub-side-btn-neo {
+  box-shadow: 5px 5px 0 0 rgb(15 23 42);
+}
+
+.hub-side-btn-neo:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 0 rgb(15 23 42);
+}
+
+.hub-side-btn-neo:active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 1px 0 0 rgb(15 23 42);
+}
+
+.hub-side-btn:focus-visible {
+  outline: 2px solid rgb(99 102 241 / 0.5);
+  outline-offset: 3px;
+}
+
+.hub-side-btn-active-tools {
+  border-color: rgb(79 70 229) !important;
+  background: rgb(238 242 255 / 0.98) !important;
+  color: rgb(55 48 163) !important;
+  box-shadow: 5px 5px 0 0 rgb(99 102 241) !important;
+}
+
+.hub-side-btn-active-tools:hover {
+  box-shadow: 3px 3px 0 0 rgb(99 102 241) !important;
+}
+
+.hub-side-btn-active-certs {
+  border-color: rgb(5 122 85) !important;
+  background: rgb(236 253 245 / 0.98) !important;
+  color: rgb(6 78 59) !important;
+  box-shadow: 5px 5px 0 0 rgb(16 185 129) !important;
+}
+
+.hub-side-btn-active-certs:hover {
+  box-shadow: 3px 3px 0 0 rgb(16 185 129) !important;
+}
+
+#hub-back-btn:focus-visible,
+.hub-back-inner:focus-visible {
+  outline: 2px solid rgb(99 102 241 / 0.55);
+  outline-offset: 2px;
+}
+
+.hub-tool-detail:not(.hidden) {
+  min-height: 3.25rem;
+}
+
+.tool-hub-wrap {
+  cursor: pointer;
+}
+
+.tool-hub-wrap.is-selected .tool-hub-btn {
+  box-shadow: 0 0 0 2px rgb(99 102 241 / 0.65);
+  transform: scale(1.05);
+}
+
+/* Timeline horizontale : ligne pointillée fine + pulse plus étroit */
+.timeline-path-horizontal {
+  stroke-dasharray: 4 5;
+  animation: dash-flow-horizontal 1.5s linear infinite;
+}
+
+@keyframes dash-flow-horizontal {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+.experience-timeline-travel-pulse {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 10px;
+  margin-top: -5px;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+.experience-timeline-travel-pulse::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(99 102 241 / 0.38),
+    rgb(16 185 129 / 0.3),
+    transparent
+  );
+  animation: travelPulse 4s linear infinite;
+}
+
+@keyframes travelPulse {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(480%);
+  }
+}
+
+/* Glow sur les nœuds, synchronisé avec le cycle 4s (délai par index) */
+.exp-timeline-node {
+  --exp-index: 0;
+  --exp-denom: 1;
+}
+
+.exp-timeline-node .exp-orbit-dot {
+  position: relative;
+}
+
+.exp-timeline-node .exp-orbit-dot::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  animation: pointGlow 4s linear infinite;
+  animation-delay: calc(-4s * (var(--exp-index) / var(--exp-denom)));
+  box-shadow: 0 0 0 0 rgb(99 102 241 / 0);
+}
+
+@keyframes pointGlow {
+  0%,
+  100% {
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgb(99 102 241 / 0);
+  }
+  9%,
+  14% {
+    opacity: 1;
+    box-shadow:
+      0 0 22px 6px rgb(99 102 241 / 0.45),
+      0 0 10px 2px rgb(16 185 129 / 0.25);
+  }
+  20% {
+    opacity: 0;
+    box-shadow: 0 0 0 0 rgb(99 102 241 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-path-horizontal {
+    animation: none;
+  }
+
+  .experience-timeline-travel-pulse::before {
+    animation: none;
+    display: none;
+  }
+
+  .exp-timeline-node .exp-orbit-dot::after {
+    animation: none;
+  }
+
+  .orbit-explore-hint {
+    animation: none;
+  }
 }
 

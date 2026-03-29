@@ -23,9 +23,16 @@
       desc11: "Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (",
       desc12: 'IA, automatisation, outils internes',
       desc13: ") pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.",
-      // Indication discrète sous l’orbite (liée à #click-hint dans index.html)
       clickToDiscover:
-        'Les cercles autour du portrait ouvrent chaque expérience.',
+        'Les pastilles du parcours en bas ouvrent chaque expérience.',
+      heroCtaProjects: 'Mes projets',
+      heroCtaCv: 'Mon CV',
+      hubCertifsShort: 'Certifs',
+      hubBackProfile: 'Retour au profil',
+      hubBackShort: 'Retour',
+      hubToolsHeading: 'Maîtrise technique',
+      hubViewToolsAnnounce: 'Vue outils',
+      hubViewCertsAnnounce: 'Vue certifications',
       heroBadge: 'Builder produit',
       tools: 'Outils',
       certif: 'Certifications',
@@ -54,8 +61,8 @@
       about: 'Formation',
       projects: 'Projets persos',
       formationSubtitle: 'Parcours académique',
-      personalProjectsHover: 'Clique pour voir mes projets persos',
-      personalProjectsAria: 'Ouvrir mes projets persos',
+      personalProjectsHover: 'Clique pour ouvrir la page projet Portfolio',
+      personalProjectsAria: 'Ouvrir la page projet AI-Powered Portfolio',
       contactPhoneLabel: 'Téléphone',
       contactCopyTitle: 'Copier',
       automationModalSub: 'Builder side projects',
@@ -83,7 +90,15 @@
       desc11: 'My specialty? A natural tech appetite that drives me to build solutions (',
       desc12: 'AI, automation, internal tools',
       desc13: ') to simplify the lives of those who build and use them.',
-      clickToDiscover: 'The circles around the portrait open each experience.',
+      clickToDiscover: 'The dots on the path below open each experience.',
+      heroCtaProjects: 'My projects',
+      heroCtaCv: 'My resume',
+      hubCertifsShort: 'Certs',
+      hubBackProfile: 'Back to profile',
+      hubBackShort: 'Back',
+      hubToolsHeading: 'Technical mastery',
+      hubViewToolsAnnounce: 'Tools view',
+      hubViewCertsAnnounce: 'Certifications view',
       heroBadge: 'Product builder',
       tools: 'Tools',
       certif: 'Certifications',
@@ -112,8 +127,8 @@
       about: 'Education',
       projects: 'Personal projects',
       formationSubtitle: 'Academic path',
-      personalProjectsHover: 'Click to open my personal projects',
-      personalProjectsAria: 'Open my personal projects',
+      personalProjectsHover: 'Click to open the Portfolio project page',
+      personalProjectsAria: 'Open the AI-Powered Portfolio project page',
       contactPhoneLabel: 'Phone',
       contactCopyTitle: 'Copy',
       automationModalSub: 'Builder side projects',
@@ -949,6 +964,14 @@
     },
   ];
 
+  const certEntries = [
+    { FR: 'PSM I — Scrum.org', EN: 'PSM I — Scrum.org' },
+    { FR: 'ISTQB — Testeur certifié', EN: 'ISTQB — Certified Tester' },
+    { FR: 'CESAM', EN: 'CESAM' },
+    { FR: 'Maestro — École du Product Management', EN: 'Maestro — Product Management School' },
+    { FR: 'Thiga Academy', EN: 'Thiga Academy' },
+  ];
+
   function renderStars(level, maxStars) {
     maxStars = maxStars || 5;
     var html = '<div class="flex gap-0.5">';
@@ -968,6 +991,8 @@
   let activeProjectPage = 0;
   let hasInteracted = false;
   let lastAutomationAgentId = 'pm-secretary';
+  /** @type {'photo' | 'tools' | 'certs'} */
+  let hubView = 'photo';
 
   function t(key) {
     return translations[lang][key] || key;
@@ -991,78 +1016,60 @@
     return row ? row[lang] : type;
   }
 
-  function renderOrbit() {
-    const container = document.getElementById('experience-orbit');
+  function renderExperienceTimeline() {
+    const container = document.getElementById('experience-timeline-nodes');
     if (!container) return;
     const total = experiences.length;
-    // Rayons plus petits sur très petits écrans pour éviter que les pastilles sortent du viewport
-    var vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
-    var radius = vw < 380 ? 118 : vw < 640 ? 150 : vw < 1024 ? 190 : 250;
+    const denom = Math.max(1, total - 1);
     container.innerHTML = '';
-    container.classList.remove('pointer-events-auto');
-    container.classList.add('pointer-events-none');
 
     experiences.forEach(function (exp, index) {
-      const angle = -90 + (index * (180 / Math.max(1, total - 1)));
-      const rad = (angle * Math.PI) / 180;
-      const x = Math.cos(rad) * radius;
-      const y = Math.sin(rad) * radius;
-
-      const wrap = document.createElement('div');
-      wrap.className = 'absolute transition-all duration-700 ease-out pointer-events-auto';
-      wrap.style.left = '50%';
-      wrap.style.top = '50%';
-      wrap.style.transform = 'translate(-50%, -50%) translate(' + x + 'px, ' + y + 'px)';
-
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.dataset.expIndex = index;
-      btn.className = 'exp-orbit-btn flex flex-col items-center group relative text-slate-900';
-      // Libellé au-dessus de la pastille : mb-1 = léger décalage vers le haut par rapport à mb-0.5
-      btn.innerHTML =
-        '<span class="exp-orbit-label absolute bottom-full left-1/2 mb-1 -translate-x-1/2 flex flex-col items-center gap-0.5 text-center transition-all duration-300 opacity-0 translate-y-2 scale-90">' +
-        '<span class="text-[10px] font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">' + escapeHtml(exp.company) + '</span>' +
-        '<span class="text-[8px] font-bold text-[#818CF8] uppercase tracking-widest whitespace-nowrap">' + escapeHtml(exp.period[lang]) + '</span>' +
-        '</span>' +
-        '<span class="w-14 h-14 md:w-18 md:h-18 rounded-[1.6rem] md:rounded-[2.1rem] flex items-center justify-center transition-all duration-500 bg-white/95 backdrop-blur-md text-slate-400 border border-white shadow-xl exp-orbit-dot overflow-hidden" style="width:3.5rem;height:3.5rem;"><span class="text-lg md:text-xl font-black tracking-tighter uppercase">' +
-        escapeHtml(exp.shortName) +
-        '</span></span>';
+      btn.dataset.expIndex = String(index);
+      btn.className =
+        'exp-orbit-btn exp-timeline-node group relative flex min-w-0 max-w-[22%] flex-1 flex-col items-center text-slate-900 sm:max-w-none';
+      btn.style.setProperty('--exp-index', String(index));
+      btn.style.setProperty('--exp-denom', String(denom));
 
-      // Remplacement du monogramme par le logo quand disponible
+      btn.innerHTML =
+        '<span class="exp-orbit-dot flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-[1.25rem] border border-white bg-white/95 text-sm font-black uppercase tracking-tighter text-slate-400 shadow-xl backdrop-blur-md transition-all duration-300 sm:h-14 sm:w-14 sm:rounded-[1.6rem] sm:text-base">' +
+        escapeHtml(exp.shortName) +
+        '</span>' +
+        '<span class="exp-timeline-caption mt-2 max-w-full px-0.5 text-center transition-colors duration-200">' +
+        '<span class="block truncate text-[8px] font-black leading-tight tracking-tight text-slate-800 sm:text-[9px]">' +
+        escapeHtml(exp.company) +
+        '</span>' +
+        '<span class="mt-0.5 block truncate text-[6px] font-bold uppercase tracking-widest text-[#818CF8] sm:text-[7px]">' +
+        escapeHtml(exp.period[lang]) +
+        '</span>' +
+        '</span>';
+
       var dotEl = btn.querySelector('.exp-orbit-dot');
       if (dotEl && exp.logo) {
         dotEl.innerHTML =
           '<img src="' +
-          exp.logo +
+          escapeHtml(exp.logo) +
           '" alt="' +
           escapeHtml(exp.company) +
-          ' logo" class="w-10 h-10 md:w-12 md:h-12 object-contain" />';
+          ' logo" class="h-9 w-9 object-contain sm:h-11 sm:w-11" />';
       }
 
-      wrap.appendChild(btn);
-      container.appendChild(wrap);
+      container.appendChild(btn);
 
       btn.addEventListener('mouseenter', function () {
-        var labelEl = btn.querySelector('.exp-orbit-label');
-        var dotEl = btn.querySelector('.exp-orbit-dot');
-        labelEl.classList.remove('opacity-0', 'scale-90', 'translate-y-2');
-        labelEl.classList.add('opacity-100', 'scale-100');
-        dotEl.classList.add('scale-110');
-        dotEl.style.boxShadow = '0 0 0 3px ' + exp.color + '33, 0 18px 30px rgba(15,23,42,0.35)';
+        var d = btn.querySelector('.exp-orbit-dot');
+        if (d && selectedExp !== index) {
+          d.classList.add('scale-105');
+          d.style.boxShadow = '0 0 0 3px ' + exp.color + '33, 0 12px 24px rgba(15,23,42,0.22)';
+        }
       });
       btn.addEventListener('mouseleave', function () {
-        var labelEl = btn.querySelector('.exp-orbit-label');
-        var dotEl = btn.querySelector('.exp-orbit-dot');
-        var isActive = selectedExp === index;
-        labelEl.classList.add('opacity-0', 'scale-90', 'translate-y-2');
-        labelEl.classList.remove('opacity-100', 'scale-100');
-        dotEl.classList.remove('scale-110');
-        if (!isActive) {
-          dotEl.style.boxShadow = '';
-        } else {
-          dotEl.style.boxShadow = '';
-          // dotEl.style.backgroundColor = exp.color;
-          dotEl.classList.add('text-white', 'scale-110');
+        var d = btn.querySelector('.exp-orbit-dot');
+        if (!d) return;
+        d.classList.remove('scale-105');
+        if (selectedExp !== index) {
+          d.style.boxShadow = '';
         }
       });
       btn.addEventListener('click', function () {
@@ -1084,21 +1091,345 @@
       const exp = experiences[index];
       const dot = btn.querySelector('.exp-orbit-dot');
       if (!dot) return;
+      var label = btn.querySelector('.exp-orbit-label');
+      var isTimeline = btn.classList.contains('exp-timeline-node');
       if (selectedExp === index) {
-        // dot.style.backgroundColor = exp.color;
-        dot.classList.add('text-white', 'scale-110');
-        dot.classList.remove('bg-white/95', 'text-slate-400', 'bg-slate-800');
-        btn.querySelector('.exp-orbit-label').classList.remove('opacity-0', 'scale-90', 'translate-y-2');
-        btn.querySelector('.exp-orbit-label').classList.add('opacity-100', 'scale-100');
+        dot.classList.add('scale-110', 'text-white', 'ring-2', 'ring-[#6366F1]/45');
+        dot.classList.remove('bg-white/95', 'text-slate-400');
+        if (label && !isTimeline) {
+          label.classList.remove('opacity-0', 'scale-90', 'translate-y-2');
+          label.classList.add('opacity-100', 'scale-100');
+        }
       } else {
         dot.style.backgroundColor = '';
-        dot.classList.remove('scale-110', 'text-white');
+        dot.classList.remove('scale-110', 'text-white', 'ring-2', 'ring-[#6366F1]/45');
         dot.classList.add('bg-white/95', 'text-slate-400');
-        if (btn.matches(':hover')) return;
-        btn.querySelector('.exp-orbit-label').classList.add('opacity-0', 'scale-90', 'translate-y-2');
-        btn.querySelector('.exp-orbit-label').classList.remove('opacity-100', 'scale-100');
+        if (label && !isTimeline) {
+          if (!btn.matches(':hover')) {
+            label.classList.add('opacity-0', 'scale-90', 'translate-y-2');
+            label.classList.remove('opacity-100', 'scale-100');
+          }
+        }
       }
     });
+  }
+
+  function getHubLiveRegion() {
+    var row = document.getElementById('hero-hub-row');
+    if (!row) return null;
+    var el = document.getElementById('hub-live-region');
+    if (el) return el;
+    el = document.createElement('span');
+    el.id = 'hub-live-region';
+    el.className = 'sr-only';
+    el.setAttribute('aria-live', 'polite');
+    el.setAttribute('aria-atomic', 'true');
+    row.appendChild(el);
+    return el;
+  }
+
+  function announceHubView(view) {
+    var lr = getHubLiveRegion();
+    if (!lr) return;
+    if (view === 'photo') lr.textContent = '';
+    else if (view === 'tools') lr.textContent = t('hubViewToolsAnnounce');
+    else if (view === 'certs') lr.textContent = t('hubViewCertsAnnounce');
+  }
+
+  function setHubView(next) {
+    if (next !== 'photo' && next !== 'tools' && next !== 'certs') return;
+    var photo = document.getElementById('hub-layer-photo');
+    var tools = document.getElementById('hub-layer-tools');
+    var certs = document.getElementById('hub-layer-certs');
+    var back = document.getElementById('hub-back-btn');
+    var btnTools = document.getElementById('hub-btn-tools');
+    var btnCerts = document.getElementById('hub-btn-certs');
+    if (!photo || !tools || !certs) return;
+
+    hubView = next;
+    var showPhoto = next === 'photo';
+    var showTools = next === 'tools';
+    var showCerts = next === 'certs';
+
+    if (btnTools) {
+      btnTools.setAttribute('aria-pressed', showTools ? 'true' : 'false');
+      btnTools.classList.toggle('hub-side-btn-active-tools', showTools);
+    }
+    if (btnCerts) {
+      btnCerts.setAttribute('aria-pressed', showCerts ? 'true' : 'false');
+      btnCerts.classList.toggle('hub-side-btn-active-certs', showCerts);
+    }
+    if (back) {
+      back.classList.toggle('hidden', showPhoto);
+      back.setAttribute('aria-hidden', showPhoto ? 'true' : 'false');
+    }
+    if (!showTools) {
+      clearHubToolsUI();
+    }
+
+    function deactivateLayer(layer) {
+      if (!layer) return;
+      layer.classList.remove('z-20', 'opacity-100', 'scale-100');
+      layer.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
+      window.setTimeout(function () {
+        if (
+          (layer === tools && hubView !== 'tools') ||
+          (layer === certs && hubView !== 'certs')
+        ) {
+          layer.hidden = true;
+        }
+      }, 320);
+    }
+
+    if (showPhoto) {
+      deactivateLayer(tools);
+      deactivateLayer(certs);
+      photo.classList.remove('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
+      photo.classList.add('z-10', 'opacity-100', 'scale-100');
+      announceHubView('photo');
+      return;
+    }
+
+    photo.classList.remove('z-10', 'opacity-100', 'scale-100');
+    photo.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
+
+    if (showTools) {
+      clearHubToolsUI();
+      deactivateLayer(certs);
+      tools.hidden = false;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          tools.classList.remove('z-0', 'opacity-0', 'scale-95', 'pointer-events-none');
+          tools.classList.add('z-20', 'opacity-100', 'scale-100');
+        });
+      });
+      announceHubView('tools');
+    } else if (showCerts) {
+      deactivateLayer(tools);
+      certs.hidden = false;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          certs.classList.remove('z-0', 'opacity-0', 'scale-95', 'pointer-events-none');
+          certs.classList.add('z-20', 'opacity-100', 'scale-100');
+        });
+      });
+      announceHubView('certs');
+    }
+  }
+
+  function renderHubCerts() {
+    var ul = document.getElementById('hub-certs-list');
+    if (!ul) return;
+    ul.innerHTML = certEntries
+      .map(function (c) {
+        return (
+          '<li class="rounded-lg border border-slate-200/90 bg-white/90 px-2 py-2 leading-snug text-slate-700">' +
+          escapeHtml(c[lang]) +
+          '</li>'
+        );
+      })
+      .join('');
+  }
+
+  function clearHubToolsUI() {
+    var grid = document.getElementById('hub-tools-grid');
+    var host = document.getElementById('hub-tool-hover');
+    if (grid) {
+      grid.querySelectorAll('.tool-hub-wrap').forEach(function (w) {
+        w.classList.remove('is-selected');
+      });
+    }
+    if (host) {
+      host.innerHTML = '';
+      host.classList.add('hidden');
+    }
+  }
+
+  function wireHubToolClicks(gridContainer) {
+    var host = document.getElementById('hub-tool-hover');
+    if (!host || !gridContainer) return;
+    function showDetail(idx) {
+      var item = tools[idx];
+      if (!item) return;
+      host.classList.remove('hidden');
+      host.innerHTML =
+        '<span class="block text-[9px] font-black tracking-tight text-slate-900 sm:text-[10px]">' +
+        escapeHtml(item.name) +
+        '</span>' +
+        '<span class="mt-0.5 flex justify-center">' +
+        renderStars(item.level) +
+        '</span>' +
+        '<span class="mt-1 block text-[7px] font-medium leading-snug text-slate-600 sm:text-[8px]">' +
+        escapeHtml(item.desc[lang]) +
+        '</span>';
+    }
+    gridContainer.querySelectorAll('.tool-hub-wrap').forEach(function (wrap) {
+      wrap.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var idx = parseInt(wrap.getAttribute('data-tool-idx'), 10);
+        var wasSelected = wrap.classList.contains('is-selected');
+        gridContainer.querySelectorAll('.tool-hub-wrap').forEach(function (w) {
+          w.classList.remove('is-selected');
+        });
+        if (wasSelected) {
+          host.innerHTML = '';
+          host.classList.add('hidden');
+          return;
+        }
+        wrap.classList.add('is-selected');
+        showDetail(idx);
+      });
+    });
+  }
+
+  function renderToolsInto(container, options) {
+    options = options || {};
+    var compact = !!options.compact;
+    if (!container) return;
+
+    if (compact) {
+      container.innerHTML = tools
+        .map(function (item, idx) {
+          var imgSizeClass = item.neutralLogoBtn ? 'h-7 w-7 max-h-[1.75rem] max-w-[1.75rem]' : 'h-5 w-5 max-h-5 max-w-5';
+          var imgWh = item.neutralLogoBtn ? '28' : '20';
+          var iconMarkup = item.iconSrc
+            ? '<img src="' +
+              escapeHtml(item.iconSrc) +
+              '" alt="" class="' +
+              imgSizeClass +
+              ' object-contain object-center pointer-events-none" width="' +
+              imgWh +
+              '" height="' +
+              imgWh +
+              '" decoding="async" />'
+            : '<div class="' + item.textColor + ' flex items-center justify-center [&>svg]:h-5 [&>svg]:w-5">' + item.icon + '</div>';
+          var btnClass =
+            'tool-hub-btn flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/90 shadow-md transition-transform duration-200 sm:h-11 sm:w-11 ';
+          var btnStyle = '';
+          if (item.neutralLogoBtn) {
+            btnClass += 'bg-white ring-1 ring-slate-100';
+          } else {
+            btnClass += 'border-2';
+            btnStyle = 'background-color:' + item.color;
+          }
+          var styleAttr = btnStyle ? ' style="' + btnStyle + '"' : '';
+          return (
+            '<div class="tool-hub-wrap flex min-w-0 flex-col items-center gap-1 text-center" data-tool-idx="' +
+            idx +
+            '">' +
+            '<button type="button" class="' +
+            btnClass +
+            '"' +
+            styleAttr +
+            '>' +
+            iconMarkup +
+            '</button>' +
+            '<span class="line-clamp-2 min-h-[1.5em] text-[6px] font-black uppercase leading-tight tracking-tight text-slate-700 sm:text-[7px]">' +
+            escapeHtml(item.name) +
+            '</span>' +
+            '</div>'
+          );
+        })
+        .join('');
+      wireHubToolClicks(container);
+      return;
+    }
+
+    container.innerHTML =
+      '<div class="grid w-full grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 justify-items-center">' +
+      tools
+        .map(function (item, idx) {
+          var tooltipUp = idx < 3;
+          var labelClasses =
+            'tool-hover-label absolute left-1/2 z-30 w-[min(240px,calc(100vw-3rem))] -translate-x-1/2 px-3 py-2.5 rounded-2xl text-center ' +
+            'bg-white/85 backdrop-blur-md border border-white/70 shadow-xl ' +
+            'transition-all duration-300 ease-out opacity-0 scale-90 translate-y-4 flex flex-col items-center gap-1 ' +
+            (tooltipUp ? 'bottom-full mb-2' : 'top-full mt-2');
+          var labelHtml =
+            '<span class="' +
+            labelClasses +
+            '">' +
+            '<span class="text-[10px] font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">' +
+            escapeHtml(item.name) +
+            '</span>' +
+            '<span class="flex justify-center">' +
+            renderStars(item.level) +
+            '</span>' +
+            '<span class="text-[8px] font-semibold text-slate-600 leading-snug max-w-[220px]">' +
+            escapeHtml(item.desc[lang]) +
+            '</span>' +
+            '</span>';
+          var imgSizeClass = item.neutralLogoBtn ? 'w-8 h-8 max-w-[2rem] max-h-[2rem]' : 'w-5 h-5';
+          var imgWh = item.neutralLogoBtn ? '32' : '20';
+          var iconMarkup = item.iconSrc
+            ? '<img src="' +
+              escapeHtml(item.iconSrc) +
+              '" alt="" class="' +
+              imgSizeClass +
+              ' object-contain object-center pointer-events-none" width="' +
+              imgWh +
+              '" height="' +
+              imgWh +
+              '" decoding="async" />'
+            : '<div class="' + item.textColor + '">' + item.icon + '</div>';
+          var btnClass =
+            'tool-btn relative rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 ';
+          var btnStyle = '';
+          if (item.neutralLogoBtn) {
+            btnClass +=
+              'w-12 h-12 bg-white border border-slate-200 shadow-md ring-1 ring-slate-100';
+          } else {
+            btnClass += 'w-11 h-11 shadow-lg border-2 border-white';
+            btnStyle = 'background-color:' + item.color;
+          }
+          var styleAttr = btnStyle ? ' style="' + btnStyle + '"' : '';
+          var btnHtml =
+            '<button type="button" class="' + btnClass + '"' + styleAttr + '>' + iconMarkup + '</button>';
+          var inner =
+            '<div class="relative inline-flex flex-col items-center">' +
+            (tooltipUp ? labelHtml + btnHtml : btnHtml + labelHtml) +
+            '</div>';
+          return (
+            '<div class="tool-wrap group relative flex flex-col items-center" data-tool-idx="' +
+            idx +
+            '">' +
+            inner +
+            '</div>'
+          );
+        })
+        .join('') +
+      '</div>';
+
+    container.querySelectorAll('.tool-wrap').forEach(function (wrap) {
+      var idx = parseInt(wrap.dataset.toolIdx, 10);
+      var toolItem = tools[idx];
+      var labelEl = wrap.querySelector('.tool-hover-label');
+      var btnEl = wrap.querySelector('.tool-btn');
+
+      wrap.addEventListener('mouseenter', function () {
+        labelEl.classList.remove('opacity-0', 'scale-90', 'translate-y-4');
+        labelEl.classList.add('opacity-100', 'scale-100');
+        btnEl.classList.add('scale-110');
+        btnEl.style.boxShadow = '0 0 0 3px ' + toolItem.color + '44, 0 14px 28px rgba(15,23,42,0.25)';
+      });
+      wrap.addEventListener('mouseleave', function () {
+        labelEl.classList.add('opacity-0', 'scale-90', 'translate-y-4');
+        labelEl.classList.remove('opacity-100', 'scale-100');
+        btnEl.classList.remove('scale-110');
+        btnEl.style.boxShadow = '';
+      });
+    });
+  }
+
+  function renderTools() {
+    var hub = document.getElementById('hub-tools-grid');
+    if (hub) {
+      renderToolsInto(hub, { compact: true });
+    }
+    var list = document.getElementById('tools-list');
+    if (list) {
+      renderToolsInto(list, { compact: false });
+    }
   }
 
   function escapeHtml(str) {
@@ -1555,10 +1886,27 @@
     }
     var heroBadgeEl = document.getElementById('hero-badge');
     if (heroBadgeEl) heroBadgeEl.textContent = t('heroBadge');
-    var heroToolsLbl = document.getElementById('hero-tools-label');
-    if (heroToolsLbl) heroToolsLbl.textContent = t('tools');
-    var heroCertLbl = document.getElementById('hero-cert-label');
-    if (heroCertLbl) heroCertLbl.textContent = t('certif');
+    var hubToolsLbl = document.getElementById('hub-btn-tools-label');
+    if (hubToolsLbl) hubToolsLbl.textContent = t('tools');
+    var hubCertsLbl = document.getElementById('hub-btn-certs-label');
+    if (hubCertsLbl) hubCertsLbl.textContent = t('hubCertifsShort');
+    var heroProjBtn = document.getElementById('btn-hero-projects');
+    if (heroProjBtn) heroProjBtn.textContent = t('heroCtaProjects');
+    var heroCvBtn = document.getElementById('btn-hero-cv');
+    if (heroCvBtn) heroCvBtn.textContent = t('heroCtaCv');
+    var hubBack = document.getElementById('hub-back-btn');
+    if (hubBack) {
+      hubBack.setAttribute('aria-label', t('hubBackProfile'));
+      var hubBackLbl = document.getElementById('hub-back-btn-label');
+      if (hubBackLbl) hubBackLbl.textContent = t('hubBackShort');
+    }
+    var photoProjBtn = document.getElementById('btn-hub-photo-projects');
+    if (photoProjBtn) {
+      photoProjBtn.setAttribute('aria-label', t('personalProjectsAria'));
+      photoProjBtn.setAttribute('title', t('personalProjectsHover'));
+    }
+    var hubToolsH = document.getElementById('hub-tools-heading');
+    if (hubToolsH) hubToolsH.textContent = t('hubToolsHeading');
     var navFormation = document.getElementById('btn-formation');
     if (navFormation) navFormation.textContent = t('about');
     var mobileFormation = document.getElementById('mobile-nav-formation');
@@ -1607,8 +1955,6 @@
     if (posTabDesc) posTabDesc.textContent = t('automationTabPosDesc');
     var portfolioTabDesc = document.getElementById('automation-tab-portfolio-desc');
     if (portfolioTabDesc) portfolioTabDesc.textContent = t('automationTabPortfolioDesc');
-    var personalBtn = document.getElementById('btn-personal-projects');
-    if (personalBtn) personalBtn.setAttribute('aria-label', t('personalProjectsAria'));
     var visAutoRoot = getVisibleAutomationRoot();
     if (visAutoRoot) setActiveAutomationAgent(lastAutomationAgentId, visAutoRoot);
     renderCVModalBody();
@@ -1629,109 +1975,20 @@
       '</div>';
   }
 
-  function renderTools() {
-    const list = document.getElementById('tools-list');
-    if (!list) return;
-
-    // Ligne du haut (index 0–2) : tooltip au-dessus (bottom-full). Ligne du bas (3–5) : tooltip en dessous (top-full).
-    list.innerHTML =
-      '<div class="grid w-full grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 justify-items-center">' +
-      tools
-        .map(function (item, idx) {
-          var tooltipUp = idx < 3;
-          var labelClasses =
-            'tool-hover-label absolute left-1/2 z-30 w-[min(240px,calc(100vw-3rem))] -translate-x-1/2 px-3 py-2.5 rounded-2xl text-center ' +
-            'bg-white/85 backdrop-blur-md border border-white/70 shadow-xl ' +
-            'transition-all duration-300 ease-out opacity-0 scale-90 translate-y-4 flex flex-col items-center gap-1 ' +
-            (tooltipUp ? 'bottom-full mb-2' : 'top-full mt-2');
-          var labelHtml =
-            '<span class="' +
-            labelClasses +
-            '">' +
-            '<span class="text-[10px] font-black text-slate-900 tracking-tight leading-tight whitespace-nowrap">' +
-            escapeHtml(item.name) +
-            '</span>' +
-            '<span class="flex justify-center">' +
-            renderStars(item.level) +
-            '</span>' +
-            '<span class="text-[8px] font-semibold text-slate-600 leading-snug max-w-[220px]">' +
-            escapeHtml(item.desc[lang]) +
-            '</span>' +
-            '</span>';
-          var imgSizeClass = item.neutralLogoBtn ? 'w-8 h-8 max-w-[2rem] max-h-[2rem]' : 'w-5 h-5';
-          var imgWh = item.neutralLogoBtn ? '32' : '20';
-          var iconMarkup = item.iconSrc
-            ? '<img src="' +
-              escapeHtml(item.iconSrc) +
-              '" alt="" class="' +
-              imgSizeClass +
-              ' object-contain object-center pointer-events-none" width="' +
-              imgWh +
-              '" height="' +
-              imgWh +
-              '" decoding="async" />'
-            : '<div class="' + item.textColor + '">' + item.icon + '</div>';
-          var btnClass =
-            'tool-btn relative rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 ';
-          var btnStyle = '';
-          if (item.neutralLogoBtn) {
-            btnClass +=
-              'w-12 h-12 bg-white border border-slate-200 shadow-md ring-1 ring-slate-100';
-          } else {
-            btnClass += 'w-11 h-11 shadow-lg border-2 border-white';
-            btnStyle = 'background-color:' + item.color;
-          }
-          var styleAttr = btnStyle ? ' style="' + btnStyle + '"' : '';
-          var btnHtml =
-            '<button type="button" class="' + btnClass + '"' + styleAttr + '>' + iconMarkup + '</button>';
-          var inner =
-            '<div class="relative inline-flex flex-col items-center">' +
-            (tooltipUp ? labelHtml + btnHtml : btnHtml + labelHtml) +
-            '</div>';
-          return (
-            '<div class="tool-wrap group relative flex flex-col items-center" data-tool-idx="' +
-            idx +
-            '">' +
-            inner +
-            '</div>'
-          );
-        })
-        .join('') +
-      '</div>';
-
-    list.querySelectorAll('.tool-wrap').forEach(function (wrap) {
-      var idx = parseInt(wrap.dataset.toolIdx, 10);
-      var toolItem = tools[idx];
-      var labelEl = wrap.querySelector('.tool-hover-label');
-      var btnEl = wrap.querySelector('.tool-btn');
-
-      wrap.addEventListener('mouseenter', function () {
-        labelEl.classList.remove('opacity-0', 'scale-90', 'translate-y-4');
-        labelEl.classList.add('opacity-100', 'scale-100');
-        btnEl.classList.add('scale-110');
-        btnEl.style.boxShadow = '0 0 0 3px ' + toolItem.color + '44, 0 14px 28px rgba(15,23,42,0.25)';
-      });
-      wrap.addEventListener('mouseleave', function () {
-        labelEl.classList.add('opacity-0', 'scale-90', 'translate-y-4');
-        labelEl.classList.remove('opacity-100', 'scale-100');
-        btnEl.classList.remove('scale-110');
-        btnEl.style.boxShadow = '';
-      });
-    });
-  }
-
   function init() {
     applyTranslations();
-    renderOrbit();
+    renderExperienceTimeline();
     renderTools();
+    renderHubCerts();
 
     document.getElementById('btn-lang').addEventListener('click', function () {
       lang = lang === 'FR' ? 'EN' : 'FR';
       applyTranslations();
-      renderOrbit();
+      renderExperienceTimeline();
       renderProjectsList();
       renderProjectDetailPanel();
       renderTools();
+      renderHubCerts();
       if (selectedExp != null) renderExpModalBody();
     });
 
@@ -1777,30 +2034,62 @@
       document.getElementById('contact-modal').setAttribute('aria-hidden', 'true');
     });
 
-    var personalProjectsBtn = document.getElementById('btn-personal-projects');
     var headerProjectsBtn = document.getElementById('btn-projects');
-    function openAutomationWorkflowModal() {
+    var heroProjectsBtn = document.getElementById('btn-hero-projects');
+    function openMesProjetsModal(projectId) {
       var modal = document.getElementById('automation-card-modal');
       if (!modal) return;
       modal.classList.remove('invisible');
       modal.setAttribute('aria-hidden', 'false');
+      setActiveAutomationProject(projectId || 'workflow');
     }
-    if (personalProjectsBtn) {
-      personalProjectsBtn.addEventListener('click', function () {
-        openAutomationWorkflowModal();
-        setActiveAutomationProject('workflow');
-      });
-      personalProjectsBtn.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          personalProjectsBtn.click();
-        }
+    function wireProjectsOpener(btn) {
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        openMesProjetsModal('workflow');
       });
     }
-    if (headerProjectsBtn) {
-      headerProjectsBtn.addEventListener('click', function () {
-        openAutomationWorkflowModal();
-        setActiveAutomationProject('workflow');
+    wireProjectsOpener(headerProjectsBtn);
+    wireProjectsOpener(heroProjectsBtn);
+
+    var hubPhotoLayer = document.getElementById('hub-layer-photo');
+    var hubBrainBtn = document.getElementById('btn-hub-photo-projects');
+    var hubCircle = document.getElementById('hub-circle');
+
+    if (!hubCircle) return;
+    hubCircle.addEventListener('click', function () {
+      if (hubView !== 'photo') return;
+      openMesProjetsModal('workflow');
+    });
+
+    var heroCvOpen = document.getElementById('btn-hero-cv');
+    if (heroCvOpen) {
+      heroCvOpen.addEventListener('click', function () {
+        var cv = document.getElementById('cv-modal');
+        if (!cv) return;
+        cv.classList.remove('invisible');
+        cv.setAttribute('aria-hidden', 'false');
+      });
+    }
+
+    var hubBtnTools = document.getElementById('hub-btn-tools');
+    if (hubBtnTools) {
+      hubBtnTools.addEventListener('click', function () {
+        setHubView(hubView === 'tools' ? 'photo' : 'tools');
+      });
+    }
+    var hubBtnCerts = document.getElementById('hub-btn-certs');
+    if (hubBtnCerts) {
+      hubBtnCerts.addEventListener('click', function () {
+        setHubView(hubView === 'certs' ? 'photo' : 'certs');
+      });
+    }
+    var hubBackBtn = document.getElementById('hub-back-btn');
+    if (hubBackBtn) {
+      // Empêche le clic sur le bouton retour de remonter jusqu'au hubCircle (qui ouvre la modale "projets")
+      hubBackBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setHubView('photo');
       });
     }
     var autoClose = document.getElementById('automation-card-close');
@@ -1895,7 +2184,7 @@
 
     window.addEventListener('resize', function () {
       if (window.innerWidth >= 768) closeMobileNav();
-      renderOrbit();
+      renderExperienceTimeline();
       updateOrbitActiveState();
     });
   }
