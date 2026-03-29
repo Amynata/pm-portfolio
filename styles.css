@@ -238,7 +238,8 @@ body {
     transition: none;
   }
   .hub-tools-grid-scroll,
-  .hub-certs-list {
+  .hub-certs-list,
+  .hub-notion-list {
     scroll-behavior: auto;
   }
   .portfolio-hero-panel:hover {
@@ -591,13 +592,13 @@ button.portfolio-pillar-card.hub-pillar-card {
   }
 }
 
-/* Hub cercle : rail Outils / Certifs — translateY fluide (comme un scroll vertical) */
+/* Hub cercle : rail Outils / Certifs / Notion — translateY fluide sur 3 panneaux */
 #hub-tools-certs-track {
   transform: translateY(0);
   transition: transform 0.55s cubic-bezier(0.25, 1, 0.3, 1);
 }
 
-/* Fond du cercle (vues Outils / Certifs) : dégradés un peu plus marqués (indigo / émeraude) */
+/* Fond du cercle (vues Outils / Certifs / Notion) : dégradés (indigo / émeraude / violet) */
 #hub-layer-tools {
   background: linear-gradient(
     165deg,
@@ -614,6 +615,59 @@ button.portfolio-pillar-card.hub-pillar-card {
     rgb(253 248 240) 32%,
     rgb(209 250 229 / 0.62) 100%
   );
+}
+
+/* Panneau « Notion » (savoirs / domaines) : léger dégradé violet → crème */
+#hub-layer-notion {
+  background: linear-gradient(
+    200deg,
+    rgb(255 255 255) 0%,
+    rgb(245 243 255) 35%,
+    rgb(224 231 255 / 0.55) 100%
+  );
+}
+
+.hub-notion-list {
+  scroll-behavior: smooth;
+}
+
+/* Lignes compactes dans le cercle (lisibles sans médaille comme les certifs) */
+.hub-notion-line {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.4rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgb(99 102 241 / 0.2);
+  background: linear-gradient(
+    160deg,
+    rgb(255 255 255 / 0.96) 0%,
+    rgb(238 242 255 / 0.45) 100%
+  );
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 0.9) inset;
+}
+
+.hub-notion-line-text {
+  font-family:
+    'Inter',
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  font-size: 0.4375rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: rgb(30 41 59);
+}
+
+@media (min-width: 640px) {
+  .hub-notion-line-text {
+    font-size: 0.5rem;
+    letter-spacing: 0.03em;
+  }
 }
 
 .hub-track-no-transition {
@@ -755,6 +809,12 @@ button.portfolio-pillar-card.hub-pillar-card {
   box-shadow: 0 4px 14px -3px rgb(16 185 129 / 0.45);
 }
 
+/* Pastille « Notion » : violet / ambre pour distinguer savoirs vs outils / certifs */
+.hub-side-btn-icon--notion {
+  background: linear-gradient(135deg, rgb(129 140 248) 0%, rgb(251 191 36 / 0.95) 100%);
+  box-shadow: 0 4px 14px -3px rgb(129 140 248 / 0.5);
+}
+
 .hub-side-btn-active-tools {
   border-color: rgb(199 210 254) !important;
   background: rgb(248 250 255 / 0.98) !important;
@@ -801,6 +861,30 @@ button.portfolio-pillar-card.hub-pillar-card {
   height: 3px;
   border-radius: 9999px;
   background: linear-gradient(90deg, rgb(99 102 241) 0%, rgb(16 185 129) 100%);
+}
+
+.hub-side-btn-active-notion {
+  border-color: rgb(196 181 253) !important;
+  background: rgb(245 243 255 / 0.98) !important;
+  padding-bottom: 0.65rem !important;
+  box-shadow:
+    0 4px 18px -6px rgb(99 102 241 / 0.28),
+    0 0 0 1px rgb(129 140 248 / 0.12) inset !important;
+}
+
+.hub-side-btn-active-notion .hub-side-btn-textblock span:first-child {
+  color: rgb(67 56 202) !important;
+}
+
+.hub-side-btn-active-notion::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0.35rem;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(99 102 241) 0%, rgb(251 191 36) 100%);
 }
 
 #hub-back-btn:focus-visible,

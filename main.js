@@ -33,8 +33,15 @@
       hubToolsHeading: 'Maîtrise technique',
       hubBtnToolsSub: 'Stack & méthodes',
       hubBtnCertsSub: 'Titres & labels',
+      hubNotionShort: 'Notion',
+      hubBtnNotionSub: 'Domaines & compétences',
+      hubNotionHeading: 'Savoirs & notions',
+      hubNotionItem1: 'Data Engineering',
+      hubNotionItem2: 'MLOps/IA',
+      hubNotionItem3: 'C / C++ / SQL / Markdown',
       hubViewToolsAnnounce: 'Vue outils',
       hubViewCertsAnnounce: 'Vue certifications',
+      hubViewNotionAnnounce: 'Vue savoirs et notions',
       heroBadge: 'Builder produit',
       tools: 'Outils',
       certif: 'Certifications',
@@ -101,8 +108,15 @@
       hubToolsHeading: 'Technical mastery',
       hubBtnToolsSub: 'Stack & methods',
       hubBtnCertsSub: 'Credentials',
+      hubNotionShort: 'Notion',
+      hubBtnNotionSub: 'Skills & concepts',
+      hubNotionHeading: 'Knowledge & skills',
+      hubNotionItem1: 'Data Engineering',
+      hubNotionItem2: 'MLOps / AI',
+      hubNotionItem3: 'C / C++ / SQL / Markdown',
       hubViewToolsAnnounce: 'Tools view',
       hubViewCertsAnnounce: 'Certifications view',
+      hubViewNotionAnnounce: 'Knowledge areas view',
       heroBadge: 'Product builder',
       tools: 'Tools',
       certif: 'Certifications',
@@ -1139,10 +1153,11 @@
     if (view === 'photo') lr.textContent = '';
     else if (view === 'tools') lr.textContent = t('hubViewToolsAnnounce');
     else if (view === 'certs') lr.textContent = t('hubViewCertsAnnounce');
+    else if (view === 'notion') lr.textContent = t('hubViewNotionAnnounce');
   }
 
-  /** Positionne le rail Outils/Certifs (translateY) ; animation fluide uniquement entre les deux onglets. */
-  function setHubTrackPosition(showCerts, animate) {
+  /** Positionne le rail Outils / Certifs / Notion (translateY sur 3 panneaux). */
+  function setHubTrackPosition(panel, animate) {
     var track = document.getElementById('hub-tools-certs-track');
     if (!track) return;
     var reduce =
@@ -1152,7 +1167,10 @@
     if (instant) {
       track.classList.add('hub-track-no-transition');
     }
-    track.style.transform = showCerts ? 'translateY(-50%)' : 'translateY(0)';
+    var y = 'translateY(0)';
+    if (panel === 'certs') y = 'translateY(-33.333333%)';
+    else if (panel === 'notion') y = 'translateY(-66.666666%)';
+    track.style.transform = y;
     if (instant) {
       void track.offsetHeight;
       track.classList.remove('hub-track-no-transition');
@@ -1163,27 +1181,41 @@
   function updateHubSubviewPointerAndAria() {
     var tools = document.getElementById('hub-layer-tools');
     var certs = document.getElementById('hub-layer-certs');
-    if (!tools || !certs) return;
+    var notion = document.getElementById('hub-layer-notion');
+    if (!tools || !certs || !notion) return;
     if (hubView === 'tools') {
       tools.style.pointerEvents = 'auto';
       certs.style.pointerEvents = 'none';
+      notion.style.pointerEvents = 'none';
       tools.setAttribute('aria-hidden', 'false');
       certs.setAttribute('aria-hidden', 'true');
+      notion.setAttribute('aria-hidden', 'true');
     } else if (hubView === 'certs') {
       tools.style.pointerEvents = 'none';
       certs.style.pointerEvents = 'auto';
+      notion.style.pointerEvents = 'none';
       tools.setAttribute('aria-hidden', 'true');
       certs.setAttribute('aria-hidden', 'false');
+      notion.setAttribute('aria-hidden', 'true');
+    } else if (hubView === 'notion') {
+      tools.style.pointerEvents = 'none';
+      certs.style.pointerEvents = 'none';
+      notion.style.pointerEvents = 'auto';
+      tools.setAttribute('aria-hidden', 'true');
+      certs.setAttribute('aria-hidden', 'true');
+      notion.setAttribute('aria-hidden', 'false');
     } else {
       tools.style.pointerEvents = 'none';
       certs.style.pointerEvents = 'none';
+      notion.style.pointerEvents = 'none';
       tools.setAttribute('aria-hidden', 'true');
       certs.setAttribute('aria-hidden', 'true');
+      notion.setAttribute('aria-hidden', 'true');
     }
   }
 
   function setHubView(next) {
-    if (next !== 'photo' && next !== 'tools' && next !== 'certs') return;
+    if (next !== 'photo' && next !== 'tools' && next !== 'certs' && next !== 'notion') return;
     var photo = document.getElementById('hub-layer-photo');
     var tools = document.getElementById('hub-layer-tools');
     var certs = document.getElementById('hub-layer-certs');
@@ -1191,13 +1223,16 @@
     var back = document.getElementById('hub-back-btn');
     var btnTools = document.getElementById('hub-btn-tools');
     var btnCerts = document.getElementById('hub-btn-certs');
-    if (!photo || !tools || !certs) return;
+    var btnNotion = document.getElementById('hub-btn-notion');
+    var notionLayer = document.getElementById('hub-layer-notion');
+    if (!photo || !tools || !certs || !notionLayer) return;
 
     var prev = hubView;
     hubView = next;
     var showPhoto = next === 'photo';
     var showTools = next === 'tools';
     var showCerts = next === 'certs';
+    var showNotion = next === 'notion';
 
     if (btnTools) {
       btnTools.setAttribute('aria-pressed', showTools ? 'true' : 'false');
@@ -1206,6 +1241,10 @@
     if (btnCerts) {
       btnCerts.setAttribute('aria-pressed', showCerts ? 'true' : 'false');
       btnCerts.classList.toggle('hub-side-btn-active-certs', showCerts);
+    }
+    if (btnNotion) {
+      btnNotion.setAttribute('aria-pressed', showNotion ? 'true' : 'false');
+      btnNotion.classList.toggle('hub-side-btn-active-notion', showNotion);
     }
     if (back) {
       back.classList.toggle('hidden', showPhoto);
@@ -1242,13 +1281,14 @@
     photo.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
 
     var animateTrack =
-      (prev === 'tools' && showCerts) || (prev === 'certs' && showTools);
+      prev !== 'photo' && next !== 'photo' && prev !== next;
 
-    if (showTools || showCerts) {
+    if (showTools || showCerts || showNotion) {
       if (portal) {
         var portalWasHidden = portal.hidden;
         portal.hidden = false;
-        setHubTrackPosition(showCerts, animateTrack);
+        var trackPanel = showTools ? 'tools' : showCerts ? 'certs' : 'notion';
+        setHubTrackPosition(trackPanel, animateTrack);
         if (portalWasHidden) {
           portal.classList.remove('opacity-100', 'pointer-events-auto');
           portal.classList.add('opacity-0', 'pointer-events-none');
@@ -1263,7 +1303,9 @@
           portal.classList.add('opacity-100', 'pointer-events-auto');
         }
       }
-      announceHubView(showTools ? 'tools' : 'certs');
+      if (showTools) announceHubView('tools');
+      else if (showCerts) announceHubView('certs');
+      else announceHubView('notion');
     }
 
     updateHubSubviewPointerAndAria();
@@ -1959,6 +2001,18 @@
     if (hubCertsLbl) hubCertsLbl.textContent = t('hubCertifsShort');
     var hubCertsSub = document.getElementById('hub-btn-certs-sub');
     if (hubCertsSub) hubCertsSub.textContent = t('hubBtnCertsSub');
+    var hubNotionLbl = document.getElementById('hub-btn-notion-label');
+    if (hubNotionLbl) hubNotionLbl.textContent = t('hubNotionShort');
+    var hubNotionSub = document.getElementById('hub-btn-notion-sub');
+    if (hubNotionSub) hubNotionSub.textContent = t('hubBtnNotionSub');
+    var hubNotionHeadingEl = document.getElementById('hub-notion-heading');
+    if (hubNotionHeadingEl) hubNotionHeadingEl.textContent = t('hubNotionHeading');
+    var hubNi1 = document.getElementById('hub-notion-item-1');
+    if (hubNi1) hubNi1.textContent = t('hubNotionItem1');
+    var hubNi2 = document.getElementById('hub-notion-item-2');
+    if (hubNi2) hubNi2.textContent = t('hubNotionItem2');
+    var hubNi3 = document.getElementById('hub-notion-item-3');
+    if (hubNi3) hubNi3.textContent = t('hubNotionItem3');
     var heroProjBtn = document.getElementById('btn-hero-projects');
     if (heroProjBtn) heroProjBtn.textContent = t('heroCtaProjects');
     var heroCvBtn = document.getElementById('btn-hero-cv');
@@ -2152,6 +2206,12 @@
     if (hubBtnCerts) {
       hubBtnCerts.addEventListener('click', function () {
         setHubView(hubView === 'certs' ? 'photo' : 'certs');
+      });
+    }
+    var hubBtnNotion = document.getElementById('hub-btn-notion');
+    if (hubBtnNotion) {
+      hubBtnNotion.addEventListener('click', function () {
+        setHubView(hubView === 'notion' ? 'photo' : 'notion');
       });
     }
     var hubBackBtn = document.getElementById('hub-back-btn');
