@@ -26,6 +26,7 @@
       // Indication discrète sous l’orbite (liée à #click-hint dans index.html)
       clickToDiscover:
         'Les cercles autour du portrait ouvrent chaque expérience.',
+      heroBadge: 'Builder produit',
       tools: 'Outils',
       certif: 'Certifications',
       tabMission: 'Mission',
@@ -83,6 +84,7 @@
       desc12: 'AI, automation, internal tools',
       desc13: ') to simplify the lives of those who build and use them.',
       clickToDiscover: 'The circles around the portrait open each experience.',
+      heroBadge: 'Product builder',
       tools: 'Tools',
       certif: 'Certifications',
       tabMission: 'Mission',
@@ -1551,6 +1553,12 @@
     if (clickHintEl) {
       clickHintEl.textContent = t('clickToDiscover');
     }
+    var heroBadgeEl = document.getElementById('hero-badge');
+    if (heroBadgeEl) heroBadgeEl.textContent = t('heroBadge');
+    var heroToolsLbl = document.getElementById('hero-tools-label');
+    if (heroToolsLbl) heroToolsLbl.textContent = t('tools');
+    var heroCertLbl = document.getElementById('hero-cert-label');
+    if (heroCertLbl) heroCertLbl.textContent = t('certif');
     var navFormation = document.getElementById('btn-formation');
     if (navFormation) navFormation.textContent = t('about');
     var mobileFormation = document.getElementById('mobile-nav-formation');

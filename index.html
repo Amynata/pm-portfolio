@@ -12,13 +12,15 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="min-h-screen bg-[#FDFBF7] text-slate-900 font-sans antialiased overflow-x-hidden">
-  <div class="fixed inset-0 pointer-events-none -z-10 opacity-60" aria-hidden="true">
-    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#818CF8]/5 blur-[120px]"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-amber-100/10 blur-[120px]"></div>
+  <div class="fixed inset-0 pointer-events-none -z-10 opacity-70" aria-hidden="true">
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#818CF8]/12 blur-[120px]"></div>
+    <div class="absolute top-[20%] right-[-15%] w-[40%] h-[45%] rounded-full bg-[#6366F1]/8 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-emerald-200/15 blur-[120px]"></div>
+    <div class="absolute bottom-[10%] left-[-5%] w-[35%] h-[35%] rounded-full bg-amber-100/12 blur-[90px]"></div>
   </div>
 
   <!-- Header : nav compacte sur mobile (hamburger), liens inchangés sur md+ -->
-  <header class="site-header fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/30">
+  <header class="site-header site-header-glow fixed top-0 left-0 right-0 z-50 bg-white/75 backdrop-blur-xl border-b border-[#6366F1]/10">
     <div class="flex justify-between items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-10 py-4 md:py-6 max-w-[100vw] min-w-0">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <div class="w-5 h-5 shrink-0 rounded-md bg-slate-900 shadow-lg"></div>
@@ -86,44 +88,92 @@
   <main class="site-main flex flex-col px-4 pb-10 pt-[max(5.5rem,env(safe-area-inset-top)+4.5rem)] sm:px-6 sm:pb-12 sm:pt-24 md:px-6">
     <!-- Hero -->
     <section class="mx-auto mb-10 grid w-full max-w-[1600px] grid-cols-1 items-center gap-10 lg:mb-12 lg:grid-cols-2 lg:gap-12 xl:gap-24" id="about">
-      <div class="order-1 flex flex-col items-center justify-center relative py-12 lg:py-0">
-        <div class="relative flex items-center justify-center w-full min-h-[400px] md:min-h-[500px]" id="hero-orbit-section" aria-describedby="click-hint">
-          <div class="relative z-20 group">
-            <div class="absolute top-[38%] left-1/2 -translate-x-1/2 z-40 bg-white/90 backdrop-blur-md text-slate-900 px-4 py-2 rounded-xl shadow-xl border border-slate-50 opacity-0 animate-bounce group-hover:opacity-100 transition-opacity pointer-events-none">
-              <p class="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                <span class="text-[#818CF8]">✦</span>
-                <span data-portfolio-lang="FR">Clique pour voir mes projets persos</span>
-                <span data-portfolio-lang="EN" class="hidden">Click to open my personal projects</span>
-              </p>
+      <div class="order-1 flex flex-col items-center justify-center relative py-12 lg:py-0 w-full">
+        <div
+          class="portfolio-photo-stage w-full max-w-[min(100%,calc(100vw-1.5rem))] sm:max-w-[min(100%,38rem)] md:max-w-[min(100%,44rem)] lg:max-w-[min(100%,46rem)] mx-auto px-3 py-9 sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-12 lg:py-14"
+        >
+          <div class="portfolio-dot-grid pointer-events-none absolute inset-0 opacity-30 rounded-[inherit]" aria-hidden="true"></div>
+          <div
+            class="relative flex items-center justify-center w-full min-h-[min(88vw,26rem)] sm:min-h-[28rem] md:min-h-[34rem] lg:min-h-[36rem]"
+            id="hero-orbit-section"
+            aria-describedby="click-hint"
+          >
+            <div class="relative z-20 group flex flex-col items-center">
+              <div class="absolute top-[32%] left-1/2 -translate-x-1/2 z-40 bg-white/95 backdrop-blur-md text-slate-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl shadow-xl border border-[#6366F1]/10 opacity-0 animate-bounce group-hover:opacity-100 transition-opacity pointer-events-none max-w-[min(90vw,16rem)] text-center">
+                <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest flex flex-wrap items-center justify-center gap-1.5">
+                  <span class="text-[#6366F1]">✦</span>
+                  <span data-portfolio-lang="FR">Projets persos — cliquer</span>
+                  <span data-portfolio-lang="EN" class="hidden">Personal projects — click</span>
+                </p>
+              </div>
+              <div class="portfolio-photo-gradient-ring shrink-0">
+                <button
+                  type="button"
+                  id="btn-personal-projects"
+                  class="relative aspect-square w-[min(78vw,15.5rem)] max-w-[340px] sm:w-64 sm:h-64 md:w-[340px] md:h-[340px] rounded-full overflow-hidden border-[6px] sm:border-[8px] md:border-[10px] border-white shadow-2xl bg-white transition-all duration-500 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25 cursor-pointer touch-manipulation"
+                  aria-label="Ouvrir mes projets persos"
+                >
+                  <img
+                    src="Images/Photo_pro.jpg"
+                    alt="Portrait Aminata Lissa Dia"
+                    class="w-full h-full object-cover rounded-full grayscale opacity-95 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                  />
+                  <span class="absolute inset-0 rounded-full bg-gradient-to-t from-[#6366F1]/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></span>
+                  <span class="absolute inset-0 rounded-full bg-[#818CF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center border border-white/80 shadow-2xl transform transition-all duration-300 scale-90 group-hover:scale-100">
+                      <svg viewBox="0 0 64 64" class="w-7 h-7 sm:w-8 sm:h-8 text-[#6366F1]" fill="none" aria-hidden="true">
+                        <path
+                          d="M24 18c-5 0-9 4-9 9 0 3 1 6 4 7-1 4 1 9 6 9 2 0 4-1 5-2 1 1 3 2 5 2 5 0 7-5 6-9 3-1 4-4 4-7 0-5-4-9-9-9-2 0-4 1-6 3-2-2-4-3-6-3Z"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path d="M32 23v18M27 28h5M32 28h5" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
             </div>
-            <button type="button" id="btn-personal-projects" class="relative aspect-square w-[min(85vw,17.5rem)] max-w-[380px] sm:w-72 sm:h-72 md:h-[380px] md:w-[380px] rounded-full overflow-hidden border-[10px] sm:border-[12px] md:border-[16px] border-white shadow-2xl bg-white transition-all duration-500 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30 cursor-pointer touch-manipulation" aria-label="Ouvrir mes projets persos">
-              <img src="Images/Photo_pro.jpg" alt="Portrait Aminata Lissa Dia" class="w-full h-full object-cover rounded-full grayscale opacity-95 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" />
-              <span class="absolute inset-0 rounded-full bg-[#818CF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span class="w-14 h-14 rounded-full bg-white/85 backdrop-blur-sm flex items-center justify-center border border-white/70 shadow-2xl transform transition-all duration-300 scale-90 group-hover:scale-100">
-                  <svg viewBox="0 0 64 64" class="w-8 h-8 text-[#818CF8]" fill="none" aria-hidden="true">
-                    <path d="M24 18c-5 0-9 4-9 9 0 3 1 6 4 7-1 4 1 9 6 9 2 0 4-1 5-2 1 1 3 2 5 2 5 0 7-5 6-9 3-1 4-4 4-7 0-5-4-9-9-9-2 0-4 1-6 3-2-2-4-3-6-3Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M32 23v18M27 28h5M32 28h5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  </svg>
-                </span>
-              </span>
-            </button>
+            <!-- z-[55] > header (z-50) pour que les labels au survol (ex. Decathlon en haut de l’arc) ne passent pas derrière la barre fixe -->
+            <div id="experience-orbit" class="pointer-events-none absolute inset-0 z-[55] flex items-center justify-center">
+              <!-- Experience buttons injected by JS -->
+            </div>
+            <svg
+              class="pointer-events-none absolute z-10 h-auto w-[min(88vw,22rem)] max-w-[22rem] opacity-[0.14] sm:w-[min(90vw,28rem)] sm:max-w-[28rem] md:w-[min(92vw,36rem)] md:max-w-[36rem] lg:w-[38rem] lg:max-w-[38rem]"
+              style="aspect-ratio: 100/100"
+              aria-hidden="true"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="16 16" class="text-indigo-300" />
+              <path
+                d="M 50 0 A 42 42 0 0 1 50 100"
+                fill="none"
+                stroke="url(#orbit-arc-grad)"
+                stroke-width="3.5"
+                stroke-linecap="round"
+                class="opacity-90"
+              />
+              <defs>
+                <linearGradient id="orbit-arc-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#6366f1" />
+                  <stop offset="100%" stop-color="#34d399" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
-          <!-- z-[55] > header (z-50) pour que les labels au survol (ex. Decathlon en haut de l’arc) ne passent pas derrière la barre fixe -->
-          <div id="experience-orbit" class="pointer-events-none absolute inset-0 z-[55] flex items-center justify-center">
-            <!-- Experience buttons injected by JS -->
-          </div>
-          <svg class="pointer-events-none absolute z-10 h-auto w-[min(92vw,400px)] max-w-[400px] opacity-10 md:w-[530px] md:max-w-[530px]" style="aspect-ratio:100/100" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-            <!-- Cercle de base -->
-            <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="16 16" class="text-indigo-200" />
-            <!-- Arc clé qui traverse toutes les expériences (demi-cercle complet, violet plus soutenu) -->
-            <path d="M 50 0 A 42 42 0 0 1 50 100" fill="none" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" class="opacity-80" />
-          </svg>
+          <p
+            id="click-hint"
+            class="orbit-explore-hint relative z-[1] mt-6 md:mt-8 mb-0 max-w-[20rem] mx-auto text-center text-[11px] md:text-xs text-slate-500 font-medium leading-snug tracking-tight px-3"
+            role="note"
+          >
+            Les cercles autour du portrait ouvrent chaque expérience.
+          </p>
         </div>
-        <p id="click-hint" class="orbit-explore-hint mt-9 md:mt-11 mb-0 max-w-[19rem] mx-auto text-center text-[11px] md:text-xs text-slate-400/90 font-medium leading-snug tracking-tight px-3 transition-opacity duration-500" role="note">
-          Les cercles autour du portrait ouvrent chaque expérience.
-        </p>
-        <div class="flex items-center justify-center gap-8 md:gap-12 mt-16 md:mt-20">
-          <div class="flex flex-col items-center gap-2">
+        <div class="flex flex-wrap items-stretch justify-center gap-4 md:gap-6 mt-16 md:mt-20">
+          <div class="portfolio-pillar-card flex flex-col items-center gap-2 min-w-[5.5rem]">
             <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
               <svg viewBox="0 0 64 64" class="w-full h-full" fill="none">
                 <rect x="28" y="8" width="8" height="36" rx="4" fill="#F59E0B"/>
@@ -138,7 +188,7 @@
             </div>
             <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-amber-500">Automation</span>
           </div>
-          <div class="flex flex-col items-center gap-2">
+          <div class="portfolio-pillar-card flex flex-col items-center gap-2 min-w-[5.5rem]">
             <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
               <svg viewBox="0 0 64 64" class="w-full h-full" fill="none">
                 <rect x="14" y="16" width="36" height="32" rx="8" fill="#818CF8"/>
@@ -152,7 +202,7 @@
             </div>
             <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#818CF8]">Robotics</span>
           </div>
-          <div class="flex flex-col items-center gap-2">
+          <div class="portfolio-pillar-card flex flex-col items-center gap-2 min-w-[5.5rem]">
             <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
               <svg viewBox="0 0 64 64" class="w-full h-full" fill="none">
                 <circle cx="32" cy="28" r="14" fill="#E0E7FF"/>
@@ -169,36 +219,51 @@
         </div>
       </div>
       <div class="order-2">
-        <div class="mb-10 text-left">
-          <h1 class="text-5xl md:text-6xl font-black tracking-tighter leading-[0.9] mb-4" id="hero-vision">Bâtir des solutions</h1>
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-slate-400 tracking-tight">
-            <span id="hero-driven">intelligentes pour</span>
-            <span class="text-[#818CF8] font-medium underline decoration-[#818CF8]/10 decoration-4 underline-offset-8" id="hero-impact">simplifier le quotidien.</span>
-          </h2>
-          <div class="w-20 h-1 bg-[#818CF8] mt-8 rounded-full shadow-lg"></div>
-        </div>
-        <div class="mb-10 max-w-xl text-left text-[0.95rem] font-medium leading-relaxed text-slate-500 sm:text-base md:mb-12 md:text-lg" id="hero-desc">
-          <p class="mb-4 text-slate-900"><strong id="desc1">Ingénieure de formation</strong><span id="desc2">, forte de plus de huit ans d'expérience dans la tech, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.</span></p>
-          <p class="mb-4 text-slate-700"><span id="desc3">Mon parcours a commencé dans la </span><span class="text-[#818CF8] font-bold" id="desc4">robotique et les systèmes complexes</span><span id="desc5">, mais c'est le besoin de rester </span><span class="text-slate-900 font-bold underline decoration-indigo-200" id="desc6">connectée à l'humain</span><span id="desc7"> qui m'a menée vers le </span><span class="text-slate-900 font-bold" id="desc8">Product Management.</span><span id="desc9"> Aujourd'hui, je résous des problèmes concrets en faisant le </span><span class="text-indigo-600 font-bold" id="desc10">pont entre la puissance technique et l'usage utilisateur.</span></p>
-          <p class="text-slate-700"><span id="desc11">Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (</span><span class="text-[#818CF8] font-bold" id="desc12">IA, automatisation, outils internes</span><span id="desc13">) pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.</span></p>
-        </div>
-        <div class="space-y-12 max-w-md text-left">
-          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 md:gap-12">
-            <div class="flex-1">
-              <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-6">Outils</p>
-              <div id="tools-list" class="w-full">
-                <!-- Tools injected by JS -->
-              </div>
+        <div class="portfolio-hero-panel p-6 sm:p-8 md:p-10 lg:p-12">
+          <div class="portfolio-dot-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"></div>
+          <div class="portfolio-hero-panel-inner">
+            <div class="mb-10 text-left">
+              <p class="text-[10px] font-black uppercase tracking-[0.28em] text-slate-400 mb-4 flex items-center gap-2">
+                <span class="portfolio-section-label-icon" aria-hidden="true">✦</span>
+                <span id="hero-badge">Builder produit</span>
+              </p>
+              <h1 class="text-5xl md:text-6xl font-black tracking-tighter leading-[0.9] mb-4" id="hero-vision">Bâtir des solutions</h1>
+              <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-slate-400 tracking-tight">
+                <span id="hero-driven">intelligentes pour</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500 font-medium" id="hero-impact">simplifier le quotidien.</span>
+              </h2>
+              <div class="hero-accent-bar mt-8" aria-hidden="true"></div>
             </div>
-            <div class="hidden sm:block w-[1px] h-24 bg-slate-200/60 mt-4"></div>
-            <div class="flex-1">
-              <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-6">Certifications</p>
-              <div class="flex flex-wrap justify-center lg:justify-start gap-2.5">
-                <span class="px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">PSM</span>
-                <span class="px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">ISTQB</span>
-                <span class="px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">CESAM</span>
-                <span class="px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">Maestro</span>
-                <span class="px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">Thiga Academy</span>
+            <div class="mb-10 max-w-xl text-left text-[0.95rem] font-medium leading-relaxed text-slate-500 sm:text-base md:mb-12 md:text-lg" id="hero-desc">
+              <p class="mb-4 text-slate-900"><strong id="desc1">Ingénieure de formation</strong><span id="desc2">, forte de plus de huit ans d'expérience dans la tech, j'ai réalisé une partie de mon rêve : transformer les technologies de pointe en outils du quotidien.</span></p>
+              <p class="mb-4 text-slate-700"><span id="desc3">Mon parcours a commencé dans la </span><span class="text-[#818CF8] font-bold" id="desc4">robotique et les systèmes complexes</span><span id="desc5">, mais c'est le besoin de rester </span><span class="text-slate-900 font-bold underline decoration-indigo-200" id="desc6">connectée à l'humain</span><span id="desc7"> qui m'a menée vers le </span><span class="text-slate-900 font-bold" id="desc8">Product Management.</span><span id="desc9"> Aujourd'hui, je résous des problèmes concrets en faisant le </span><span class="text-indigo-600 font-bold" id="desc10">pont entre la puissance technique et l'usage utilisateur.</span></p>
+              <p class="text-slate-700"><span id="desc11">Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (</span><span class="text-[#818CF8] font-bold" id="desc12">IA, automatisation, outils internes</span><span id="desc13">) pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.</span></p>
+            </div>
+            <div class="portfolio-tools-well p-5 sm:p-6 md:p-8 max-w-xl">
+              <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 md:gap-10">
+                <div class="flex-1 w-full sm:w-auto">
+                  <p class="portfolio-section-label text-[10px] font-black uppercase text-slate-400 mb-6">
+                    <span class="portfolio-section-label-icon" aria-hidden="true">⚡</span>
+                    <span id="hero-tools-label">Outils</span>
+                  </p>
+                  <div id="tools-list" class="w-full">
+                    <!-- Tools injected by JS -->
+                  </div>
+                </div>
+                <div class="hidden sm:block w-px min-h-[5rem] self-stretch bg-gradient-to-b from-transparent via-[#6366F1]/20 to-transparent mt-2"></div>
+                <div class="flex-1 w-full sm:w-auto">
+                  <p class="portfolio-section-label text-[10px] font-black uppercase text-slate-400 mb-6">
+                    <span class="portfolio-section-label-icon" aria-hidden="true">✓</span>
+                    <span id="hero-cert-label">Certifications</span>
+                  </p>
+                  <div class="flex flex-wrap justify-center lg:justify-start gap-2.5">
+                    <span class="cert-chip px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">PSM</span>
+                    <span class="cert-chip px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">ISTQB</span>
+                    <span class="cert-chip px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">CESAM</span>
+                    <span class="cert-chip px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">Maestro</span>
+                    <span class="cert-chip px-3.5 py-1.5 bg-white rounded-xl text-[10px] font-black text-slate-700 shadow-md border border-slate-100 uppercase tracking-widest">Thiga Academy</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -208,13 +273,14 @@
 
   </main>
 
-  <footer class="border-t border-slate-200/30 bg-white/20 backdrop-blur-xl py-10 mt-auto">
-    <div class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 sm:flex-row sm:justify-between sm:gap-10 sm:px-6 md:px-10">
-      <p>© 2026 / Aminata Lissa Dia</p>
+  <footer class="portfolio-footer-glow border-t backdrop-blur-xl py-12 mt-auto relative overflow-hidden">
+    <div class="portfolio-dot-grid pointer-events-none absolute inset-0 opacity-25" aria-hidden="true"></div>
+    <div class="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 sm:flex-row sm:justify-between sm:gap-10 sm:px-6 md:px-10">
+      <p class="text-slate-600">© 2026 / Aminata Lissa Dia</p>
       <div class="flex gap-12">
-        <a href="https://www.linkedin.com/in/aminata-lissa-dia" target="_blank" rel="noopener noreferrer" class="hover:text-[#818CF8] transition-colors">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/aminata-lissa-dia" target="_blank" rel="noopener noreferrer" class="rounded-full px-4 py-2 text-slate-800 ring-1 ring-slate-200/80 bg-white/60 hover:ring-[#6366F1]/35 hover:text-[#6366F1] transition-all">LinkedIn</a>
       </div>
-      <p class="text-[#818CF8]">Impact Driven Portfolio</p>
+      <p class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500 tracking-[0.22em]">Impact Driven Portfolio</p>
     </div>
   </footer>
 
