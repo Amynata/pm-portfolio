@@ -200,7 +200,38 @@ body {
   .cert-chip {
     transition: none;
   }
-  .hub-pillars .portfolio-pillar-card {
+  .hub-pillar-animate-arm,
+  .hub-pillar-animate-head,
+  .hub-pillar-animate-brain,
+  .hub-pillar-orbit-spin {
+    animation: none;
+  }
+  .hub-pillar-tint-a,
+  .hub-pillar-tint-b,
+  .hub-pillar-tint-c {
+    animation: none !important;
+    color: rgb(148 163 184) !important;
+  }
+  .hub-pillar-label-a,
+  .hub-pillar-label-b,
+  .hub-pillar-label-c {
+    animation: none !important;
+    color: rgb(148 163 184) !important;
+  }
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-a,
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-a {
+    color: rgb(0 122 189) !important;
+  }
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-b,
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-b {
+    color: rgb(217 119 6) !important;
+  }
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-c,
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-c {
+    color: rgb(8 145 178) !important;
+  }
+  .hub-pillars .animate-pulse,
+  .hub-pillars .group-hover\:animate-pulse {
     animation: none;
   }
   #hub-tools-certs-track {
@@ -298,32 +329,187 @@ body {
   opacity: 0.92;
 }
 
-/* Piliers hub : léger flottement vertical + décalage entre les trois cartes */
-@keyframes hub-pillar-float {
+/* Boutons centres d’intérêt : reset natif, pas de bordure */
+button.portfolio-pillar-card.hub-pillar-card {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+}
+
+.hub-pillar-card:focus-visible {
+  outline: 2px solid rgb(99 102 241 / 0.45);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* Couleur : animation continue (hors survol uniquement) + teinte au clic (aria-pressed) */
+@keyframes hub-pillar-color-a {
   0%,
   100% {
-    transform: translateY(0);
+    color: rgb(203 213 225);
   }
   50% {
-    transform: translateY(-3px);
+    color: rgb(0 122 189);
   }
 }
 
-.hub-pillars .portfolio-pillar-card {
-  animation: hub-pillar-float 3.2s ease-in-out infinite;
+@keyframes hub-pillar-color-b {
+  0%,
+  100% {
+    color: rgb(203 213 225);
+  }
+  50% {
+    color: rgb(234 179 8);
+  }
 }
 
-.hub-pillars .portfolio-pillar-card:nth-child(1) {
-  animation-delay: 0s;
+@keyframes hub-pillar-color-c {
+  0%,
+  100% {
+    color: rgb(203 213 225);
+  }
+  50% {
+    color: rgb(6 182 212);
+  }
 }
 
-.hub-pillars .portfolio-pillar-card:nth-child(2) {
-  animation-delay: 0.45s;
+.hub-pillar-animate-arm.hub-pillar-tint-a {
+  transform-origin: 50% 88%;
+  animation:
+    hub-pillar-robot-arm 2s ease-in-out infinite,
+    hub-pillar-color-a 5s ease-in-out infinite;
 }
 
-.hub-pillars .portfolio-pillar-card:nth-child(3) {
-  animation-delay: 0.9s;
+.hub-pillar-animate-head.hub-pillar-tint-b {
+  transform-origin: center center;
+  animation:
+    hub-pillar-robot-head 3s ease-in-out infinite,
+    hub-pillar-color-b 5s ease-in-out infinite;
+  animation-delay: 0.15s, 1.65s;
 }
+
+.hub-pillar-animate-brain.hub-pillar-tint-c {
+  transform-origin: center center;
+  animation:
+    hub-pillar-brain-pulse 2s ease-in-out infinite,
+    hub-pillar-color-c 5s ease-in-out infinite;
+  animation-delay: 0.25s, 3.25s;
+}
+
+.hub-pillar-label-a {
+  animation: hub-pillar-color-a 5s ease-in-out infinite;
+  color: rgb(148 163 184);
+}
+
+.hub-pillar-label-b {
+  animation: hub-pillar-color-b 5s ease-in-out infinite;
+  animation-delay: 1.65s;
+  color: rgb(148 163 184);
+}
+
+.hub-pillar-label-c {
+  animation: hub-pillar-color-c 5s ease-in-out infinite;
+  animation-delay: 3.25s;
+  color: rgb(148 163 184);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-a {
+  animation: hub-pillar-robot-arm 2s ease-in-out infinite;
+  color: rgb(0 122 189);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-b {
+  animation: hub-pillar-robot-head 3s ease-in-out infinite;
+  animation-delay: 0.15s;
+  color: rgb(217 119 6);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-c {
+  animation: hub-pillar-brain-pulse 2s ease-in-out infinite;
+  animation-delay: 0.25s;
+  color: rgb(8 145 178);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-label-a {
+  animation: none;
+  color: rgb(0 122 189);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-label-b {
+  animation: none;
+  color: rgb(217 119 6);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-label-c {
+  animation: none;
+  color: rgb(8 145 178);
+}
+
+/* Centres d’intérêt hub : bras articulé, tête robot, noyau IA (d’après maquette keyframes) */
+@keyframes hub-pillar-robot-arm {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+@keyframes hub-pillar-robot-head {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes hub-pillar-brain-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes hub-pillar-orbit-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Variantes sans teinte animée (non utilisées actuellement — gardées pour cohérence) */
+.hub-pillar-animate-arm:not(.hub-pillar-tint-a) {
+  transform-origin: 50% 88%;
+  animation: hub-pillar-robot-arm 2s ease-in-out infinite;
+}
+
+.hub-pillar-animate-head:not(.hub-pillar-tint-b) {
+  transform-origin: center center;
+  animation: hub-pillar-robot-head 3s ease-in-out infinite;
+}
+
+.hub-pillar-animate-brain:not(.hub-pillar-tint-c) {
+  transform-origin: center center;
+  animation: hub-pillar-brain-pulse 2s ease-in-out infinite;
+}
+
+/* Orbite pointillée : rotation lente (équivalent animate-spin 8s) */
+.hub-pillar-orbit-spin {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hub-pillar-orbit-rotate 8s linear infinite;
+}
+
 
 .cert-chip {
   transition:

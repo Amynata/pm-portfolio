@@ -2257,6 +2257,23 @@
       renderExperienceTimeline();
       updateOrbitActiveState();
     });
+
+    // Centres d’intérêt : clic = sélection exclusive (teinte fixe sans survol)
+    (function wireHubPillarCards() {
+      var cards = document.querySelectorAll('.hub-pillar-card');
+      if (!cards.length) return;
+      cards.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var wasPressed = btn.getAttribute('aria-pressed') === 'true';
+          cards.forEach(function (b) {
+            b.setAttribute('aria-pressed', 'false');
+          });
+          if (!wasPressed) {
+            btn.setAttribute('aria-pressed', 'true');
+          }
+        });
+      });
+    })();
   }
 
   if (document.readyState === 'loading') {

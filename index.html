@@ -91,10 +91,10 @@
       class="about-hero mx-auto mb-10 grid w-full max-w-[1600px] grid-cols-1 items-start gap-10 lg:mb-14 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-x-0 lg:gap-y-12 xl:gap-x-0"
       id="about"
     >
-      <!-- Colonne texte (gauche desktop) : order 2 mobile puis 1 sur lg -->
-      <div class="order-2 w-full min-w-0 lg:order-1 lg:max-w-[min(100%,42rem)] xl:max-w-[min(100%,44rem)]">
-        <div class="portfolio-hero-panel relative px-0 py-6 sm:py-8 md:py-10 lg:py-8 lg:pr-0">
-          <div class="portfolio-hero-panel-inner relative z-[1]">
+      <!-- Colonne texte (gauche desktop) -->
+      <div class="order-2 flex w-full min-w-0 flex-col lg:order-1 lg:max-w-[min(100%,42rem)] xl:max-w-[min(100%,44rem)]">
+        <div class="portfolio-hero-panel relative flex flex-col px-0 py-6 sm:py-8 md:py-10 lg:py-8 lg:pr-0">
+          <div class="portfolio-hero-panel-inner relative z-[1] flex flex-col">
             <div class="mb-8 text-left sm:mb-10">
               <p class="text-[10px] font-black uppercase tracking-[0.28em] text-slate-400 mb-4 flex items-center gap-2">
                 <span class="portfolio-section-label-icon" aria-hidden="true">✦</span>
@@ -111,7 +111,7 @@
               <p class="mb-4 text-slate-700"><span id="desc3">Mon parcours a commencé dans la </span><span class="text-[#818CF8] font-bold" id="desc4">robotique et les systèmes complexes</span><span id="desc5">, mais c'est le besoin de rester </span><span class="text-slate-900 font-bold underline decoration-indigo-200" id="desc6">connectée à l'humain</span><span id="desc7"> qui m'a menée vers le </span><span class="text-slate-900 font-bold" id="desc8">Product Management.</span><span id="desc9"> Aujourd'hui, je résous des problèmes concrets en faisant le </span><span class="text-indigo-600 font-bold" id="desc10">pont entre la puissance technique et l'usage utilisateur.</span></p>
               <p class="text-slate-700"><span id="desc11">Ma particularité ? Une appétence tech naturelle qui me pousse à bâtir des solutions (</span><span class="text-[#818CF8] font-bold" id="desc12">IA, automatisation, outils internes</span><span id="desc13">) pour simplifier la vie de ceux qui les construisent et de ceux qui les utilisent.</span></p>
             </div>
-            <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div class="mt-4 flex max-w-xl flex-wrap items-center gap-3 sm:mt-5 sm:gap-4">
               <button
                 type="button"
                 id="btn-hero-projects"
@@ -131,55 +131,18 @@
         </div>
       </div>
 
-      <!-- Colonne hub (droite desktop), alignée à droite du bloc pour équilibrer la maquette -->
-      <div class="order-1 flex w-full min-w-0 flex-col items-center justify-center py-6 lg:order-2 lg:items-start lg:justify-start lg:py-4">
+      <!-- Colonne hub : portrait + outils ; centres d’intérêt centrés sous la photo -->
+      <div class="order-1 flex w-full min-w-0 flex-col items-center justify-center py-6 lg:order-2 lg:py-4">
         <div
-          class="portfolio-photo-stage w-full max-w-[min(100%,calc(100vw-1rem))] sm:max-w-[min(100%,38rem)] lg:max-w-none lg:w-full mx-auto px-1 py-6 sm:px-2 sm:py-8 lg:mx-0 lg:px-0 lg:-ml-10 xl:-ml-14 2xl:-ml-16"
+          class="portfolio-photo-stage flex w-full max-w-[min(100%,calc(100vw-1rem))] flex-col sm:max-w-[min(100%,38rem)] lg:mx-0 lg:w-full lg:max-w-none lg:px-0 lg:py-0 xl:-ml-14 2xl:-ml-16 mx-auto px-1 py-6 sm:px-2 sm:py-8 lg:-ml-10"
         >
-          <!-- Piliers au-dessus du portrait uniquement : même axe horizontal que le cercle (pas décalés par les boutons latéraux) -->
           <div class="hub-visual-group relative z-[1] flex w-full flex-col items-center">
             <div
-              class="relative z-[1] flex w-full flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-4"
+              class="relative z-[1] flex w-full flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:items-center lg:gap-4"
               id="hero-hub-row"
               aria-live="polite"
             >
-              <div class="flex min-w-0 flex-col items-center gap-5">
-                <div class="hub-pillars flex w-full flex-wrap items-center justify-center gap-4 md:gap-5">
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
-                <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
-                  <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
-                    <rect x="28" y="8" width="8" height="36" rx="4" fill="#F59E0B" />
-                    <circle cx="32" cy="8" r="6" fill="#F59E0B" />
-                    <rect x="16" y="44" width="32" height="4" rx="2" fill="#F59E0B" />
-                    <rect x="20" y="48" width="24" height="4" rx="2" fill="#FBBF24" />
-                    <rect x="24" y="52" width="16" height="4" rx="2" fill="#FCD34D" />
-                  </svg>
-                </div>
-                <span class="text-[7px] font-black uppercase tracking-widest text-amber-500 md:text-[8px]">Automation</span>
-              </div>
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
-                <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
-                  <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
-                    <rect x="14" y="16" width="36" height="32" rx="8" fill="#818CF8" />
-                    <rect x="18" y="20" width="28" height="20" rx="4" fill="#E0E7FF" />
-                    <circle cx="26" cy="30" r="3" fill="#818CF8" />
-                    <circle cx="38" cy="30" r="3" fill="#818CF8" />
-                  </svg>
-                </div>
-                <span class="text-[7px] font-black uppercase tracking-widest text-[#818CF8] md:text-[8px]">Robotics</span>
-              </div>
-              <div class="portfolio-pillar-card flex min-w-[5rem] flex-col items-center gap-2">
-                <div class="flex h-9 w-9 items-center justify-center md:h-10 md:w-10">
-                  <svg viewBox="0 0 64 64" class="h-full w-full" fill="none" aria-hidden="true">
-                    <circle cx="32" cy="28" r="14" fill="#E0E7FF" />
-                    <circle cx="32" cy="28" r="8" fill="#6366F1" />
-                    <circle cx="32" cy="28" r="3" fill="white" />
-                    <line x1="32" y1="42" x2="32" y2="52" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round" />
-                  </svg>
-                </div>
-                <span class="text-[7px] font-black uppercase tracking-widest text-indigo-500 md:text-[8px]">IA Agents</span>
-              </div>
-                </div>
+              <div class="flex min-w-0 flex-col items-center">
               <div
                 class="portfolio-photo-gradient-ring hub-photo-ring group/portrait shrink-0 cursor-pointer rounded-full transition-[transform,filter] duration-200 ease-out will-change-transform hover:scale-[1.02] hover:shadow-[0_20px_50px_-12px_rgb(99_102_241_/_0.35)]"
               >
@@ -270,7 +233,87 @@
                   </button>
                 </div>
               </div>
+              <!-- Sous le portrait : rangée centrée sur le cercle → Robotics sur l’axe vertical de la photo -->
+              <div
+                class="hub-pillars mt-5 flex w-full shrink-0 flex-wrap items-center justify-center gap-4 md:gap-5 lg:mt-6"
+                aria-label="Centres d'intérêt"
+              >
+              <button
+                type="button"
+                class="portfolio-pillar-card hub-pillar-card group flex min-w-[5rem] cursor-pointer flex-col items-center gap-2"
+                aria-pressed="false"
+              >
+                <div class="relative h-11 w-14 text-slate-900 hub-pillar-animate-arm hub-pillar-tint-a sm:h-12 sm:w-16">
+                  <svg viewBox="0 0 120 80" class="h-full w-full" fill="none" aria-hidden="true">
+                    <rect x="45" y="70" width="30" height="4" rx="2" fill="currentColor" />
+                    <g>
+                      <rect x="57" y="45" width="6" height="28" rx="3" fill="currentColor" opacity="0.4" />
+                      <g>
+                        <rect x="57" y="25" width="6" height="24" rx="3" fill="currentColor" opacity="0.7" />
+                        <g>
+                          <path
+                            d="M54 12 Q60 5 66 12"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                          />
+                          <circle cx="60" cy="20" r="5" fill="currentColor" />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                <span class="hub-pillar-label hub-pillar-label-a text-[7px] font-black uppercase tracking-[0.2em] md:text-[8px]">Automation</span>
+              </button>
+              <button
+                type="button"
+                class="portfolio-pillar-card hub-pillar-card group flex min-w-[5rem] cursor-pointer flex-col items-center gap-2"
+                aria-pressed="false"
+              >
+                <div class="relative h-11 w-14 text-slate-900 hub-pillar-animate-head hub-pillar-tint-b sm:h-12 sm:w-16">
+                  <svg viewBox="0 0 100 80" class="h-full w-full" fill="none" aria-hidden="true">
+                    <rect x="30" y="25" width="40" height="35" rx="8" fill="none" stroke="currentColor" stroke-width="3" />
+                    <circle cx="41" cy="40" r="3" fill="currentColor" class="group-hover:animate-pulse" />
+                    <circle cx="59" cy="40" r="3" fill="currentColor" class="group-hover:animate-pulse" />
+                    <path d="M42 52 Q50 56 58 52" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M50 15 L50 25 M45 10 L55 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <span class="hub-pillar-label hub-pillar-label-b text-[7px] font-black uppercase tracking-[0.2em] md:text-[8px]">Robotics</span>
+              </button>
+              <button
+                type="button"
+                class="portfolio-pillar-card hub-pillar-card group flex min-w-[5rem] cursor-pointer flex-col items-center gap-2"
+                aria-pressed="false"
+              >
+                <div class="relative h-11 w-14 text-slate-900 hub-pillar-animate-brain hub-pillar-tint-c sm:h-12 sm:w-16">
+                  <svg viewBox="0 0 100 80" class="h-full w-full" fill="none" aria-hidden="true">
+                    <circle
+                      cx="50"
+                      cy="40"
+                      r="12"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-dasharray="4 2"
+                      class="hub-pillar-orbit-spin"
+                    />
+                    <circle cx="50" cy="40" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="50" cy="40" r="4" fill="currentColor" class="animate-pulse" />
+                    <path
+                      d="M50 20 L50 10 M70 40 L80 40 M50 60 L50 70 M30 40 L20 40"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      opacity="0.5"
+                    />
+                  </svg>
+                </div>
+                <span class="hub-pillar-label hub-pillar-label-c text-[7px] font-black uppercase tracking-[0.2em] md:text-[8px]">IA Agents</span>
+              </button>
             </div>
+          </div>
               <div class="flex shrink-0 flex-col justify-center gap-2.5 sm:gap-3">
                 <button
                   type="button"
