@@ -211,7 +211,7 @@ export function createModalHandlers(deps) {
   function renderCVModalBody() {
     var body = document.getElementById('cv-modal-body');
     if (!body) return;
-    var pdfPath = 'Images/_Aminata_Dia_Product_Manager_Resume_2025 (2).pdf';
+    var pdfPath = 'Images/_Aminata_Dia_Product_Manager_Resume_2025.pdf';
     body.innerHTML =
       '<div class="cv-preview-wrap w-full">' +
       '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +
