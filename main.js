@@ -376,14 +376,14 @@
             '<p>🗂️ Simplification de l\'accès au patrimoine data de l\'entreprise</p>' +
             '<p>🚀 Livraison d\'un MVP en 6 mois, actuellement en phase de généralisation</p>' +
             '</div></div></div>' +
-            '<div class="pt-6 border-t border-slate-100 flex items-center justify-between">' +
+            // Le CTA vidéo MVP est retiré pour éviter toute réexposition de contenu sensible.
+            '<div class="pt-6 border-t border-slate-100">' +
             '<div><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Stack</p>' +
             '<div class="flex flex-wrap gap-2">' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">GEN AI (LLM)</span>' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Data Cockpit</span>' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Discovery → Delivery</span>' +
             '</div></div>' +
-            '<a href="Images/Data_Caockpit_Video.mp4" target="_blank" class="inline-flex items-center gap-2 bg-[#007ABD] text-white font-black uppercase tracking-widest text-[10px] px-4 py-2.5 rounded-xl shadow-lg hover:bg-[#005a8c] transition-all shrink-0 ml-4 mt-6">▶ Voir le MVP</a>' +
             '</div>',
           EN: '<h4 class="text-base md:text-lg font-black text-slate-900 mb-4">Reducing Time to Data: Data Accessibility</h4>' +
             '<div class="flex gap-4 mb-6"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 bg-[#007ABD]/10 text-[#007ABD] font-bold text-sm">⚠</div><div class="flex-1"><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Problem</p>' +
@@ -410,14 +410,13 @@
             '<p>🗂️ Simplified access to the company\\\'s data estate</p>' +
             '<p>🚀 MVP delivered in 6 months, currently in rollout phase</p>' +
             '</div></div></div>' +
-            '<div class="pt-6 border-t border-slate-100 flex items-center justify-between">' +
+            '<div class="pt-6 border-t border-slate-100">' +
             '<div><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Stack</p>' +
             '<div class="flex flex-wrap gap-2">' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">GEN AI (LLM)</span>' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Data Cockpit</span>' +
             '<span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tight">Discovery → Delivery</span>' +
             '</div></div>' +
-            '<a href="Images/Data_Caockpit_Video.mp4" target="_blank" class="inline-flex items-center gap-2 bg-[#007ABD] text-white font-black uppercase tracking-widest text-[10px] px-4 py-2.5 rounded-xl shadow-lg hover:bg-[#005a8c] transition-all shrink-0 ml-4 mt-6">▶ Watch MVP</a>' +
             '</div>',
         },
       ],
