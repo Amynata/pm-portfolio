@@ -38,7 +38,7 @@
       hubNotionHeading: 'Savoirs & notions',
       hubNotionItem1: 'Data Engineering',
       hubNotionItem2: 'MLOps/IA',
-      hubNotionItem3: 'C / C++ / SQL / Markdown',
+      hubNotionItem3: 'C / C++ / SQL / Markdown / Git',
       hubViewToolsAnnounce: 'Vue outils',
       hubViewCertsAnnounce: 'Vue certifications',
       hubViewNotionAnnounce: 'Vue savoirs et notions',
@@ -113,7 +113,7 @@
       hubNotionHeading: 'Knowledge & skills',
       hubNotionItem1: 'Data Engineering',
       hubNotionItem2: 'MLOps / AI',
-      hubNotionItem3: 'C / C++ / SQL / Markdown',
+      hubNotionItem3: 'C / C++ / SQL / Markdown / Git',
       hubViewToolsAnnounce: 'Tools view',
       hubViewCertsAnnounce: 'Certifications view',
       hubViewNotionAnnounce: 'Knowledge areas view',
@@ -2129,10 +2129,14 @@
     document.getElementById('exp-modal-close').addEventListener('click', closeExpModal);
     document.getElementById('exp-modal-backdrop').addEventListener('click', closeExpModal);
 
-    document.getElementById('btn-cv').addEventListener('click', function () {
-      document.getElementById('cv-modal').classList.remove('invisible');
-      document.getElementById('cv-modal').setAttribute('aria-hidden', 'false');
-    });
+    // Le lien CV peut être absent du header selon la variante de navigation.
+    var btnCv = document.getElementById('btn-cv');
+    if (btnCv) {
+      btnCv.addEventListener('click', function () {
+        document.getElementById('cv-modal').classList.remove('invisible');
+        document.getElementById('cv-modal').setAttribute('aria-hidden', 'false');
+      });
+    }
     document.getElementById('cv-modal-close').addEventListener('click', function () {
       document.getElementById('cv-modal').classList.add('invisible');
       document.getElementById('cv-modal').setAttribute('aria-hidden', 'true');
