@@ -215,6 +215,46 @@ export const formationEntries = [
     },
   ];
 
+// Icônes SVG des outils (reprennent la maquette React)
+const miroIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.462c-3.564 0-6.462-2.898-6.462-6.462S8.436 5.538 12 5.538s6.462 2.898 6.462 6.462-2.898 6.462-6.462 6.462zM9.231 9.231h5.538v5.538H9.231V9.231z" /></svg>`;
+const replitIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M2 10h10v4H2v-4zm5-5h10v4H7V5zm5 10h10v4H12v-4z" /></svg>`;
+
+export const tools = [
+  { name: 'Miro', color: '#FFD02F', textColor: 'text-black', icon: miroIcon, level: 5,
+    desc: { FR: 'Workshop & Discovery', EN: 'Workshop & Discovery' },
+    detail: { FR: 'Animation de workshops produit, cadrage de problématiques, Design Sprints et sessions de co-construction avec les équipes métiers et techniques.', EN: 'Facilitating product workshops, problem framing, Design Sprints and co-creation sessions with business and technical teams.' }
+  },
+  { name: 'Replit', color: '#F26207', textColor: 'text-white', icon: replitIcon, level: 4,
+    desc: { FR: 'Prototypage rapide', EN: 'Rapid prototyping' },
+    detail: { FR: 'Prototypage rapide de MVPs et proof-of-concepts. Développement d\'outils internes et d\'assistants IA pour accélérer les cycles discovery.', EN: 'Rapid prototyping of MVPs and proof-of-concepts. Building internal tools and AI assistants to accelerate discovery cycles.' }
+  },
+  { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_software.svg', level: 5, neutralLogoBtn: true,
+    desc: { FR: 'Backlog & Agile Ops', EN: 'Backlog & Agile Ops' },
+    detail: { FR: 'Gestion du backlog produit, pilotage des sprints et suivi delivery. Structuration des epics, stories et critères d\'acceptance.', EN: 'Product backlog management, sprint planning and delivery tracking. Structuring epics, stories and acceptance criteria.' }
+  },
+  { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_discovery.svg', level: 4, neutralLogoBtn: true,
+    desc: { FR: 'Discovery & Priorisation', EN: 'Discovery & Prioritisation' },
+    detail: { FR: 'Collecte et priorisation des opportunités produit. Scoring d\'impact, gestion des insights utilisateurs et alignement stratégique.', EN: 'Collecting and prioritizing product opportunities. Impact scoring, user insights management and strategic alignment.' }
+  },
+  { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 4, neutralLogoBtn: true,
+    desc: { FR: 'Observabilité', EN: 'Observability' },
+    detail: { FR: 'Monitoring de la performance produit, suivi des métriques d\'usage en temps réel et mise en place de dashboards d\'observabilité data.', EN: 'Product performance monitoring, real-time usage metrics tracking and setting up data observability dashboards.' }
+  },
+  { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: '', iconSrc: 'Images/notion_logo.png', level: 5,
+    desc: { FR: 'Docs & suivi produit', EN: 'Docs & product tracking' },
+    detail: { FR: 'Documentation produit, roadmaps, specs et bases de connaissance partagées avec les équipes.', EN: 'Product documentation, roadmaps, specs and shared knowledge bases with teams.' }
+  },
+  // Logos PNG dans Images/ (même schéma que Jira / Notion pour un rendu lisible dans le hub)
+  { name: 'Obsidian', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'Images/obsidian-icon.png', level: 4, neutralLogoBtn: true,
+    desc: { FR: 'Notes & graphe de connaissance', EN: 'Notes & knowledge graph' },
+    detail: { FR: 'Prise de notes structurée, liens entre idées et documentation personnelle ou d’équipe en Markdown.', EN: 'Structured note-taking, linking ideas, and personal or team documentation in Markdown.' }
+  },
+  { name: 'Cursor', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'Images/cursor_logo.png', level: 3, neutralLogoBtn: true,
+    desc: { FR: 'IDE & assistance IA', EN: 'IDE & AI assistance' },
+    detail: { FR: 'Développement et prototypage avec un éditeur centré sur l’IA pour accélérer itérations et refactors.', EN: 'Development and prototyping with an AI-first editor to speed up iterations and refactors.' }
+  },
+];
+
 export const experiences = [
     {
       id: 0,
@@ -948,36 +988,6 @@ export const experiences = [
           techStack: ['LTE / VoLTE', 'QA / E2E', 'Télécom', 'Certification'],
         },
       ],
-    },
-  ];
-
-  // Icônes SVG des outils (reprennent la maquette React)
-  const miroIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.462c-3.564 0-6.462-2.898-6.462-6.462S8.436 5.538 12 5.538s6.462 2.898 6.462 6.462-2.898 6.462-6.462 6.462zM9.231 9.231h5.538v5.538H9.231V9.231z" /></svg>`;
-  const replitIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M2 10h10v4H2v-4zm5-5h10v4H7V5zm5 10h10v4H12v-4z" /></svg>`;
-export const tools = [
-    { name: 'Miro', color: '#FFD02F', textColor: 'text-black', icon: miroIcon, level: 5,
-      desc: { FR: 'Workshop & Discovery', EN: 'Workshop & Discovery' },
-      detail: { FR: 'Animation de workshops produit, cadrage de problématiques, Design Sprints et sessions de co-construction avec les équipes métiers et techniques.', EN: 'Facilitating product workshops, problem framing, Design Sprints and co-creation sessions with business and technical teams.' }
-    },
-    { name: 'Replit', color: '#F26207', textColor: 'text-white', icon: replitIcon, level: 4,
-      desc: { FR: 'Prototypage rapide', EN: 'Rapid prototyping' },
-      detail: { FR: 'Prototypage rapide de MVPs et proof-of-concepts. Développement d\'outils internes et d\'assistants IA pour accélérer les cycles discovery.', EN: 'Rapid prototyping of MVPs and proof-of-concepts. Building internal tools and AI assistants to accelerate discovery cycles.' }
-    },
-    { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_software.svg', level: 5, neutralLogoBtn: true,
-      desc: { FR: 'Backlog & Agile Ops', EN: 'Backlog & Agile Ops' },
-      detail: { FR: 'Gestion du backlog produit, pilotage des sprints et suivi delivery. Structuration des epics, stories et critères d\'acceptance.', EN: 'Product backlog management, sprint planning and delivery tracking. Structuring epics, stories and acceptance criteria.' }
-    },
-    { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_discovery.svg', level: 4, neutralLogoBtn: true,
-      desc: { FR: 'Discovery & Priorisation', EN: 'Discovery & Prioritisation' },
-      detail: { FR: 'Collecte et priorisation des opportunités produit. Scoring d\'impact, gestion des insights utilisateurs et alignement stratégique.', EN: 'Collecting and prioritizing product opportunities. Impact scoring, user insights management and strategic alignment.' }
-    },
-    { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 4, neutralLogoBtn: true,
-      desc: { FR: 'Observabilité', EN: 'Observability' },
-      detail: { FR: 'Monitoring de la performance produit, suivi des métriques d\'usage en temps réel et mise en place de dashboards d\'observabilité data.', EN: 'Product performance monitoring, real-time usage metrics tracking and setting up data observability dashboards.' }
-    },
-    { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: '', iconSrc: 'Images/notion_logo.png', level: 5,
-      desc: { FR: 'Docs & suivi produit', EN: 'Docs & product tracking' },
-      detail: { FR: 'Documentation produit, roadmaps, specs et bases de connaissance partagées avec les équipes.', EN: 'Product documentation, roadmaps, specs and shared knowledge bases with teams.' }
     },
   ];
 
