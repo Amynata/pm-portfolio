@@ -1172,3 +1172,152 @@ button.portfolio-pillar-card.hub-pillar-card {
   }
 }
 
+/* Garde-fous responsive : évite les débordements horizontaux sur petits écrans */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Permet de couper les textes très longs (labels dynamiques, tags, etc.) */
+p,
+h1,
+h2,
+h3,
+h4,
+span,
+button,
+a {
+  overflow-wrap: anywhere;
+}
+
+/* Ajustements smartphone (<= 640px) pour conserver une UI lisible */
+@media (max-width: 640px) {
+  .site-main {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .about-hero {
+    gap: 1.75rem;
+  }
+
+  /* Titre hero plus fluide pour les mobiles étroits */
+  #hero-vision {
+    font-size: clamp(1.95rem, 9vw, 2.75rem);
+    line-height: 0.96;
+  }
+
+  .about-hero h2 {
+    font-size: clamp(1.45rem, 7.3vw, 2rem);
+    line-height: 1.12;
+  }
+
+  .hero-cta-dash {
+    width: 100%;
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
+  /* Les boutons du hub passent en grille 2 colonnes pour éviter le serrage */
+  .hub-visual-group .hub-side-btn {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .hub-visual-group .hub-pillars {
+    gap: 0.75rem;
+  }
+
+  .hub-visual-group .hub-pillar-card {
+    min-width: 0;
+    width: calc(50% - 0.375rem);
+  }
+
+  .hub-side-btn-textblock > span:first-child {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hub-side-btn-textblock > span:last-child {
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* Lisibilité minimale du hub sur écran étroit */
+  .hub-notion-line-text {
+    font-size: 0.5rem;
+  }
+
+  .hub-cert-badge-label {
+    font-size: 0.5rem;
+  }
+
+  .hub-pillar-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* Les onglets de la modale automation restent utilisables même en très petit viewport */
+  #automation-card-modal .flex.flex-row.flex-nowrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.4rem;
+  }
+
+  #automation-card-modal .automation-project-tab {
+    flex: 0 0 auto;
+    min-width: 11.25rem;
+    scroll-snap-align: start;
+  }
+
+  /* Onglets "agents IA" : autorise le scroll horizontal au lieu de déborder */
+  #automation-card-modal .group\/agents > .inline-flex {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  #automation-card-modal .group\/agents > .inline-flex > button {
+    flex: 0 0 auto;
+  }
+
+  /* Modales : rayon réduit pour ne pas rogner le contenu sur mobile */
+  #exp-modal-content,
+  #cv-modal-content,
+  #contact-modal-content,
+  #formation-modal-content {
+    border-radius: 1.25rem;
+  }
+
+  /* CV mobile : hauteur du PDF maîtrisée pour éviter une double zone de scroll trop lourde */
+  .cv-preview-wrap {
+    min-height: 56vh;
+  }
+
+  .cv-preview-iframe {
+    height: 56vh;
+  }
+}
+
+/* CV desktop/tablette : conserve une zone de lecture confortable */
+.cv-preview-wrap {
+  min-height: 70vh;
+}
+
+.cv-preview-iframe {
+  height: 70vh;
+}
+

@@ -1,0 +1,26 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Il s'agit du site web qui met en avant mon expérience en tant que Product Manager",
+  "main": "main.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:responsive": "playwright test tests/responsive.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amynata/pm-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Amynata/pm-portfolio/issues"
+  },
+  "homepage": "https://github.com/Amynata/pm-portfolio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

@@ -2098,8 +2098,9 @@
     if (!body) return;
     var pdfPath = 'Images/_Aminata_Dia_Product_Manager_Resume_2025 (2).pdf';
     body.innerHTML =
-      '<div class="w-full" style="min-height:70vh">' +
-      '<iframe src="' + pdfPath + '" class="w-full rounded-2xl border border-slate-100" style="height:70vh" frameborder="0"></iframe>' +
+      // Classes dédiées pour adapter finement la hauteur du PDF selon le viewport.
+      '<div class="cv-preview-wrap w-full">' +
+      '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +
       '</div>' +
       '<div class="flex justify-center mt-6">' +
       '<a href="' + pdfPath + '" download class="inline-flex items-center gap-2 bg-slate-900 text-white font-black uppercase tracking-widest text-xs px-6 py-3 rounded-2xl shadow-xl hover:bg-[#818CF8] transition-all">' +
@@ -2309,8 +2310,9 @@
       [
         ['mobile-nav-lang', 'btn-lang'],
         ['mobile-nav-formation', 'btn-formation'],
-        ['mobile-nav-projects', 'btn-projects'],
-        ['mobile-nav-cv', 'btn-cv'],
+        // Sur cette variante, les CTA Hero sont la source la plus fiable pour ouvrir Projets/CV.
+        ['mobile-nav-projects', 'btn-hero-projects'],
+        ['mobile-nav-cv', 'btn-hero-cv'],
         ['mobile-nav-contact', 'btn-contact'],
       ].forEach(function (pair) {
         var m = document.getElementById(pair[0]);
