@@ -12,31 +12,6 @@ Le site a été développé en **environ une semaine** (conception + intégratio
 
 ---
 
-## Lancer le projet
-
-Le site est servi comme une **page statique** (HTML/CSS/JS). Ouvre `index.html` dans un navigateur ou utilise un serveur local de ton choix (par ex. extension Live Server dans l’éditeur).
-
-Pour les **tests Playwright** (optionnel) :
-
-```bash
-npm install
-npm test
-```
-
-Mode UI avec relance à la sauvegarde :
-
-```bash
-npm run test:watch
-```
-
-Tests responsive ciblés :
-
-```bash
-npm run test:responsive
-```
-
----
-
 ## Structure fonctionnelle du JavaScript
 
 Le code JavaScript est découpé en plusieurs blocs, chacun avec une responsabilité claire.
