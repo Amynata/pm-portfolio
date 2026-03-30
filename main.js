@@ -1984,13 +1984,61 @@
   }
 
   function applyTranslations() {
-    document.getElementById('header-name').textContent = t('name');
-    document.getElementById('lang-label').textContent = lang;
+    // Helpers locaux pour centraliser les écritures DOM et alléger la lecture de la traduction.
+    function setTextIfPresent(id, text) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+    function setAttrIfPresent(id, attr, value) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute(attr, value);
+    }
+    function setTextEntries(entries) {
+      entries.forEach(function (entry) {
+        setTextIfPresent(entry[0], entry[1]);
+      });
+    }
+
+    setTextIfPresent('header-name', t('name'));
+    setTextIfPresent('lang-label', lang);
     var mobileLangEl = document.getElementById('mobile-lang-label');
     if (mobileLangEl) mobileLangEl.textContent = lang;
-    document.getElementById('hero-vision').textContent = t('vision');
-    document.getElementById('hero-driven').textContent = t('drivenBy');
-    document.getElementById('hero-impact').textContent = t('impact');
+    setTextEntries([
+      ['hero-vision', t('vision')],
+      ['hero-driven', t('drivenBy')],
+      ['hero-impact', t('impact')],
+      ['hero-badge', t('heroBadge')],
+      ['hub-btn-tools-label', t('tools')],
+      ['hub-btn-tools-sub', t('hubBtnToolsSub')],
+      ['hub-btn-certs-label', t('hubCertifsShort')],
+      ['hub-btn-certs-sub', t('hubBtnCertsSub')],
+      ['hub-btn-notion-label', t('hubNotionShort')],
+      ['hub-btn-notion-sub', t('hubBtnNotionSub')],
+      ['hub-notion-heading', t('hubNotionHeading')],
+      ['hub-notion-item-1', t('hubNotionItem1')],
+      ['hub-notion-item-2', t('hubNotionItem2')],
+      ['hub-notion-item-3', t('hubNotionItem3')],
+      ['btn-hero-projects', t('heroCtaProjects')],
+      ['btn-hero-cv', t('heroCtaCv')],
+      ['hub-tools-heading', t('hubToolsHeading')],
+      ['btn-formation', t('about')],
+      ['mobile-nav-formation', t('about')],
+      ['btn-projects', t('projects')],
+      ['mobile-nav-projects', t('projects')],
+      ['mobile-nav-cv', 'CV'],
+      ['mobile-nav-contact', t('contactMe')],
+      ['cv-modal-title', t('cvTitle')],
+      ['contact-modal-title', t('contactMe')],
+      ['contact-modal-subtitle', t('directSend')],
+      ['contact-label-phone', t('contactPhoneLabel')],
+      ['formation-modal-title', t('about')],
+      ['formation-modal-subtitle', t('formationSubtitle')],
+      ['automation-modal-heading', t('projects')],
+      ['automation-modal-tagline', t('automationModalSub')],
+      ['automation-tab-workflow-desc', t('automationTabWorkflowDesc')],
+      ['automation-tab-pos-desc', t('automationTabPosDesc')],
+      ['automation-tab-portfolio-desc', t('automationTabPortfolioDesc')],
+    ]);
     var descIds = ['desc1','desc2','desc3','desc4','desc5','desc6','desc7','desc8','desc9','desc10','desc11','desc12','desc13'];
     descIds.forEach(function (id) {
       var el = document.getElementById(id);
@@ -2000,77 +2048,22 @@
     if (clickHintEl) {
       clickHintEl.textContent = t('clickToDiscover');
     }
-    var heroBadgeEl = document.getElementById('hero-badge');
-    if (heroBadgeEl) heroBadgeEl.textContent = t('heroBadge');
-    var hubToolsLbl = document.getElementById('hub-btn-tools-label');
-    if (hubToolsLbl) hubToolsLbl.textContent = t('tools');
-    var hubToolsSub = document.getElementById('hub-btn-tools-sub');
-    if (hubToolsSub) hubToolsSub.textContent = t('hubBtnToolsSub');
-    var hubCertsLbl = document.getElementById('hub-btn-certs-label');
-    if (hubCertsLbl) hubCertsLbl.textContent = t('hubCertifsShort');
-    var hubCertsSub = document.getElementById('hub-btn-certs-sub');
-    if (hubCertsSub) hubCertsSub.textContent = t('hubBtnCertsSub');
-    var hubNotionLbl = document.getElementById('hub-btn-notion-label');
-    if (hubNotionLbl) hubNotionLbl.textContent = t('hubNotionShort');
-    var hubNotionSub = document.getElementById('hub-btn-notion-sub');
-    if (hubNotionSub) hubNotionSub.textContent = t('hubBtnNotionSub');
-    var hubNotionHeadingEl = document.getElementById('hub-notion-heading');
-    if (hubNotionHeadingEl) hubNotionHeadingEl.textContent = t('hubNotionHeading');
-    var hubNi1 = document.getElementById('hub-notion-item-1');
-    if (hubNi1) hubNi1.textContent = t('hubNotionItem1');
-    var hubNi2 = document.getElementById('hub-notion-item-2');
-    if (hubNi2) hubNi2.textContent = t('hubNotionItem2');
-    var hubNi3 = document.getElementById('hub-notion-item-3');
-    if (hubNi3) hubNi3.textContent = t('hubNotionItem3');
-    var heroProjBtn = document.getElementById('btn-hero-projects');
-    if (heroProjBtn) heroProjBtn.textContent = t('heroCtaProjects');
-    var heroCvBtn = document.getElementById('btn-hero-cv');
-    if (heroCvBtn) heroCvBtn.textContent = t('heroCtaCv');
     var hubBack = document.getElementById('hub-back-btn');
     if (hubBack) {
-      hubBack.setAttribute('aria-label', t('hubBackProfile'));
-      var hubBackLbl = document.getElementById('hub-back-btn-label');
-      if (hubBackLbl) hubBackLbl.textContent = t('hubBackShort');
+      setAttrIfPresent('hub-back-btn', 'aria-label', t('hubBackProfile'));
+      setTextIfPresent('hub-back-btn-label', t('hubBackShort'));
     }
     var photoProjBtn = document.getElementById('btn-hub-photo-projects');
     if (photoProjBtn) {
-      photoProjBtn.setAttribute('aria-label', t('personalProjectsAria'));
-      photoProjBtn.setAttribute('title', t('personalProjectsHover'));
+      setAttrIfPresent('btn-hub-photo-projects', 'aria-label', t('personalProjectsAria'));
+      setAttrIfPresent('btn-hub-photo-projects', 'title', t('personalProjectsHover'));
     }
-    var hubToolsH = document.getElementById('hub-tools-heading');
-    if (hubToolsH) hubToolsH.textContent = t('hubToolsHeading');
-    var navFormation = document.getElementById('btn-formation');
-    if (navFormation) navFormation.textContent = t('about');
-    var mobileFormation = document.getElementById('mobile-nav-formation');
-    if (mobileFormation) mobileFormation.textContent = t('about');
-    var navProjects = document.getElementById('btn-projects');
-    if (navProjects) navProjects.textContent = t('projects');
-    var mobileProjects = document.getElementById('mobile-nav-projects');
-    if (mobileProjects) mobileProjects.textContent = t('projects');
-    var mobileCv = document.getElementById('mobile-nav-cv');
-    if (mobileCv) mobileCv.textContent = 'CV';
-    var mobileContact = document.getElementById('mobile-nav-contact');
-    if (mobileContact) mobileContact.textContent = t('contactMe');
-    document.getElementById('cv-modal-title').textContent = t('cvTitle');
-    document.getElementById('contact-modal-title').textContent = t('contactMe');
-    var sub = document.getElementById('contact-modal-subtitle');
-    if (sub) sub.textContent = t('directSend');
-    var contactPhoneLbl = document.getElementById('contact-label-phone');
-    if (contactPhoneLbl) contactPhoneLbl.textContent = t('contactPhoneLabel');
     document.querySelectorAll('.contact-copy-btn').forEach(function (btn) {
       btn.setAttribute('title', t('contactCopyTitle'));
     });
     syncPortfolioLangBlocks();
     syncAutomationModalLang();
-    var formationTitleEl = document.getElementById('formation-modal-title');
-    if (formationTitleEl) formationTitleEl.textContent = t('about');
-    var formationSubEl = document.getElementById('formation-modal-subtitle');
-    if (formationSubEl) formationSubEl.textContent = t('formationSubtitle');
     renderFormationModal();
-    var autoHeading = document.getElementById('automation-modal-heading');
-    if (autoHeading) autoHeading.textContent = t('projects');
-    var autoTag = document.getElementById('automation-modal-tagline');
-    if (autoTag) autoTag.textContent = t('automationModalSub');
     var wfH3 = document.getElementById('automation-tab-workflow-h3');
     if (wfH3) {
       if (lang === 'FR') {
@@ -2081,12 +2074,6 @@
           '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automated</span> Workflow';
       }
     }
-    var wfTabDesc = document.getElementById('automation-tab-workflow-desc');
-    if (wfTabDesc) wfTabDesc.textContent = t('automationTabWorkflowDesc');
-    var posTabDesc = document.getElementById('automation-tab-pos-desc');
-    if (posTabDesc) posTabDesc.textContent = t('automationTabPosDesc');
-    var portfolioTabDesc = document.getElementById('automation-tab-portfolio-desc');
-    if (portfolioTabDesc) portfolioTabDesc.textContent = t('automationTabPortfolioDesc');
     var visAutoRoot = getVisibleAutomationRoot();
     if (visAutoRoot) setActiveAutomationAgent(lastAutomationAgentId, visAutoRoot);
     renderCVModalBody();
@@ -2109,6 +2096,28 @@
   }
 
   function init() {
+    // Utilitaire unique pour garantir la même mécanique d'ouverture/fermeture des modales.
+    function setModalVisibility(modalId, isOpen) {
+      var modal = document.getElementById(modalId);
+      if (!modal) return;
+      modal.classList.toggle('invisible', !isOpen);
+      modal.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    }
+    function bindModalOpen(triggerId, modalId) {
+      var trigger = document.getElementById(triggerId);
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        setModalVisibility(modalId, true);
+      });
+    }
+    function bindModalClose(triggerId, modalId) {
+      var trigger = document.getElementById(triggerId);
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        setModalVisibility(modalId, false);
+      });
+    }
+
     applyTranslations();
     renderExperienceTimeline();
     renderTools();
@@ -2129,48 +2138,18 @@
     document.getElementById('exp-modal-close').addEventListener('click', closeExpModal);
     document.getElementById('exp-modal-backdrop').addEventListener('click', closeExpModal);
 
-    // Le lien CV peut être absent du header selon la variante de navigation.
-    var btnCv = document.getElementById('btn-cv');
-    if (btnCv) {
-      btnCv.addEventListener('click', function () {
-        document.getElementById('cv-modal').classList.remove('invisible');
-        document.getElementById('cv-modal').setAttribute('aria-hidden', 'false');
-      });
-    }
-    document.getElementById('cv-modal-close').addEventListener('click', function () {
-      document.getElementById('cv-modal').classList.add('invisible');
-      document.getElementById('cv-modal').setAttribute('aria-hidden', 'true');
-    });
-    document.getElementById('cv-modal-backdrop').addEventListener('click', function () {
-      document.getElementById('cv-modal').classList.add('invisible');
-      document.getElementById('cv-modal').setAttribute('aria-hidden', 'true');
-    });
+    // Factorisation des modales pour retirer la duplication sans changer les IDs déjà en place.
+    bindModalOpen('btn-cv', 'cv-modal');
+    bindModalClose('cv-modal-close', 'cv-modal');
+    bindModalClose('cv-modal-backdrop', 'cv-modal');
 
-    document.getElementById('btn-formation').addEventListener('click', function () {
-      document.getElementById('formation-modal').classList.remove('invisible');
-      document.getElementById('formation-modal').setAttribute('aria-hidden', 'false');
-    });
-    document.getElementById('formation-modal-close').addEventListener('click', function () {
-      document.getElementById('formation-modal').classList.add('invisible');
-      document.getElementById('formation-modal').setAttribute('aria-hidden', 'true');
-    });
-    document.getElementById('formation-modal-backdrop').addEventListener('click', function () {
-      document.getElementById('formation-modal').classList.add('invisible');
-      document.getElementById('formation-modal').setAttribute('aria-hidden', 'true');
-    });
+    bindModalOpen('btn-formation', 'formation-modal');
+    bindModalClose('formation-modal-close', 'formation-modal');
+    bindModalClose('formation-modal-backdrop', 'formation-modal');
 
-    document.getElementById('btn-contact').addEventListener('click', function () {
-      document.getElementById('contact-modal').classList.remove('invisible');
-      document.getElementById('contact-modal').setAttribute('aria-hidden', 'false');
-    });
-    document.getElementById('contact-modal-close').addEventListener('click', function () {
-      document.getElementById('contact-modal').classList.add('invisible');
-      document.getElementById('contact-modal').setAttribute('aria-hidden', 'true');
-    });
-    document.getElementById('contact-modal-backdrop').addEventListener('click', function () {
-      document.getElementById('contact-modal').classList.add('invisible');
-      document.getElementById('contact-modal').setAttribute('aria-hidden', 'true');
-    });
+    bindModalOpen('btn-contact', 'contact-modal');
+    bindModalClose('contact-modal-close', 'contact-modal');
+    bindModalClose('contact-modal-backdrop', 'contact-modal');
 
     var headerProjectsBtn = document.getElementById('btn-projects');
     var heroProjectsBtn = document.getElementById('btn-hero-projects');
@@ -2190,8 +2169,6 @@
     wireProjectsOpener(headerProjectsBtn);
     wireProjectsOpener(heroProjectsBtn);
 
-    var hubPhotoLayer = document.getElementById('hub-layer-photo');
-    var hubBrainBtn = document.getElementById('btn-hub-photo-projects');
     var hubCircle = document.getElementById('hub-circle');
 
     if (!hubCircle) return;
@@ -2203,31 +2180,21 @@
     var heroCvOpen = document.getElementById('btn-hero-cv');
     if (heroCvOpen) {
       heroCvOpen.addEventListener('click', function () {
-        var cv = document.getElementById('cv-modal');
-        if (!cv) return;
-        cv.classList.remove('invisible');
-        cv.setAttribute('aria-hidden', 'false');
+        setModalVisibility('cv-modal', true);
       });
     }
 
-    var hubBtnTools = document.getElementById('hub-btn-tools');
-    if (hubBtnTools) {
-      hubBtnTools.addEventListener('click', function () {
-        setHubView(hubView === 'tools' ? 'photo' : 'tools');
+    // Même comportement pour les 3 boutons hub, centralisé pour limiter les divergences futures.
+    function bindHubToggle(buttonId, targetView) {
+      var btn = document.getElementById(buttonId);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        setHubView(hubView === targetView ? 'photo' : targetView);
       });
     }
-    var hubBtnCerts = document.getElementById('hub-btn-certs');
-    if (hubBtnCerts) {
-      hubBtnCerts.addEventListener('click', function () {
-        setHubView(hubView === 'certs' ? 'photo' : 'certs');
-      });
-    }
-    var hubBtnNotion = document.getElementById('hub-btn-notion');
-    if (hubBtnNotion) {
-      hubBtnNotion.addEventListener('click', function () {
-        setHubView(hubView === 'notion' ? 'photo' : 'notion');
-      });
-    }
+    bindHubToggle('hub-btn-tools', 'tools');
+    bindHubToggle('hub-btn-certs', 'certs');
+    bindHubToggle('hub-btn-notion', 'notion');
     var hubBackBtn = document.getElementById('hub-back-btn');
     if (hubBackBtn) {
       // Empêche le clic sur le bouton retour de remonter jusqu'au hubCircle (qui ouvre la modale "projets")
