@@ -1,3 +1,13 @@
+import {
+  setModalVisibility,
+  bindModalOpen,
+  bindModalClose,
+} from './src/js/utils/dom.js';
+import { bindHubToggle } from './src/js/features/hub.js';
+import { wireMobileNav } from './src/js/features/mobile-nav.js';
+import { wireAutomationInteractions } from './src/js/features/automation.js';
+import { applyTranslations as applyAppTranslations } from './src/js/i18n.js';
+
 (function () {
   'use strict';
 
@@ -1006,7 +1016,6 @@
   let activeTab = 'mission';
   let activeProjIdx = 0;
   let activeProjectPage = 0;
-  let hasInteracted = false;
   let lastAutomationAgentId = 'pm-secretary';
   /** @type {'photo' | 'tools' | 'certs'} */
   let hubView = 'photo';
@@ -1091,7 +1100,6 @@
         }
       });
       btn.addEventListener('click', function () {
-        hasInteracted = true;
         var clickHintEl = document.getElementById('click-hint');
         if (clickHintEl) {
           clickHintEl.classList.add('opacity-0', 'pointer-events-none');
@@ -1249,12 +1257,8 @@
       back.classList.toggle('hidden', showPhoto);
       back.setAttribute('aria-hidden', showPhoto ? 'true' : 'false');
     }
-    if (!showTools) {
-      clearHubToolsUI();
-    }
-    if (showTools) {
-      clearHubToolsUI();
-    }
+    // La vue outils est re-rendue dans les mêmes conditions ; un seul clear suffit.
+    clearHubToolsUI();
 
     function hidePortalSoon() {
       if (!portal) return;
@@ -1848,18 +1852,18 @@
   function openExpModal() {
     renderExpModalBody();
     const modal = document.getElementById('exp-modal');
-    modal.classList.remove('invisible');
+    if (!modal) return;
+    setModalVisibility('exp-modal', true);
     modal.classList.add('visible');
-    modal.setAttribute('aria-hidden', 'false');
   }
 
   function closeExpModal() {
     const modal = document.getElementById('exp-modal');
+    if (!modal) return;
     // modal.classList.add('closing');
     setTimeout(function () {
       modal.classList.remove('visible');
-      modal.classList.add('invisible');
-      modal.setAttribute('aria-hidden', 'true');
+      setModalVisibility('exp-modal', false);
     }, 0);
   }
 
@@ -1984,99 +1988,17 @@
   }
 
   function applyTranslations() {
-    // Helpers locaux pour centraliser les écritures DOM et alléger la lecture de la traduction.
-    function setTextIfPresent(id, text) {
-      var el = document.getElementById(id);
-      if (el) el.textContent = text;
-    }
-    function setAttrIfPresent(id, attr, value) {
-      var el = document.getElementById(id);
-      if (el) el.setAttribute(attr, value);
-    }
-    function setTextEntries(entries) {
-      entries.forEach(function (entry) {
-        setTextIfPresent(entry[0], entry[1]);
-      });
-    }
-
-    setTextIfPresent('header-name', t('name'));
-    setTextIfPresent('lang-label', lang);
-    var mobileLangEl = document.getElementById('mobile-lang-label');
-    if (mobileLangEl) mobileLangEl.textContent = lang;
-    setTextEntries([
-      ['hero-vision', t('vision')],
-      ['hero-driven', t('drivenBy')],
-      ['hero-impact', t('impact')],
-      ['hero-badge', t('heroBadge')],
-      ['hub-btn-tools-label', t('tools')],
-      ['hub-btn-tools-sub', t('hubBtnToolsSub')],
-      ['hub-btn-certs-label', t('hubCertifsShort')],
-      ['hub-btn-certs-sub', t('hubBtnCertsSub')],
-      ['hub-btn-notion-label', t('hubNotionShort')],
-      ['hub-btn-notion-sub', t('hubBtnNotionSub')],
-      ['hub-notion-heading', t('hubNotionHeading')],
-      ['hub-notion-item-1', t('hubNotionItem1')],
-      ['hub-notion-item-2', t('hubNotionItem2')],
-      ['hub-notion-item-3', t('hubNotionItem3')],
-      ['btn-hero-projects', t('heroCtaProjects')],
-      ['btn-hero-cv', t('heroCtaCv')],
-      ['hub-tools-heading', t('hubToolsHeading')],
-      ['btn-formation', t('about')],
-      ['mobile-nav-formation', t('about')],
-      ['btn-projects', t('projects')],
-      ['mobile-nav-projects', t('projects')],
-      ['mobile-nav-cv', 'CV'],
-      ['mobile-nav-contact', t('contactMe')],
-      ['cv-modal-title', t('cvTitle')],
-      ['contact-modal-title', t('contactMe')],
-      ['contact-modal-subtitle', t('directSend')],
-      ['contact-label-phone', t('contactPhoneLabel')],
-      ['formation-modal-title', t('about')],
-      ['formation-modal-subtitle', t('formationSubtitle')],
-      ['automation-modal-heading', t('projects')],
-      ['automation-modal-tagline', t('automationModalSub')],
-      ['automation-tab-workflow-desc', t('automationTabWorkflowDesc')],
-      ['automation-tab-pos-desc', t('automationTabPosDesc')],
-      ['automation-tab-portfolio-desc', t('automationTabPortfolioDesc')],
-    ]);
-    var descIds = ['desc1','desc2','desc3','desc4','desc5','desc6','desc7','desc8','desc9','desc10','desc11','desc12','desc13'];
-    descIds.forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.textContent = t(id);
+    applyAppTranslations({
+      t: t,
+      lang: lang,
+      syncPortfolioLangBlocks: syncPortfolioLangBlocks,
+      syncAutomationModalLang: syncAutomationModalLang,
+      renderFormationModal: renderFormationModal,
+      getVisibleAutomationRoot: getVisibleAutomationRoot,
+      setActiveAutomationAgent: setActiveAutomationAgent,
+      getLastAutomationAgentId: function () { return lastAutomationAgentId; },
+      renderCVModalBody: renderCVModalBody,
     });
-    var clickHintEl = document.getElementById('click-hint');
-    if (clickHintEl) {
-      clickHintEl.textContent = t('clickToDiscover');
-    }
-    var hubBack = document.getElementById('hub-back-btn');
-    if (hubBack) {
-      setAttrIfPresent('hub-back-btn', 'aria-label', t('hubBackProfile'));
-      setTextIfPresent('hub-back-btn-label', t('hubBackShort'));
-    }
-    var photoProjBtn = document.getElementById('btn-hub-photo-projects');
-    if (photoProjBtn) {
-      setAttrIfPresent('btn-hub-photo-projects', 'aria-label', t('personalProjectsAria'));
-      setAttrIfPresent('btn-hub-photo-projects', 'title', t('personalProjectsHover'));
-    }
-    document.querySelectorAll('.contact-copy-btn').forEach(function (btn) {
-      btn.setAttribute('title', t('contactCopyTitle'));
-    });
-    syncPortfolioLangBlocks();
-    syncAutomationModalLang();
-    renderFormationModal();
-    var wfH3 = document.getElementById('automation-tab-workflow-h3');
-    if (wfH3) {
-      if (lang === 'FR') {
-        wfH3.innerHTML =
-          'Workflow <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automatisé</span>';
-      } else {
-        wfH3.innerHTML =
-          '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automated</span> Workflow';
-      }
-    }
-    var visAutoRoot = getVisibleAutomationRoot();
-    if (visAutoRoot) setActiveAutomationAgent(lastAutomationAgentId, visAutoRoot);
-    renderCVModalBody();
   }
 
   function renderCVModalBody() {
@@ -2096,28 +2018,6 @@
   }
 
   function init() {
-    // Utilitaire unique pour garantir la même mécanique d'ouverture/fermeture des modales.
-    function setModalVisibility(modalId, isOpen) {
-      var modal = document.getElementById(modalId);
-      if (!modal) return;
-      modal.classList.toggle('invisible', !isOpen);
-      modal.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    }
-    function bindModalOpen(triggerId, modalId) {
-      var trigger = document.getElementById(triggerId);
-      if (!trigger) return;
-      trigger.addEventListener('click', function () {
-        setModalVisibility(modalId, true);
-      });
-    }
-    function bindModalClose(triggerId, modalId) {
-      var trigger = document.getElementById(triggerId);
-      if (!trigger) return;
-      trigger.addEventListener('click', function () {
-        setModalVisibility(modalId, false);
-      });
-    }
-
     applyTranslations();
     renderExperienceTimeline();
     renderTools();
@@ -2154,10 +2054,7 @@
     var headerProjectsBtn = document.getElementById('btn-projects');
     var heroProjectsBtn = document.getElementById('btn-hero-projects');
     function openMesProjetsModal(projectId) {
-      var modal = document.getElementById('automation-card-modal');
-      if (!modal) return;
-      modal.classList.remove('invisible');
-      modal.setAttribute('aria-hidden', 'false');
+      setModalVisibility('automation-card-modal', true);
       setActiveAutomationProject(projectId || 'workflow');
     }
     function wireProjectsOpener(btn) {
@@ -2184,17 +2081,10 @@
       });
     }
 
-    // Même comportement pour les 3 boutons hub, centralisé pour limiter les divergences futures.
-    function bindHubToggle(buttonId, targetView) {
-      var btn = document.getElementById(buttonId);
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        setHubView(hubView === targetView ? 'photo' : targetView);
-      });
-    }
-    bindHubToggle('hub-btn-tools', 'tools');
-    bindHubToggle('hub-btn-certs', 'certs');
-    bindHubToggle('hub-btn-notion', 'notion');
+    // Même comportement pour les 3 boutons hub, centralisé dans un module dédié.
+    bindHubToggle('hub-btn-tools', 'tools', function () { return hubView; }, setHubView);
+    bindHubToggle('hub-btn-certs', 'certs', function () { return hubView; }, setHubView);
+    bindHubToggle('hub-btn-notion', 'notion', function () { return hubView; }, setHubView);
     var hubBackBtn = document.getElementById('hub-back-btn');
     if (hubBackBtn) {
       // Empêche le clic sur le bouton retour de remonter jusqu'au hubCircle (qui ouvre la modale "projets")
@@ -2203,99 +2093,18 @@
         setHubView('photo');
       });
     }
-    var autoClose = document.getElementById('automation-card-close');
-    var autoBackdrop = document.getElementById('automation-card-backdrop');
-    function closeAutomationCard() {
-      var modal = document.getElementById('automation-card-modal');
-      if (!modal) return;
-      modal.classList.add('invisible');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-    if (autoClose) autoClose.addEventListener('click', closeAutomationCard);
-    if (autoBackdrop) autoBackdrop.addEventListener('click', closeAutomationCard);
+    wireAutomationInteractions({
+      getAutomationModal: getAutomationModal,
+      getVisibleAutomationRoot: getVisibleAutomationRoot,
+      setActiveAutomationAgent: setActiveAutomationAgent,
+      setActiveAutomationProject: setActiveAutomationProject,
+      getLastAgentId: function () { return lastAutomationAgentId; },
+    });
 
-    var autoModalNode = getAutomationModal();
-    if (autoModalNode) {
-      autoModalNode.addEventListener('click', function (e) {
-        var agentBtn = e.target.closest('[data-agent-tab]');
-        if (!agentBtn || !autoModalNode.contains(agentBtn)) return;
-        var root = agentBtn.closest('.automation-modal-lang-root');
-        if (!root || root.classList.contains('hidden')) return;
-        var agentId = agentBtn.getAttribute('data-agent-tab');
-        if (agentId) setActiveAutomationAgent(agentId, root);
-      });
-    }
-
-    var automationProjectTabs = document.querySelectorAll('[data-automation-project-tab]');
-    if (automationProjectTabs.length) {
-      automationProjectTabs.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var projectId = btn.getAttribute('data-automation-project-tab');
-          if (projectId) setActiveAutomationProject(projectId);
-        });
-      });
-      setActiveAutomationProject('workflow');
-      var r0 = getVisibleAutomationRoot();
-      if (r0) setActiveAutomationAgent(lastAutomationAgentId, r0);
-    }
-    // Navigation mobile : drawer + délégation vers les boutons desktop (réutilise modales / langue)
-    function closeMobileNav() {
-      var overlay = document.getElementById('mobile-nav');
-      var drawer = document.getElementById('mobile-nav-drawer');
-      var openBtn = document.getElementById('btn-nav-open');
-      if (!overlay || !drawer) return;
-      overlay.classList.add('invisible', 'opacity-0', 'pointer-events-none');
-      overlay.classList.remove('opacity-100');
-      overlay.setAttribute('aria-hidden', 'true');
-      drawer.classList.add('translate-x-full');
-      drawer.classList.remove('translate-x-0');
-      document.body.classList.remove('overflow-hidden');
-      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
-    }
-    function openMobileNav() {
-      var overlay = document.getElementById('mobile-nav');
-      var drawer = document.getElementById('mobile-nav-drawer');
-      var openBtn = document.getElementById('btn-nav-open');
-      if (!overlay || !drawer) return;
-      overlay.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
-      overlay.classList.add('opacity-100');
-      overlay.setAttribute('aria-hidden', 'false');
-      drawer.classList.remove('translate-x-full');
-      drawer.classList.add('translate-x-0');
-      document.body.classList.add('overflow-hidden');
-      if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
-    }
-    (function wireMobileNav() {
-      var openBtn = document.getElementById('btn-nav-open');
-      var closeBtn = document.getElementById('btn-nav-close');
-      var backdrop = document.getElementById('mobile-nav-backdrop');
-      if (openBtn) openBtn.addEventListener('click', openMobileNav);
-      if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
-      if (backdrop) backdrop.addEventListener('click', closeMobileNav);
-      // Réutilise les boutons desktop (même logique modales / langue)
-      [
-        ['mobile-nav-lang', 'btn-lang'],
-        ['mobile-nav-formation', 'btn-formation'],
-        // Sur cette variante, les CTA Hero sont la source la plus fiable pour ouvrir Projets/CV.
-        ['mobile-nav-projects', 'btn-hero-projects'],
-        ['mobile-nav-cv', 'btn-hero-cv'],
-        ['mobile-nav-contact', 'btn-contact'],
-      ].forEach(function (pair) {
-        var m = document.getElementById(pair[0]);
-        if (!m) return;
-        m.addEventListener('click', function () {
-          var t = document.getElementById(pair[1]);
-          if (t) t.click();
-          closeMobileNav();
-        });
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMobileNav();
-      });
-    })();
+    var mobileNav = wireMobileNav({});
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 768) closeMobileNav();
+      if (window.innerWidth >= 768) mobileNav.closeMobileNav();
       renderExperienceTimeline();
       updateOrbitActiveState();
     });
