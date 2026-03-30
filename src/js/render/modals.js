@@ -10,7 +10,7 @@ export function createModalHandlers(deps) {
   var getProjectPageForExperience = deps.getProjectPageForExperience;
   var t = deps.t;
   var setModalVisibility = deps.setModalVisibility;
-  var renderProjectDetailPanel = deps.renderProjectDetailPanel;
+  var getRenderProjectDetailPanel = deps.getRenderProjectDetailPanel;
 
   function renderFormationModal() {
     var wrap = document.getElementById('formation-modal-body');
@@ -168,7 +168,8 @@ export function createModalHandlers(deps) {
       el.addEventListener('click', function () {
         state.activeTab = 'mission';
         renderExpModalBody();
-        renderProjectDetailPanel();
+        var renderProjectDetailPanel = getRenderProjectDetailPanel();
+        if (renderProjectDetailPanel) renderProjectDetailPanel();
       });
     });
     body.querySelectorAll('.exp-modal-tab-project').forEach(function (el) {
@@ -176,14 +177,16 @@ export function createModalHandlers(deps) {
         state.activeTab = 'project';
         state.activeProjectPage = 0;
         renderExpModalBody();
-        renderProjectDetailPanel();
+        var renderProjectDetailPanel = getRenderProjectDetailPanel();
+        if (renderProjectDetailPanel) renderProjectDetailPanel();
       });
     });
     body.querySelectorAll('.exp-page-dot').forEach(function (el) {
       el.addEventListener('click', function () {
         state.activeProjectPage = parseInt(el.dataset.page, 10);
         renderExpModalBody();
-        renderProjectDetailPanel();
+        var renderProjectDetailPanel = getRenderProjectDetailPanel();
+        if (renderProjectDetailPanel) renderProjectDetailPanel();
       });
     });
   }
