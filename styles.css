@@ -203,18 +203,21 @@ body {
   .hub-pillar-animate-arm,
   .hub-pillar-animate-head,
   .hub-pillar-animate-brain,
+  .hub-pillar-animate-system,
   .hub-pillar-orbit-spin {
     animation: none;
   }
   .hub-pillar-tint-a,
   .hub-pillar-tint-b,
-  .hub-pillar-tint-c {
+  .hub-pillar-tint-c,
+  .hub-pillar-tint-d {
     animation: none !important;
     color: rgb(148 163 184) !important;
   }
   .hub-pillar-label-a,
   .hub-pillar-label-b,
-  .hub-pillar-label-c {
+  .hub-pillar-label-c,
+  .hub-pillar-label-d {
     animation: none !important;
     color: rgb(148 163 184) !important;
   }
@@ -230,11 +233,16 @@ body {
   .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-c {
     color: rgb(8 145 178) !important;
   }
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-d,
+  .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-d {
+    color: rgb(124 58 237) !important;
+  }
   .hub-pillars .animate-pulse,
   .hub-pillars .group-hover\:animate-pulse {
     animation: none;
   }
-  #hub-tools-certs-track {
+  #hub-tools-certs-track,
+  .hub-layer {
     transition: none;
   }
   .hub-tools-grid-scroll,
@@ -377,6 +385,16 @@ button.portfolio-pillar-card.hub-pillar-card {
   }
 }
 
+@keyframes hub-pillar-color-d {
+  0%,
+  100% {
+    color: rgb(203 213 225);
+  }
+  50% {
+    color: rgb(124 58 237);
+  }
+}
+
 .hub-pillar-animate-arm.hub-pillar-tint-a {
   transform-origin: 50% 88%;
   animation:
@@ -400,6 +418,14 @@ button.portfolio-pillar-card.hub-pillar-card {
   animation-delay: 0.25s, 3.25s;
 }
 
+.hub-pillar-animate-system.hub-pillar-tint-d {
+  transform-origin: center center;
+  animation:
+    hub-pillar-system-bob 2.4s ease-in-out infinite,
+    hub-pillar-color-d 5s ease-in-out infinite;
+  animation-delay: 0.35s, 4.1s;
+}
+
 .hub-pillar-label-a {
   animation: hub-pillar-color-a 5s ease-in-out infinite;
   color: rgb(148 163 184);
@@ -414,6 +440,12 @@ button.portfolio-pillar-card.hub-pillar-card {
 .hub-pillar-label-c {
   animation: hub-pillar-color-c 5s ease-in-out infinite;
   animation-delay: 3.25s;
+  color: rgb(148 163 184);
+}
+
+.hub-pillar-label-d {
+  animation: hub-pillar-color-d 5s ease-in-out infinite;
+  animation-delay: 4.1s;
   color: rgb(148 163 184);
 }
 
@@ -434,6 +466,12 @@ button.portfolio-pillar-card.hub-pillar-card {
   color: rgb(8 145 178);
 }
 
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-tint-d {
+  animation: hub-pillar-system-bob 2.4s ease-in-out infinite;
+  animation-delay: 0.35s;
+  color: rgb(124 58 237);
+}
+
 .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-a {
   animation: none;
   color: rgb(0 122 189);
@@ -447,6 +485,11 @@ button.portfolio-pillar-card.hub-pillar-card {
 .hub-pillar-card[aria-pressed="true"] .hub-pillar-label-c {
   animation: none;
   color: rgb(8 145 178);
+}
+
+.hub-pillar-card[aria-pressed="true"] .hub-pillar-label-d {
+  animation: none;
+  color: rgb(124 58 237);
 }
 
 /* Centres d’intérêt hub : bras articulé, tête robot, noyau IA (d’après maquette keyframes) */
@@ -482,6 +525,16 @@ button.portfolio-pillar-card.hub-pillar-card {
   }
 }
 
+@keyframes hub-pillar-system-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
 @keyframes hub-pillar-orbit-rotate {
   to {
     transform: rotate(360deg);
@@ -502,6 +555,11 @@ button.portfolio-pillar-card.hub-pillar-card {
 .hub-pillar-animate-brain:not(.hub-pillar-tint-c) {
   transform-origin: center center;
   animation: hub-pillar-brain-pulse 2s ease-in-out infinite;
+}
+
+.hub-pillar-animate-system:not(.hub-pillar-tint-d) {
+  transform-origin: center center;
+  animation: hub-pillar-system-bob 2.4s ease-in-out infinite;
 }
 
 /* Orbite pointillée : rotation lente (équivalent animate-spin 8s) */
@@ -538,13 +596,23 @@ button.portfolio-pillar-card.hub-pillar-card {
   box-shadow: none;
 }
 
-/* Soulignement lavande épais sur la 2e ligne du titre (maquette) */
+/* Soulignement en dégradé indigo sous la 2e ligne du titre */
 .hero-headline-underline {
-  text-decoration: underline;
-  text-decoration-color: rgb(196 181 253);
-  text-decoration-thickness: clamp(0.18em, 0.32em, 0.45rem);
-  text-underline-offset: 0.14em;
-  text-decoration-skip-ink: none;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.hero-headline-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.06em;
+  height: clamp(0.14em, 0.24em, 0.34rem);
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(129 140 248 / 0.34) 0%, rgb(99 102 241 / 0.5) 55%, rgb(79 70 229 / 0.44) 100%);
+  pointer-events: none;
 }
 
 /* Colonne hub : pas de carte, contenu sur le fond de page */
@@ -596,6 +664,14 @@ button.portfolio-pillar-card.hub-pillar-card {
 #hub-tools-certs-track {
   transform: translateY(0);
   transition: transform 0.55s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+/* Couches du hub : fondu + léger zoom pour lisser la bascule photo -> panneau. */
+.hub-layer {
+  transition:
+    opacity 0.36s ease,
+    transform 0.42s cubic-bezier(0.25, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 /* Fond du cercle (vues Outils / Certifs / Notion) : dégradés (indigo / émeraude / violet) */

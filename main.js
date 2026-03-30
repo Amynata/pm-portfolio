@@ -1280,8 +1280,8 @@
     photo.classList.remove('z-10', 'opacity-100', 'scale-100');
     photo.classList.add('opacity-0', 'scale-95', 'pointer-events-none', 'z-0');
 
-    var animateTrack =
-      prev !== 'photo' && next !== 'photo' && prev !== next;
+    // Même depuis la photo, on garde un déplacement fluide du rail pour éviter une apparition brusque.
+    var animateTrack = prev !== next && next !== 'photo';
 
     if (showTools || showCerts || showNotion) {
       if (portal) {
@@ -1688,6 +1688,16 @@
     renderProjectsList();
   }
 
+  function getProjectPageForExperience(exp, pageIndex) {
+    if (!exp || !Array.isArray(exp.projectPages)) return null;
+    // Demande métier : sur Decathlon, on inverse le contenu du projet 1 et du projet 3.
+    if (exp.id === 0 && exp.projectPages.length >= 3) {
+      if (pageIndex === 0) return exp.projectPages[2];
+      if (pageIndex === 2) return exp.projectPages[0];
+    }
+    return exp.projectPages[pageIndex] || null;
+  }
+
   function renderProjectsList() {
     const list = document.getElementById('projects-list');
     if (!list) return;
@@ -1786,7 +1796,7 @@
           '</div>'
         : (exp.projectPages
           ? // Conteneur .exp-project-content : styles cartes dans styles.css
-          '<div class="exp-project-content w-full min-w-0">' + exp.projectPages[activeProjectPage][lang] + '</div>'
+          '<div class="exp-project-content w-full min-w-0">' + (getProjectPageForExperience(exp, activeProjectPage) || exp.projectPages[0])[lang] + '</div>'
           : '<div class="space-y-6">' +
           '<div><p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">' +
           escapeHtml(t('labelProblem')) +
@@ -1917,7 +1927,7 @@
             : '<p class="text-sm md:text-lg text-slate-600 font-medium leading-relaxed italic">"' + escapeHtml(exp.mission[lang]) + '"</p>') +
           '</div></div>'
         : (exp.projectPages
-          ? '<div class="exp-project-content w-full min-w-0">' + exp.projectPages[activeProjectPage][lang] + '</div>'
+          ? '<div class="exp-project-content w-full min-w-0">' + (getProjectPageForExperience(exp, activeProjectPage) || exp.projectPages[0])[lang] + '</div>'
           : // fallback sans projectPages
           '<div class="space-y-8">' +
           '<div class="flex gap-4"><div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 opacity-10" style="background-color:' +
