@@ -1473,6 +1473,81 @@ a {
     text-overflow: ellipsis;
   }
 
+  /* Mobile : on privilégie les cartes principales, le fil d'ariane est masqué pour éviter le bruit visuel. */
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center {
+    display: none;
+  }
+
+  /* Supprime la ligne pointillée horizontale, remplacée par une liaison verticale. */
+  #automation-card-modal [data-agent-section] .pointer-events-none.absolute.inset-0.flex.items-center.justify-center.z-0 {
+    display: none;
+  }
+
+  /* Les 3 étapes deviennent un flux vertical plein largeur avec respiration interne. */
+  #automation-card-modal [data-agent-section] .relative.z-10.grid {
+    position: relative;
+    gap: 1.35rem;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  /* Ligne verticale pointillée "vivante" pour guider l'oeil dans le scroll (1 -> 2 -> 3). */
+  #automation-card-modal [data-agent-section] .relative.z-10.grid::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5.6rem;
+    bottom: 5.6rem;
+    width: 3px;
+    border-radius: 9999px;
+    opacity: 0.8;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgb(100 116 139 / 0.55) 0 8px,
+      transparent 8px 15px
+    );
+    animation: automation-flow-drop 1.35s linear infinite;
+    z-index: 0;
+  }
+
+  #automation-card-modal [data-agent-section] .relative.z-10.grid > div {
+    width: calc(100% - 0.5rem);
+    max-width: calc(100% - 0.5rem);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Les labels d'étape masquent la ligne derrière eux pour garder une lecture nette. */
+  #automation-card-modal [data-agent-section] .relative.z-10.grid > div > p.text-\[10px\] {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 0 0.5rem;
+    background: rgb(255 255 255);
+    border-radius: 9999px;
+  }
+
+  #automation-card-modal [data-agent-section] .relative.z-10.grid > div > div {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 0.95rem;
+  }
+
+  #automation-card-modal [data-agent-section] .relative.z-10.grid > div > p {
+    margin-top: 0.7rem;
+    line-height: 1.55;
+  }
+
+  /* Ajoute de l'air en bas de section (ex: "CONNEXION JIRA SOFTWARE"). */
+  #automation-card-modal [data-agent-section] {
+    padding-bottom: 20px;
+  }
+
   /* La carte blanche occupe davantage l'écran pour réduire les marges latérales grises. */
   #exp-modal-content {
     width: 95%;
@@ -1534,6 +1609,16 @@ a {
   .exp-project-content > div.flex.gap-4 ul {
     margin-left: 0.55rem;
     padding-left: 0.8rem;
+  }
+}
+
+/* Animation dédiée au flux vertical mobile de la modale automation. */
+@keyframes automation-flow-drop {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 23px;
   }
 }
 
