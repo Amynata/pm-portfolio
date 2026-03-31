@@ -74,16 +74,17 @@ export function createModalHandlers(deps) {
     if (!body || state.selectedExp == null) return;
     var exp = experiences[state.selectedExp];
     var proj = exp.projects[state.activeProjIdx];
+    // Ajoute des classes dédiées pour appliquer des correctifs responsive ciblés en mobile.
     body.innerHTML =
       '<div class="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 opacity-[0.03] rounded-bl-full" style="background-color:' +
       exp.color +
       '"></div>' +
       '<div class="flex flex-col mb-6 text-slate-900">' +
-      '<div class="flex items-center justify-between mb-4">' +
+      '<div class="exp-modal-header-row flex items-center justify-between mb-4">' +
       '<span class="text-[9px] md:text-[10px] font-black bg-slate-100 text-slate-500 w-fit px-3 py-1 rounded-full uppercase tracking-widest">' +
       escapeHtml(exp.period[state.lang]) +
       '</span>' +
-      '<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase ' +
+      '<span class="exp-modal-company-badge px-3 py-1 rounded-full text-[10px] font-bold uppercase ' +
       getBadgeClass(exp.companyType) +
       '">' +
       escapeHtml(companyTypeForLang(exp.companyType)) +
@@ -99,13 +100,13 @@ export function createModalHandlers(deps) {
       '</p>' +
       '</div>' +
       '<div class="flex items-center justify-between mb-8">' +
-      '<div role="tablist" class="flex gap-1 p-1 bg-slate-100 rounded-2xl w-fit">' +
-      '<button type="button" role="tab" class="exp-modal-tab-mission px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest ' +
+      '<div role="tablist" class="exp-modal-tablist flex gap-1 p-1 bg-slate-100 rounded-2xl w-fit">' +
+      '<button type="button" role="tab" class="exp-modal-tab-btn exp-modal-tab-mission px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest ' +
       (state.activeTab === 'mission' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400 hover:text-slate-600') +
       '">' +
       escapeHtml(t('tabMission')) +
       '</button>' +
-      '<button type="button" role="tab" class="exp-modal-tab-project px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest ' +
+      '<button type="button" role="tab" class="exp-modal-tab-btn exp-modal-tab-project px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest ' +
       (state.activeTab === 'project' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400 hover:text-slate-600') +
       '">' +
       escapeHtml(t('tabProject')) +
@@ -211,7 +212,8 @@ export function createModalHandlers(deps) {
   function renderCVModalBody() {
     var body = document.getElementById('cv-modal-body');
     if (!body) return;
-    var pdfPath = 'Images/_Aminata_Dia_Product_Manager_Resume_2025.pdf';
+    // Keep an underscore-free filename for GitHub Pages compatibility.
+    var pdfPath = 'Images/Aminata_Dia_Product_Manager_Resume_2025.pdf';
     body.innerHTML =
       '<div class="cv-preview-wrap w-full">' +
       '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +

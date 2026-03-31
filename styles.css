@@ -1312,6 +1312,126 @@ a {
   }
 }
 
+/* Mobile étroit (< 480px) : modale expérience plus robuste */
+@media (max-width: 479px) {
+  /* La carte blanche occupe davantage l'écran pour réduire les marges latérales grises. */
+  #exp-modal-content {
+    width: 95%;
+    max-width: 95%;
+  }
+
+  /* Le bouton de fermeture reste accessible sans masquer le badge entreprise. */
+  #exp-modal-close {
+    top: 0.85rem;
+    right: 0.85rem;
+  }
+
+  #exp-modal-body .exp-modal-header-row {
+    padding-right: 4rem;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  #exp-modal-body .exp-modal-company-badge {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    font-size: 0.5625rem;
+    line-height: 1;
+    padding: 0.35rem 0.6rem;
+    max-width: calc(100% - 4.25rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Onglets MISSION / PROJETS : pas de retour à la ligne en mobile serré. */
+  #exp-modal-body .exp-modal-tablist {
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #exp-modal-body .exp-modal-tab-btn {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    font-size: 0.625rem;
+    padding: 0.5rem 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* Blocs gris : plus de place texte et listes moins indentées. */
+  .exp-project-content > div.flex.gap-4 {
+    padding: 1rem 1rem;
+  }
+
+  .exp-project-content > div.flex.gap-4 ul {
+    margin-left: 0.55rem;
+    padding-left: 0.8rem;
+  }
+}
+
+/* Très petits mobiles : compaction progressive sans casser la lisibilité. */
+@media (max-width: 390px) {
+  #exp-modal-content {
+    width: 96%;
+    max-width: 96%;
+  }
+
+  /* Réduit le padding général pour libérer de la place horizontale au contenu. */
+  #exp-modal-content > div.relative {
+    padding: 0.95rem;
+  }
+
+  #exp-modal-close {
+    top: 0.65rem;
+    right: 0.65rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.95rem;
+  }
+
+  #exp-modal-body .exp-modal-header-row {
+    padding-right: 3.5rem;
+    gap: 0.35rem;
+  }
+
+  #exp-modal-body .exp-modal-company-badge {
+    font-size: 0.5rem;
+    padding: 0.32rem 0.52rem;
+    letter-spacing: 0.1em;
+    max-width: calc(100% - 3.75rem);
+  }
+
+  #exp-modal-body .exp-modal-tab-btn {
+    font-size: 0.56rem;
+    padding: 0.44rem 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .exp-project-content > div.flex.gap-4 ul {
+    margin-left: 0.35rem;
+    padding-left: 0.65rem;
+  }
+}
+
+/* Seuil iPhone SE / Android compacts : priorité à l'absence de débordement. */
+@media (max-width: 360px) {
+  #exp-modal-content > div.relative {
+    padding: 0.85rem;
+  }
+
+  #exp-modal-body .exp-modal-header-row {
+    padding-right: 3.25rem;
+  }
+
+  #exp-modal-body .exp-modal-tab-btn {
+    font-size: 0.52rem;
+    padding: 0.42rem 0.62rem;
+  }
+}
+
 /* CV desktop/tablette : conserve une zone de lecture confortable */
 .cv-preview-wrap {
   min-height: 70vh;
