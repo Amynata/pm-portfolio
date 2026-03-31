@@ -1044,6 +1044,13 @@ button.portfolio-pillar-card.hub-pillar-card {
   height: 1.15rem;
 }
 
+/* iPhone SE conserve le padding de base ; sur écrans iPhone plus larges, on ouvre la capsule */
+@media (min-width: 390px) and (max-width: 430px) {
+  .hub-cert-badge {
+    padding: 0.4rem 2rem 0.4rem 1.65rem;
+  }
+}
+
 @media (min-width: 640px) {
   .hub-cert-badge {
     padding: 0.45rem 0.2rem 0.45rem 0.75rem;
@@ -1058,6 +1065,13 @@ button.portfolio-pillar-card.hub-pillar-card {
   .hub-cert-badge-medal {
     width: 1.25rem;
     height: 1.25rem;
+  }
+}
+
+/* iPad Mini/Air : on conserve une capsule plus large pour équilibrer le texte dans le cercle */
+@media (min-width: 768px) and (max-width: 834px) {
+  .hub-cert-badge {
+    padding: 0.4rem 2rem 0.4rem 1.65rem;
   }
 }
 
