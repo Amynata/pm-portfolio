@@ -1483,6 +1483,12 @@ a {
     display: none;
   }
 
+  /* Même logique de flux vertical pour Product OS et AI Portfolio en mobile. */
+  #automation-card-modal [data-automation-project-section="product-os"] .pointer-events-none.absolute.inset-0.flex.items-center.justify-center.z-0,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .pointer-events-none.absolute.inset-0.flex.items-center.justify-center.z-0 {
+    display: none;
+  }
+
   /* Les 3 étapes deviennent un flux vertical plein largeur avec respiration interne. */
   #automation-card-modal [data-agent-section] .relative.z-10.grid {
     position: relative;
@@ -1493,8 +1499,39 @@ a {
     padding-right: 0.35rem;
   }
 
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid {
+    position: relative;
+    gap: 1.35rem;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+    justify-items: center;
+  }
+
   /* Ligne verticale pointillée "vivante" pour guider l'oeil dans le scroll (1 -> 2 -> 3). */
   #automation-card-modal [data-agent-section] .relative.z-10.grid::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5.6rem;
+    bottom: 5.6rem;
+    width: 3px;
+    border-radius: 9999px;
+    opacity: 0.8;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgb(100 116 139 / 0.55) 0 8px,
+      transparent 8px 15px
+    );
+    animation: automation-flow-drop 1.35s linear infinite;
+    z-index: 0;
+  }
+
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid::before,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid::before {
     content: "";
     position: absolute;
     left: 50%;
@@ -1520,6 +1557,40 @@ a {
     margin-right: auto;
     position: relative;
     z-index: 1;
+  }
+
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid > div,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid > div {
+    width: calc(100% - 0.5rem);
+    max-width: calc(100% - 0.5rem);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Harmonise la taille des cartes Product OS / AI Portfolio avec Workflow Automatisé. */
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid > div > div,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid > div > div {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 0.95rem;
+  }
+
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid > div > p,
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid > div > p {
+    margin-top: 0.7rem;
+    line-height: 1.55;
+  }
+
+  #automation-card-modal [data-automation-project-section="product-os"] .relative.z-10.grid > div > p.text-\[10px\],
+  #automation-card-modal [data-automation-project-section="ai-portfolio"] .relative.z-10.grid > div > p.text-\[10px\] {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 0 0.5rem;
+    background: rgb(255 255 255);
+    border-radius: 9999px;
   }
 
   /* Les labels d'étape masquent la ligne derrière eux pour garder une lecture nette. */
