@@ -1849,3 +1849,29 @@ a {
   height: 70vh;
 }
 
+/* iPhone SE uniquement : verrouille l'alignement interne des certifs dans le cercle. */
+@media screen and (max-width: 380px) {
+  /* Lignes certifs compactes : texte et icône côte à côte, sans rejet à droite. */
+  #hub-certs-list .hub-cert-badge {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 5px !important;
+  }
+
+  /* Texte borné à 180px et ancré à gauche pour éviter qu'il prenne toute la largeur. */
+  #hub-certs-list .hub-cert-badge-label {
+    flex: 0 1 180px !important;
+    max-width: 180px !important;
+    padding-left: 20px !important;
+    text-align: left !important;
+    margin-right: 0 !important;
+  }
+
+  /* Icône sans marge parasite pour rester collée au libellé. */
+  #hub-certs-list .hub-cert-badge-icon {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+  }
+}
+
