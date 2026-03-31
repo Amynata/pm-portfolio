@@ -1312,8 +1312,167 @@ a {
   }
 }
 
+/* Modale "Projets persos" : layout mobile/tablette (<768px) sans chevauchement. */
+@media (max-width: 768px) {
+  /* Verrouille le viewport horizontal dans la modale pour éviter les scrolls parasites. */
+  #automation-card-modal,
+  #automation-card-modal .relative.max-h-\[92vh\].w-full.max-w-4xl.overflow-y-auto.rounded-2xl.border.border-slate-100.bg-white.shadow-2xl.sm\:rounded-\[2\.5rem\],
+  #automation-card-modal [data-agent-section] {
+    overflow-x: hidden;
+  }
+
+  /* Les onglets projet restent horizontaux avec scroll (pas de chevauchement). */
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch > .automation-project-tab {
+    width: auto;
+    min-width: 12.25rem;
+    flex: 0 0 auto;
+    padding: 0.5rem 0.65rem 0.7rem;
+    border: 1px solid rgb(226 232 240);
+    border-radius: 0.9rem;
+    background: rgb(248 250 252);
+    scroll-snap-align: start;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch > .w-px {
+    width: 1px;
+    height: 2.5rem;
+    flex: 0 0 auto;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch h3 {
+    font-size: 0.98rem;
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  /* Le fil de flux devient une liste verticale lisible sur petits écrans. */
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center > .text-slate-400 {
+    transform: rotate(90deg);
+    display: inline-flex;
+    line-height: 1;
+  }
+
+  /* Input / Agent IA / Output : cartes centrées et espacées verticalement. */
+  #automation-card-modal [data-agent-section] .relative.z-10.grid {
+    justify-items: center;
+    gap: 1.1rem;
+  }
+
+  #automation-card-modal [data-agent-section] .relative.z-10.grid > div {
+    width: 100%;
+    max-width: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Les pointillés décoratifs restent visuels mais ne doivent jamais élargir le layout. */
+  #automation-card-modal [data-agent-section] .pointer-events-none.absolute.inset-0.flex.items-center.justify-center.z-0 {
+    overflow: hidden;
+  }
+
+  #automation-card-modal [data-agent-section] .pointer-events-none.absolute.inset-0.flex.items-center.justify-center.z-0 svg {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Respiration du contenu textuel sous les cartes pour améliorer la lecture mobile. */
+  #automation-card-modal [data-agent-section] p.text-\[9px\],
+  #automation-card-modal [data-agent-section] p.text-\[10px\] {
+    line-height: 1.55;
+  }
+
+  #automation-card-modal [data-agent-section] .space-y-3 > p.text-\[9px\] {
+    margin-top: 0.55rem;
+  }
+}
+
 /* Mobile étroit (< 480px) : modale expérience plus robuste */
 @media (max-width: 479px) {
+  /* Modale "Projets persos" : empêche les débordements du header sur le contenu. */
+  #automation-card-modal .sticky.top-0.z-10.border-b.border-slate-100.bg-white\/95.backdrop-blur-md {
+    overflow: hidden;
+    z-index: 40;
+  }
+
+  /* Le contenu reste sous le header sticky, même pendant le scroll. */
+  #automation-card-modal .space-y-6.px-4.pb-8.pt-4 {
+    position: relative;
+    z-index: 1;
+    padding-top: 1rem;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch {
+    gap: 0.4rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.6rem;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch > .automation-project-tab {
+    min-width: 10.75rem;
+    padding: 0.45rem 0.55rem 0.6rem;
+    overflow: hidden;
+  }
+
+  /* Les titres restent lisibles sans déborder sur le flux en dessous. */
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch h3 {
+    font-size: 0.8rem;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #automation-card-modal .flex.flex-row.flex-nowrap.items-stretch p {
+    margin-top: 0.2rem;
+    font-size: 0.5rem;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Le flux démarre clairement sous les onglets/titres (plus de superposition visuelle). */
+  #automation-card-modal [data-automation-project-section="workflow"] {
+    margin-top: 1rem;
+  }
+
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center {
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Le badge source (Google Workspace) reste visuellement propre et centré sous le header. */
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center > span:first-child {
+    max-width: 92%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* La carte blanche occupe davantage l'écran pour réduire les marges latérales grises. */
   #exp-modal-content {
     width: 95%;
