@@ -1044,13 +1044,6 @@ button.portfolio-pillar-card.hub-pillar-card {
   height: 1.15rem;
 }
 
-/* iPhone SE conserve le padding de base ; sur écrans iPhone plus larges, on ouvre la capsule */
-@media (min-width: 390px) and (max-width: 430px) {
-  .hub-cert-badge {
-    padding: 0.4rem 2rem 0.4rem 1.65rem;
-  }
-}
-
 @media (min-width: 640px) {
   .hub-cert-badge {
     padding: 0.45rem 0.2rem 0.45rem 0.75rem;
@@ -1068,8 +1061,8 @@ button.portfolio-pillar-card.hub-pillar-card {
   }
 }
 
-/* iPad Mini/Air : on conserve une capsule plus large pour équilibrer le texte dans le cercle */
-@media (min-width: 768px) and (max-width: 834px) {
+/* Surcharge placée après le breakpoint 640px pour conserver le padding mobile sur smartphones larges/paysage. */
+@media (hover: none) and (pointer: coarse) and (max-width: 932px) {
   .hub-cert-badge {
     padding: 0.4rem 2rem 0.4rem 1.65rem;
   }
@@ -1316,14 +1309,7 @@ a {
     border-radius: 1.25rem;
   }
 
-  /* CV mobile : hauteur du PDF maîtrisée pour éviter une double zone de scroll trop lourde */
-  .cv-preview-wrap {
-    min-height: 56vh;
-  }
-
-  .cv-preview-iframe {
-    height: 56vh;
-  }
+  /* CV mobile : géré plus bas dans le bloc CV dédié pour éviter les conflits de cascade. */
 }
 
 /* Modale "Projets persos" : layout mobile/tablette (<768px) sans chevauchement. */
@@ -1854,116 +1840,70 @@ a {
   }
 }
 
-/* CV desktop/tablette : conserve une zone de lecture confortable */
+/* CV responsive mobile-first : modale, preview PDF et CTA harmonisés pour tous les devices. */
+#cv-modal {
+  padding: 0.65rem;
+}
+
+#cv-modal-content {
+  max-height: 94vh;
+  border-radius: 1.35rem;
+  overflow-x: hidden;
+}
+
+#cv-modal .sticky.top-0 {
+  padding: 0.85rem 0.9rem;
+  gap: 0.5rem;
+}
+
+#cv-modal .sticky.top-0 > .flex.items-center.gap-3 {
+  min-width: 0;
+  gap: 0.6rem;
+}
+
+#cv-modal .sticky.top-0 > .flex.items-center.gap-3 > div:last-child {
+  min-width: 0;
+}
+
+#cv-modal-title {
+  font-size: 0.95rem;
+  line-height: 1.15;
+}
+
+#cv-modal .sticky.top-0 p {
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+
+#cv-modal-close {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+}
+
+#cv-modal-body {
+  padding: 0.95rem 0.9rem 1.15rem;
+}
+
 .cv-preview-wrap {
-  min-height: 70vh;
+  min-height: 56vh;
 }
 
 .cv-preview-iframe {
-  height: 70vh;
+  height: 56vh;
+  border-radius: 0.9rem;
 }
 
-/* CV modal responsive : on compacte la chrome (header, paddings, CTA) pour garder la lecture PDF confortable. */
-@media (max-width: 1024px) {
-  #cv-modal {
-    padding: 0.9rem;
-  }
-
-  #cv-modal-content {
-    max-height: 92vh;
-    border-radius: 2.25rem;
-  }
-
-  #cv-modal-body {
-    padding: 1.25rem 1.1rem 1.35rem;
-  }
-
-  .cv-preview-wrap {
-    min-height: 62vh;
-  }
-
-  .cv-preview-iframe {
-    height: 62vh;
-  }
+.cv-download-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.78rem 1rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
 }
 
-/* Tablettes type iPad : header légèrement réduit, lecture PDF encore ample. */
-@media (min-width: 768px) and (max-width: 1024px) {
-  #cv-modal .sticky.top-0 {
-    padding: 1rem 1.2rem;
-  }
-
-  #cv-modal-title {
-    font-size: 1.05rem;
-    line-height: 1.15;
-  }
-}
-
-/* Smartphones : header et CTA simplifiés pour éviter les chevauchements latéraux. */
-@media (max-width: 640px) {
-  #cv-modal {
-    padding: 0.65rem;
-  }
-
-  #cv-modal-content {
-    border-radius: 1.35rem;
-    max-height: 94vh;
-  }
-
-  #cv-modal .sticky.top-0 {
-    padding: 0.85rem 0.9rem;
-    gap: 0.5rem;
-  }
-
-  #cv-modal .sticky.top-0 > .flex.items-center.gap-3 {
-    min-width: 0;
-    gap: 0.6rem;
-  }
-
-  #cv-modal .sticky.top-0 > .flex.items-center.gap-3 > div:last-child {
-    min-width: 0;
-  }
-
-  #cv-modal-title {
-    font-size: 0.95rem;
-    line-height: 1.15;
-  }
-
-  #cv-modal .sticky.top-0 p {
-    font-size: 0.52rem;
-    letter-spacing: 0.14em;
-    line-height: 1.2;
-  }
-
-  #cv-modal-close {
-    width: 2.2rem;
-    height: 2.2rem;
-    flex-shrink: 0;
-  }
-
-  #cv-modal-body {
-    padding: 0.95rem 0.9rem 1.15rem;
-  }
-
-  .cv-preview-wrap {
-    min-height: 56vh;
-  }
-
-  .cv-preview-iframe {
-    height: 56vh;
-    border-radius: 0.9rem;
-  }
-
-  .cv-download-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.78rem 1rem;
-    font-size: 0.64rem;
-    letter-spacing: 0.13em;
-  }
-}
-
-/* Très petits mobiles : on réduit encore la densité visuelle sans dégrader la tap-zone. */
+/* Très petits mobiles : densité réduite, lecture conservée. */
 @media (max-width: 380px) {
   #cv-modal .sticky.top-0 {
     padding: 0.75rem 0.75rem;
@@ -1991,7 +1931,7 @@ a {
   }
 }
 
-/* Mobiles en paysage bas : on protège l'usage en limitant la hauteur de l'iframe. */
+/* Mobiles en paysage bas : on protège l’usage avec une preview plus compacte. */
 @media (max-height: 520px) and (orientation: landscape) {
   .cv-preview-wrap {
     min-height: 48vh;
@@ -1999,6 +1939,83 @@ a {
 
   .cv-preview-iframe {
     height: 48vh;
+  }
+}
+
+/* Tablettes : plus de respiration sur la chrome et la zone PDF. */
+@media (min-width: 768px) {
+  #cv-modal {
+    padding: 0.9rem;
+  }
+
+  #cv-modal-content {
+    max-height: 92vh;
+    border-radius: 2.25rem;
+  }
+
+  #cv-modal .sticky.top-0 {
+    padding: 1rem 1.2rem;
+  }
+
+  #cv-modal-title {
+    font-size: 1.05rem;
+  }
+
+  #cv-modal-body {
+    padding: 1.25rem 1.1rem 1.35rem;
+  }
+
+  .cv-preview-wrap {
+    min-height: 62vh;
+  }
+
+  .cv-preview-iframe {
+    height: 62vh;
+  }
+
+  .cv-download-btn {
+    width: auto;
+    padding: 0.78rem 1.2rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Desktop : lecture confortable et actions au format standard. */
+@media (min-width: 1024px) {
+  #cv-modal {
+    padding: 1rem 1.5rem;
+  }
+
+  #cv-modal-content {
+    max-height: 90vh;
+    border-radius: 3rem;
+  }
+
+  #cv-modal .sticky.top-0 {
+    padding: 1.25rem 2rem;
+  }
+
+  #cv-modal-title {
+    font-size: 1.25rem;
+  }
+
+  #cv-modal-body {
+    padding: 1.5rem 2.2rem 1.75rem;
+  }
+
+  .cv-preview-wrap {
+    min-height: 70vh;
+  }
+
+  .cv-preview-iframe {
+    height: 70vh;
+    border-radius: 1rem;
+  }
+
+  .cv-download-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
   }
 }
 
