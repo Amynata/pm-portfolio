@@ -75,7 +75,8 @@ export const translations = {
       contactPhoneLabel: 'Téléphone',
       contactCopyTitle: 'Copier',
       automationModalSub: 'Builder side projects',
-      automationTabWorkflowDesc: 'Assistant de pilotage produit',
+      // Libellé au pluriel : plusieurs assistants sont présentés dans ce workflow.
+      automationTabWorkflowDesc: 'Assistants de pilotage produit',
       automationTabPosDesc: 'Automation Discovery → Delivery',
       automationTabPortfolioDesc: 'Design & développement',
     },

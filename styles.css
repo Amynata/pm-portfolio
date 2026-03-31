@@ -1358,21 +1358,44 @@ a {
     word-break: keep-all;
   }
 
-  /* Le fil de flux devient une liste verticale lisible sur petits écrans. */
-  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center {
-    flex-direction: column;
+  /* Fil de données : version horizontale compacte pour tous les projets en mobile/tablette. */
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center,
+  #automation-card-modal [data-automation-project-section] > .relative > .relative.z-10.flex.flex-wrap.items-center.justify-center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 0.35rem;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 0.25rem;
+    padding-left: 0.25rem;
+    padding-bottom: 0.25rem;
     margin-bottom: 1rem;
-    text-align: center;
+    text-align: left;
     font-size: 0.72rem;
     line-height: 1.3;
   }
 
-  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center > .text-slate-400 {
-    transform: rotate(90deg);
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center > .text-slate-400,
+  #automation-card-modal [data-automation-project-section] > .relative > .relative.z-10.flex.flex-wrap.items-center.justify-center > .text-slate-400 {
+    transform: none;
     display: inline-flex;
     line-height: 1;
+    font-size: 0.65rem;
+    flex: 0 0 auto;
+  }
+
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center > span:not(.text-slate-400),
+  #automation-card-modal [data-automation-project-section] > .relative > .relative.z-10.flex.flex-wrap.items-center.justify-center > span:not(.text-slate-400) {
+    width: auto;
+    max-width: 12.5rem;
+    flex: 0 0 auto;
+    justify-content: center;
+    scroll-snap-align: start;
   }
 
   /* Input / Agent IA / Output : cartes centrées et espacées verticalement. */
@@ -1407,6 +1430,7 @@ a {
   #automation-card-modal [data-agent-section] .space-y-3 > p.text-\[9px\] {
     margin-top: 0.55rem;
   }
+
 }
 
 /* Mobile étroit (< 480px) : modale expérience plus robuste */
@@ -1473,9 +1497,11 @@ a {
     text-overflow: ellipsis;
   }
 
-  /* Mobile : on privilégie les cartes principales, le fil d'ariane est masqué pour éviter le bruit visuel. */
-  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center {
-    display: none;
+  /* Mobile étroit : on conserve le fil en version compacte et scrollable. */
+  #automation-card-modal [data-agent-section] > .relative.z-10.flex.flex-wrap.items-center.justify-center,
+  #automation-card-modal [data-automation-project-section] > .relative > .relative.z-10.flex.flex-wrap.items-center.justify-center {
+    margin-top: 0.35rem;
+    margin-bottom: 0.95rem;
   }
 
   /* Supprime la ligne pointillée horizontale, remplacée par une liaison verticale. */
