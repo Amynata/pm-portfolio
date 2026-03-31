@@ -219,7 +219,7 @@ export function createModalHandlers(deps) {
       '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +
       '</div>' +
       '<div class="flex justify-center mt-6">' +
-      '<a href="' + pdfPath + '" download class="inline-flex items-center gap-2 bg-slate-900 text-white font-black uppercase tracking-widest text-xs px-6 py-3 rounded-2xl shadow-xl hover:bg-[#818CF8] transition-all">' +
+      '<a href="' + pdfPath + '" download class="cv-download-btn inline-flex items-center gap-2 bg-slate-900 text-white font-black uppercase tracking-widest text-xs px-6 py-3 rounded-2xl shadow-xl hover:bg-[#818CF8] transition-all">' +
       escapeHtml(t('cvDownload')) +
       '</a>' +
       '</div>';

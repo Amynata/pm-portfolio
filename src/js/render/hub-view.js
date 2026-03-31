@@ -8,6 +8,12 @@ export function createHubHandlers(deps) {
   var escapeHtml = deps.escapeHtml;
   var renderStars = deps.renderStars;
 
+  // Garde-fou visuel : Datadog doit rester affiché à 1/5 même si une donnée amont est stale/cache.
+  function getDisplayedLevel(item) {
+    if (item && item.name === 'Datadog') return 1;
+    return item && typeof item.level === 'number' ? item.level : 0;
+  }
+
   function getHubLiveRegion() {
     var row = document.getElementById('hero-hub-row');
     if (!row) return null;
@@ -225,13 +231,14 @@ export function createHubHandlers(deps) {
     function showDetail(idx) {
       var item = tools[idx];
       if (!item) return;
+      var displayLevel = getDisplayedLevel(item);
       host.classList.remove('hidden');
       host.innerHTML =
         '<span class="block text-[9px] font-black tracking-tight text-slate-900 sm:text-[10px]">' +
         escapeHtml(item.name) +
         '</span>' +
         '<span class="mt-0.5 flex justify-center">' +
-        renderStars(item.level) +
+        renderStars(displayLevel) +
         '</span>' +
         '<span class="mt-1 block text-[7px] font-medium leading-snug text-slate-600 sm:text-[8px]">' +
         escapeHtml(item.desc[state.lang]) +
@@ -313,6 +320,7 @@ export function createHubHandlers(deps) {
       '<div class="grid w-full grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-4 justify-items-center">' +
       tools
         .map(function (item, idx) {
+          var displayLevel = getDisplayedLevel(item);
           var tooltipUp = idx < 3;
           var labelClasses =
             'tool-hover-label absolute left-1/2 z-30 w-[min(240px,calc(100vw-3rem))] -translate-x-1/2 px-3 py-2.5 rounded-2xl text-center ' +
@@ -327,7 +335,7 @@ export function createHubHandlers(deps) {
             escapeHtml(item.name) +
             '</span>' +
             '<span class="flex justify-center">' +
-            renderStars(item.level) +
+            renderStars(displayLevel) +
             '</span>' +
             '<span class="text-[8px] font-semibold text-slate-600 leading-snug max-w-[220px]">' +
             escapeHtml(item.desc[state.lang]) +

@@ -9,14 +9,14 @@ import { applyTranslations as applyAppTranslations } from './src/js/i18n.js';
 import { state } from './src/js/state.js';
 import { createModalHandlers } from './src/js/render/modals.js';
 import { createExperienceSection } from './src/js/sections/experience.js';
-import { createHubSection } from './src/js/sections/hub.js';
+import { createHubSection } from './src/js/sections/hub.js?v=20260331-2';
 import {
   translations,
   formationEntries,
   experiences,
   tools,
   certEntries,
-} from './src/js/data.js';
+} from './src/js/data.js?v=20260331-2';
 
 (function () {
   'use strict';

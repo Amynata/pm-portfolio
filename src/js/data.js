@@ -237,7 +237,8 @@ export const tools = [
     desc: { FR: 'Discovery & Priorisation', EN: 'Discovery & Prioritisation' },
     detail: { FR: 'Collecte et priorisation des opportunités produit. Scoring d\'impact, gestion des insights utilisateurs et alignement stratégique.', EN: 'Collecting and prioritizing product opportunities. Impact scoring, user insights management and strategic alignment.' }
   },
-  { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 4, neutralLogoBtn: true,
+  /* Datadog : niveau affiché volontairement à 1/5 dans la jauge d’étoiles. */
+  { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 1, neutralLogoBtn: true,
     desc: { FR: 'Observabilité', EN: 'Observability' },
     detail: { FR: 'Monitoring de la performance produit, suivi des métriques d\'usage en temps réel et mise en place de dashboards d\'observabilité data.', EN: 'Product performance monitoring, real-time usage metrics tracking and setting up data observability dashboards.' }
   },
