@@ -1320,6 +1320,11 @@ a {
     max-width: 95%;
   }
 
+  /* Décale le contenu sous la zone du bouton fermer pour éviter tout recouvrement visuel. */
+  #exp-modal-content > div.relative {
+    padding-top: 3rem;
+  }
+
   /* Le bouton de fermeture reste accessible sans masquer le badge entreprise. */
   #exp-modal-close {
     top: 0.85rem;
@@ -1330,12 +1335,13 @@ a {
     padding-right: 4rem;
     align-items: flex-start;
     gap: 0.5rem;
+    max-width: calc(100% - 0.1rem);
   }
 
   #exp-modal-body .exp-modal-company-badge {
-    white-space: nowrap;
-    overflow-wrap: normal;
-    word-break: keep-all;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
     font-size: 0.5625rem;
     line-height: 1;
     padding: 0.35rem 0.6rem;
@@ -1353,9 +1359,9 @@ a {
   }
 
   #exp-modal-body .exp-modal-tab-btn {
-    white-space: nowrap;
-    overflow-wrap: normal;
-    word-break: keep-all;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
     font-size: 0.625rem;
     padding: 0.5rem 0.95rem;
     letter-spacing: 0.08em;
@@ -1382,6 +1388,7 @@ a {
   /* Réduit le padding général pour libérer de la place horizontale au contenu. */
   #exp-modal-content > div.relative {
     padding: 0.95rem;
+    padding-top: 2.85rem;
   }
 
   #exp-modal-close {
@@ -1420,6 +1427,7 @@ a {
 @media (max-width: 360px) {
   #exp-modal-content > div.relative {
     padding: 0.85rem;
+    padding-top: 2.7rem;
   }
 
   #exp-modal-body .exp-modal-header-row {
@@ -1429,6 +1437,11 @@ a {
   #exp-modal-body .exp-modal-tab-btn {
     font-size: 0.52rem;
     padding: 0.42rem 0.62rem;
+  }
+
+  /* Réduit l'espacement pour garder un badge compact et lisible sur très petit écran. */
+  #exp-modal-body .exp-modal-company-badge {
+    letter-spacing: 0.06em;
   }
 }
 
