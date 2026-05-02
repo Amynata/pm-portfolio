@@ -166,7 +166,7 @@ export const formationEntries = [
         FR: 'Grande école de commerce française, reconnue mondialement pour ses programmes en management, stratégie et leadership.',
         EN: 'Leading French business school, globally recognized for management, strategy, and leadership programs.',
       },
-      logo: 'Images/HEC.png',
+      logo: 'assets/images/HEC.png',
       logoAlt: 'HEC Paris',
       logoFallback: 'HEC',
     },
@@ -178,7 +178,7 @@ export const formationEntries = [
         FR: 'École spécialisée dans les métiers du produit : formation de Product Managers, discovery, delivery et culture agile.',
         EN: 'School focused on product roles: Product Manager training, discovery, delivery, and agile culture.',
       },
-      logo: 'Images/Thiga_Logo.png',
+      logo: 'assets/images/Thiga_Logo.png',
       logoAlt: 'Thiga Academy',
       logoFallback: 'THIGA',
     },
@@ -193,7 +193,7 @@ export const formationEntries = [
         FR: 'Organisme de formation centré sur le métier de Product Manager, la vision produit et les pratiques agiles en entreprise.',
         EN: 'Training organization focused on the Product Manager role, product vision, and agile practices in companies.',
       },
-      logo: 'Images/maestro_logo.png',
+      logo: 'assets/images/maestro_logo.png',
       logoAlt: 'Maestro',
       logoFallback: 'MAESTRO',
     },
@@ -209,7 +209,7 @@ export const formationEntries = [
         FR: 'Grande école d’ingénieurs du numérique (CY Tech / UGE), forte en informatique, électronique et systèmes embarqués.',
         EN: 'Leading engineering school in digital technology (CY Tech / UGE), strong in computer science, electronics, and embedded systems.',
       },
-      logo: 'Images/Logo-esiee-Paris-UGE.svg',
+      logo: 'assets/images/Logo-esiee-Paris-UGE.svg',
       logoAlt: 'ESIEE Paris',
       logoFallback: 'ESIEE',
       last: true,
@@ -229,29 +229,29 @@ export const tools = [
     desc: { FR: 'Prototypage rapide', EN: 'Rapid prototyping' },
     detail: { FR: 'Prototypage rapide de MVPs et proof-of-concepts. Développement d\'outils internes et d\'assistants IA pour accélérer les cycles discovery.', EN: 'Rapid prototyping of MVPs and proof-of-concepts. Building internal tools and AI assistants to accelerate discovery cycles.' }
   },
-  { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_software.svg', level: 5, neutralLogoBtn: true,
+  { name: 'Jira Software', color: '#0052CC', textColor: 'text-white', icon: '', iconSrc: 'assets/images/Jira_software.svg', level: 5, neutralLogoBtn: true,
     desc: { FR: 'Backlog & Agile Ops', EN: 'Backlog & Agile Ops' },
     detail: { FR: 'Gestion du backlog produit, pilotage des sprints et suivi delivery. Structuration des epics, stories et critères d\'acceptance.', EN: 'Product backlog management, sprint planning and delivery tracking. Structuring epics, stories and acceptance criteria.' }
   },
-  { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: '', iconSrc: 'Images/Jira_discovery.svg', level: 4, neutralLogoBtn: true,
+  { name: 'Jira Discovery', color: '#0747A6', textColor: 'text-white', icon: '', iconSrc: 'assets/images/Jira_discovery.svg', level: 4, neutralLogoBtn: true,
     desc: { FR: 'Discovery & Priorisation', EN: 'Discovery & Prioritisation' },
     detail: { FR: 'Collecte et priorisation des opportunités produit. Scoring d\'impact, gestion des insights utilisateurs et alignement stratégique.', EN: 'Collecting and prioritizing product opportunities. Impact scoring, user insights management and strategic alignment.' }
   },
   /* Datadog : niveau affiché volontairement à 1/5 dans la jauge d’étoiles. */
-  { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'Images/datadog_logo.png', level: 1, neutralLogoBtn: true,
+  { name: 'Datadog', color: '#632CA6', textColor: 'text-white', icon: '', iconSrc: 'assets/images/datadog_logo.png', level: 1, neutralLogoBtn: true,
     desc: { FR: 'Observabilité', EN: 'Observability' },
     detail: { FR: 'Monitoring de la performance produit, suivi des métriques d\'usage en temps réel et mise en place de dashboards d\'observabilité data.', EN: 'Product performance monitoring, real-time usage metrics tracking and setting up data observability dashboards.' }
   },
-  { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: '', iconSrc: 'Images/notion_logo.png', level: 5,
+  { name: 'Notion', color: '#F7F6F3', textColor: 'text-black', icon: '', iconSrc: 'assets/images/notion_logo.png', level: 5,
     desc: { FR: 'Docs & suivi produit', EN: 'Docs & product tracking' },
     detail: { FR: 'Documentation produit, roadmaps, specs et bases de connaissance partagées avec les équipes.', EN: 'Product documentation, roadmaps, specs and shared knowledge bases with teams.' }
   },
-  // Logos PNG dans Images/ (même schéma que Jira / Notion pour un rendu lisible dans le hub)
-  { name: 'Obsidian', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'Images/obsidian-icon.png', level: 4, neutralLogoBtn: true,
+  // Logos PNG dans assets/images/ (même schéma que Jira / Notion pour un rendu lisible dans le hub)
+  { name: 'Obsidian', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'assets/images/obsidian-icon.png', level: 4, neutralLogoBtn: true,
     desc: { FR: 'Notes & graphe de connaissance', EN: 'Notes & knowledge graph' },
     detail: { FR: 'Prise de notes structurée, liens entre idées et documentation personnelle ou d’équipe en Markdown.', EN: 'Structured note-taking, linking ideas, and personal or team documentation in Markdown.' }
   },
-  { name: 'Cursor', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'Images/cursor_logo.png', level: 3, neutralLogoBtn: true,
+  { name: 'Cursor', color: '#F7F6F3', textColor: 'text-slate-900', icon: '', iconSrc: 'assets/images/cursor_logo.png', level: 3, neutralLogoBtn: true,
     desc: { FR: 'IDE & assistance IA', EN: 'IDE & AI assistance' },
     detail: { FR: 'Développement et prototypage avec un éditeur centré sur l’IA pour accélérer itérations et refactors.', EN: 'Development and prototyping with an AI-first editor to speed up iterations and refactors.' }
   },
@@ -266,7 +266,7 @@ export const experiences = [
       companyType: 'Grand Groupe',
       period: { FR: '2024 - Présent', EN: '2024 - Present' },
       color: '#007ABD',
-      logo: 'Images/Decathlon_-_logo_(France,_2024).svg',
+      logo: 'assets/images/Decathlon_-_logo_(France,_2024).svg',
       mission: {
         FR: "Simplifier l'accès et la fiabilité d'un patrimoine colossal de 1,35 PiB de données fragmentées. Orchestration de la stratégie d'accessibilité globale.",
         EN: 'Simplifying access and reliability of 1.35 PiB fragmented data assets. Orchestrating global accessibility strategy.',
@@ -502,7 +502,7 @@ export const experiences = [
       companyType: 'Scale-up',
       period: { FR: '2021 - 2024', EN: '2021 - 2024' },
       color: '#0B3B70',
-      logo: 'Images/Preligens_logo.svg',
+      logo: 'assets/images/Preligens_logo.svg',
       missionHtml: {
         FR: '<p class="mb-4">Product Manager de l\'<strong>AI Factory</strong>, une plateforme interne visant à industrialiser le développement et le déploiement de modèles d\'IA utilisés pour la <strong>détection d\'objets</strong> à partir d\'images et de vidéos dans le secteur <strong>Défense & Aéronautique</strong>.</p>' +
           '<p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Responsable de</p>' +
@@ -641,7 +641,7 @@ export const experiences = [
       companyType: 'PME',
       period: { FR: '2019 - 2021', EN: '2019 - 2021' },
       color: '#00A6D6',
-      logo: 'Images/Softbank_mobile_logo.svg',
+      logo: 'assets/images/Softbank_mobile_logo.svg',
       missionHtml: {
         FR: '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4">System Engineer au sein de l\'équipe <strong class="text-slate-900">Product Architecture</strong>, responsable de la structuration et de la cohérence des exigences système pour les produits robotiques.</p>' +
           '<p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Responsable de</p>' +
@@ -762,7 +762,7 @@ export const experiences = [
       companyType: 'PME',
       period: { FR: '2017 - 2019', EN: '2017 - 2019' },
       color: '#E60012',
-      logo: 'Images/Fujitsu-Logo.wine.svg',
+      logo: 'assets/images/Fujitsu-Logo.wine.svg',
       missionHtml: {
         FR: '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4">Programme de leadership technique au sein de l\'équipe <strong class="text-slate-900">Digital Technical Services</strong>, intervenant sur des projets d\'infrastructure et de solutions digitales pour des clients grands comptes.</p>' +
           '<p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Responsable de</p>' +
@@ -866,7 +866,7 @@ export const experiences = [
       companyType: 'Grand Groupe',
       period: { FR: '2015 - 2017', EN: '2015 - 2017' },
       color: '#1428A0',
-      logo: 'Images/Samsung_Orig_Wordmark_BLUE_RGB.png',
+      logo: 'assets/images/Samsung_Orig_Wordmark_BLUE_RGB.png',
       missionHtml: {
         FR:
           '<p class="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-4">Ingénieure au sein de l\'équipe <strong class="text-slate-900">Mobile Quality Assurance (MQA)</strong>, en charge de la validation et de l\'intégration des nouvelles technologies réseau (LTE, VoLTE) sur les smartphones Samsung.</p>' +

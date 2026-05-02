@@ -212,8 +212,8 @@ export function createModalHandlers(deps) {
   function renderCVModalBody() {
     var body = document.getElementById('cv-modal-body');
     if (!body) return;
-    // Keep an underscore-free filename for GitHub Pages compatibility.
-    var pdfPath = 'Images/Aminata_Dia_Product_Manager_Resume_2026.pdf';
+    // PDF CV sous assets/documents/ — chemins relatifs pour iframe + téléchargement (GitHub Pages).
+    var pdfPath = 'assets/documents/Aminata_Dia_CV_2026_SeniorPM.pdf';
     body.innerHTML =
       '<div class="cv-preview-wrap w-full">' +
       '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +

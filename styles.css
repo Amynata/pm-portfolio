@@ -1678,20 +1678,20 @@ a {
 
   /* PM PO-Scrum : Jira Discovery en entrée, Jira Software en sortie. */
   #automation-card-modal [data-agent-section="pm-scrum"] .relative.z-10.grid > div:first-child > div::after {
-    background-image: url("Images/Jira_discovery.svg");
+    background-image: url("assets/images/Jira_discovery.svg");
   }
 
   #automation-card-modal [data-agent-section="pm-scrum"] .relative.z-10.grid > div:last-child > div::after {
-    background-image: url("Images/Jira_software.svg");
+    background-image: url("assets/images/Jira_software.svg");
   }
 
   /* PM Discovery : collecte Airtable -> sortie Jira Discovery. */
   #automation-card-modal [data-agent-section="pm-discovery"] .relative.z-10.grid > div:first-child > div::after {
-    background-image: url("Images/logo-airtable.svg");
+    background-image: url("assets/images/logo-airtable.svg");
   }
 
   #automation-card-modal [data-agent-section="pm-discovery"] .relative.z-10.grid > div:last-child > div::after {
-    background-image: url("Images/Jira_discovery.svg");
+    background-image: url("assets/images/Jira_discovery.svg");
   }
 
   /* Ajoute de l'air en bas de section (ex: "CONNEXION JIRA SOFTWARE"). */
