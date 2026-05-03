@@ -213,7 +213,8 @@ export function createModalHandlers(deps) {
     var body = document.getElementById('cv-modal-body');
     if (!body) return;
     // PDF CV sous assets/documents/ — chemins relatifs pour iframe + téléchargement (GitHub Pages).
-    var pdfPath = 'assets/documents/Aminata_Dia_CV_2026_SeniorPM.pdf';
+    // Mise à jour 2026 : version « Senior PM / 10 ans » (fichier TenYears).
+    var pdfPath = 'assets/documents/Aminata_Dia_CV_2026_SeniorPM_TenYears.pdf';
     body.innerHTML =
       '<div class="cv-preview-wrap w-full">' +
       '<iframe src="' + pdfPath + '" class="cv-preview-iframe w-full rounded-2xl border border-slate-100" frameborder="0"></iframe>' +
