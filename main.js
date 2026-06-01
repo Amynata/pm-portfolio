@@ -294,6 +294,9 @@ import {
       });
     }
 
+    // Vue Workflows n8n : ouverture/fermeture (#workflow) + iframe câblées dans le bloc
+    // inline en bas d'index.html (#workflow-view). Rien à faire ici côté module.
+
     // Hub : wiring des boutons latéraux et du bouton retour via la section dédiée.
     hubSection.initHub();
     wireAutomationInteractions({

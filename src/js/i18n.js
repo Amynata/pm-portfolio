@@ -32,7 +32,6 @@ export function applyTranslations(deps) {
     ['hub-notion-item-2', t('hubNotionItem2')],
     ['hub-notion-item-3', t('hubNotionItem3')],
     ['btn-hero-projects', t('heroCtaProjects')],
-    ['btn-hero-cv', t('heroCtaCv')],
     ['hub-tools-heading', t('hubToolsHeading')],
     ['btn-formation', t('about')],
     ['mobile-nav-formation', t('about')],
@@ -86,6 +85,13 @@ export function applyTranslations(deps) {
       wfH3.innerHTML =
         '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">Automated</span> Workflow';
     }
+  }
+  // Bouton hero "Workflows n8n" : libellé bilingue avec dégradé sur "n8n" (ne peut pas passer par textContent).
+  var heroAuto = document.getElementById('btn-hero-automations');
+  if (heroAuto) {
+    heroAuto.innerHTML = (lang === 'FR')
+      ? 'Workflows <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">n8n</span>'
+      : '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">n8n</span> Workflows';
   }
   var visAutoRoot = getVisibleAutomationRoot();
   if (visAutoRoot) setActiveAutomationAgent(getLastAutomationAgentId(), visAutoRoot);

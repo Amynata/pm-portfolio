@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FDFBF7" />
+  <title>Aminata Lissa Dia — Automatisations n8n (vue onglets)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .loom-stripes { background-image: repeating-linear-gradient(135deg, rgba(99,102,241,0.06) 0, rgba(99,102,241,0.06) 1px, transparent 1px, transparent 11px); }
+    .dot-grid { background-image: radial-gradient(#0f172a 1px, transparent 1px); background-size: 22px 22px; }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .play-pulse { animation: floaty 3.2s ease-in-out infinite; }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .panel-in { animation: panelIn 0.4s cubic-bezier(.22,1,.36,1) both; }
+    .tabs-scroll::-webkit-scrollbar { height: 0; }
+    .tabs-scroll { scrollbar-width: none; }
+    /* Mode embarqué (iframe depuis l'accueil) : l'accueil fournit déjà header + footer fixes,
+       donc on masque le chrome propre de cette page pour éviter les doublons. */
+    body.is-embedded #wf-header,
+    body.is-embedded > footer { display: none !important; }
+    body.is-embedded > main { padding-top: 1.5rem !important; }
+    /* En embarqué, le header interne est masqué : les onglets collent tout en haut de l'iframe. */
+    body.is-embedded #wf-tabs { top: 0 !important; }
+    /* Popup one-pager (contenu injecté en Shadow DOM, pas d'iframe) */
+    .op-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .op-modal.is-open { opacity: 1; pointer-events: auto; }
+    .op-backdrop { position: absolute; inset: 0; background: rgba(8,10,15,.62); backdrop-filter: blur(4px); }
+    .op-panel { position: relative; z-index: 1; display: flex; flex-direction: column; width: 100%; max-width: 960px; max-height: 90vh; border-radius: 20px; overflow: hidden; background: #0d0f14; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); transform: translateY(10px) scale(.985); transition: transform .25s ease; }
+    .op-modal.is-open .op-panel { transform: none; }
+    .op-host { display: block; overflow: auto; }
+    .op-close { position: absolute; top: 14px; right: 14px; z-index: 5; width: 36px; height: 36px; border-radius: 999px; border: 1px solid #2a3140; background: rgba(19,22,30,.85); color: #94a3b8; cursor: pointer; font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: color .15s, border-color .15s; }
+    .op-close:hover { color: #fff; border-color: #475569; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#FDFBF7] text-slate-900 antialiased overflow-x-hidden">
+
+  <!-- Halos décoratifs (repris du portfolio) -->
+  <div class="fixed inset-0 pointer-events-none -z-10 opacity-70" aria-hidden="true">
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#818CF8]/12 blur-[120px]"></div>
+    <div class="absolute top-[20%] right-[-15%] w-[40%] h-[45%] rounded-full bg-[#6366F1]/8 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-emerald-200/15 blur-[120px]"></div>
+  </div>
+
+  <!-- Header portfolio (constant) — seul le contenu en dessous change -->
+  <div id="wf-header" class="sticky top-0 z-50">
+    <header class="bg-white/75 backdrop-blur-xl border-b border-[#6366F1]/10">
+      <div class="flex justify-between items-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-10 py-4 md:py-5 max-w-[100vw] min-w-0">
+        <a href="index.html" class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 group">
+          <div class="w-5 h-5 shrink-0 rounded-md bg-slate-900 shadow-lg"></div>
+          <span class="font-black text-xs sm:text-sm uppercase tracking-tighter truncate">Aminata Lissa Dia</span>
+          <div class="h-4 w-px bg-slate-200 mx-0.5 hidden sm:block shrink-0"></div>
+          <span class="text-[8px] sm:text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">Product Manager/Builder</span>
+        </a>
+        <nav class="flex items-center gap-2 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-slate-600">
+          <button type="button" class="hidden sm:block hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Formation</button>
+          <button type="button" class="hidden sm:block hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">CV</button>
+          <button type="button" class="bg-slate-900 text-white px-4 lg:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all min-h-[2.5rem]">Me contacter</button>
+          <div class="h-5 w-px bg-slate-200 mx-1 shrink-0 hidden sm:block" aria-hidden="true"></div>
+          <button type="button" id="btn-lang" class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full transition-all text-slate-800 min-h-[2.5rem]">
+            <span aria-hidden="true">🌐</span><span id="lang-label">FR</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <main class="relative max-w-[1400px] mx-auto px-5 sm:px-8 pt-10 sm:pt-12 pb-24">
+    <!-- Retour portfolio -->
+    <a href="index.html" id="back-home" class="group inline-flex items-center gap-1.5 mb-6 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors">
+      <span class="text-base leading-none group-hover:-translate-x-0.5 transition-transform">←</span>
+      <span data-i18n="home">Accueil</span>
+    </a>
+
+    <!-- Intro courte -->
+    <section class="max-w-4xl mb-8">
+      <p class="flex items-center gap-2 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] text-[#6366F1] mb-4">
+        <span class="w-6 h-6 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-sm">⚡</span>
+        <span data-i18n="eyebrow">Builder · No-code &amp; Automation</span>
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-black tracking-tight leading-[1.08]">
+        <span data-i18n="titleA">Mes automatisations</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500"> n8n</span>
+      </h1>
+      <p class="mt-4 text-[15px] text-slate-500 leading-relaxed text-pretty" data-i18n="intro">
+        Choisissez une automatisation : démo Loom, architecture de nœuds et compétences mobilisées. Une démo à la fois — rien ne charge tant que vous ne l'ouvrez pas.
+      </p>
+    </section>
+
+    <!-- Onglets projets : sous l'intro, collants en haut au scroll (option A) -->
+    <div id="wf-tabs" class="sticky top-[72px] md:top-[80px] z-40 -mx-5 sm:-mx-8 px-5 sm:px-8 bg-[#FDFBF7]/90 backdrop-blur-md border-b border-slate-200/70 mb-8">
+      <div id="tabs" class="tabs-scroll flex items-stretch gap-1 overflow-x-auto pb-px -mb-px"></div>
+    </div>
+
+    <!-- Panneau actif (rendu JS) -->
+    <div id="panel"></div>
+
+    <!-- Ressources / one-pagers (rendu JS) -->
+    <section class="mt-14">
+      <p class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-1.5">
+        <span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🔗</span>
+        <span data-i18n="res">Ressources &amp; one-pagers</span>
+      </p>
+      <p class="text-[13px] text-slate-500 mb-5" data-i18n="resSub">Mes aide-mémoires et pages autonomes — cliquez pour ouvrir.</p>
+      <div id="resources" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200/70 py-8 text-center">
+    <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400" data-i18n="footer">Aminata Lissa Dia — Product Manager / Builder</p>
+  </footer>
+
+  <!-- Popup one-pager : le contenu d'une page autonome (ex. Git Cheatsheet) est
+       chargé puis injecté en Shadow DOM ici — isolation des styles, pas d'iframe. -->
+  <div id="op-modal" class="op-modal" aria-hidden="true">
+    <div class="op-backdrop" data-op-close></div>
+    <div class="op-panel" role="dialog" aria-modal="true">
+      <button type="button" class="op-close" data-op-close aria-label="Fermer">✕</button>
+      <div id="op-host" class="op-host"></div>
+    </div>
+  </div>
+  <!-- Pont iframe : si la page est embarquée dans l'accueil, masquer son propre chrome
+       et transformer les liens "Accueil" en fermeture de la vue (postMessage au parent). -->
+  <script>
+  (function(){
+    if (window.self === window.top) return;          // page autonome : rien à faire
+    document.body.classList.add('is-embedded');
+    function closeToParent(e){
+      if (e) e.preventDefault();
+      try { window.parent.postMessage({ type: 'workflow-close' }, '*'); } catch (_) {}
+    }
+    document.querySelectorAll('a[href="index.html"]').forEach(function(a){
+      a.addEventListener('click', closeToParent);
+    });
+  })();
+  </script>
+
+  <script>
+  /* ============================================================
+     VUE ONGLETS — un projet chargé à la fois.
+     · Loom LAZY : seul l'onglet actif monte son iframe.
+     · DEEP-LINK : #auto/stock, #auto/jarvis ouvrent direct le projet.
+     · Pour activer une démo : loom:null → loom:"https://www.loom.com/share/XXXX"
+     ============================================================ */
+  const UI = {
+    FR: {
+      crumb:"Automatisations", home:"Accueil", eyebrow:"Builder · No-code &amp; Automation", titleA:"Mes automatisations",
+      intro:"Choisissez une automatisation : démo Loom, architecture de nœuds et compétences mobilisées. Une démo à la fois — rien ne charge tant que vous ne l'ouvrez pas.",
+      footer:"Aminata Lissa Dia — Product Manager / Builder",
+      need:"Le besoin", solution:"La solution", apps:"Apps connectées", skills:"Compétences n8n démontrées",
+      flow:"Architecture du flow", demo:"Démo", input:"Input", engine:"Moteur n8n", output:"Output",
+      sub:"Sous-workflows", guard:"Garde-fous (learnings)",
+      loomSoon:"Démo Loom à venir", loomNote:"Collez le lien loom.com/share/… dans le code",
+      res:"Ressources & one-pagers", resSub:"Mes aide-mémoires et pages autonomes — cliquez pour ouvrir.", resOpen:"Ouvrir", resSoon:"Autre one-pager à venir",
+      soon:"À venir"
+    },
+    EN: {
+      crumb:"Automations", home:"Home", eyebrow:"Builder · No-code &amp; Automation", titleA:"My automations",
+      intro:"Pick an automation: Loom demo, node architecture and the skills involved. One demo at a time — nothing loads until you open it.",
+      footer:"Aminata Lissa Dia — Product Manager / Builder",
+      need:"The need", solution:"The solution", apps:"Connected apps", skills:"n8n skills demonstrated",
+      flow:"Flow architecture", demo:"Demo", input:"Input", engine:"n8n engine", output:"Output",
+      sub:"Sub-workflows", guard:"Guardrails (learnings)",
+      loomSoon:"Loom demo coming soon", loomNote:"Paste the loom.com/share/… link in the code",
+      res:"Resources & one-pagers", resSub:"My cheatsheets and standalone pages — click to open.", resOpen:"Open", resSoon:"More one-pagers coming",
+      soon:"Coming soon"
+    }
+  };
+
+  const PROJECTS = {
+    FR: [
+      {
+        id:"stock", badge:"01", short:"Stock Automation",
+        name:"Stock", accent:"Automation",
+        tagline:"Assistant conversationnel · Club Sportif de Cergy",
+        sub:"Gestion des équipements sportifs — 1 300+ licenciés",
+        need:"Le club gère manuellement les distributions de packs (maillots, shorts, équipements) pour 1 300 licenciés répartis en 10+ catégories. Vérifier qu'un licencié a reçu son pack, contrôler les stocks restants ou savoir quelle taille commander imposait de naviguer dans plusieurs fichiers Excel sans structure commune.",
+        solution:"Un assistant conversationnel connecté à une base Google Sheets structurée : les éducateurs posent des questions en langage naturel, le flow extrait, filtre et retourne les données en quelques secondes — sans accès direct aux fichiers.",
+        apps:[["📊","Google Sheets"],["⚙️","Apps Script"],["💬","Chatbot HTML"],["🤖","AI Agent"]],
+        flow:{ input:{icon:"💬",label:"Question éducateur",note:"Langage naturel, posée dans le chat"}, engine:{icon:"🤖",label:"AI Agent + Switch",note:"Routing multi-domaines, mémoire de session, scripts CRUD déterministes"}, output:{icon:"✅",label:"Réponse instantanée",note:"Phrase ou tableau, selon le contexte"}, source:"Google Sheets (6 onglets)" },
+        skills:[
+          {t:"Agent IA & mémoire",items:["AI Agent node + Window Buffer Memory (3 tours)","Prompt système structuré → JSON contrôlé","Routing multi-domaines piloté par LLM","CLARIFY auto si pronom sans antécédent"]},
+          {t:"Données & scripts",items:["Lecture Google Sheets par onglet (6 sheets)","Scripts CRUD déterministes — zéro hallucination","Filtre Levenshtein (tolérance aux fautes)","Gestion des ambiguïtés de noms en code"]},
+          {t:"Architecture de flow",items:["Switch multi-niveaux (3 couches d'aiguillage)","Static Data globale (contexte inter-messages)","Séparation READ / WRITE intentionnelle (V1 → V2)","Output Formatter adaptatif (phrase / tableau)"]},
+          {t:"Robustesse & prod",items:["Workflow publié et actif (draft vs published)","Fallback erreur sur domaine non reconnu","Détection auto des ruptures de stock","Mémoire de session isolée par sessionId"]}
+        ],
+        stats:[["6","Onglets Google Sheets"],["15+","Nœuds actifs"],["1 300+","Licenciés gérés"]],
+        loom:null
+      },
+      {
+        id:"jarvis", badge:"02", short:"Jarvis",
+        name:"Jarvis", accent:"Productivity Agent",
+        tagline:"Personal Productivity Agent",
+        sub:"Pilotage des objectifs hebdo & rituels quotidiens",
+        need:"Tenir des objectifs hebdomadaires et des rituels quotidiens demande de la discipline : sans relance ni structure, les intentions se perdent entre les outils et les notifications du quotidien.",
+        solution:"Un agent qui pilote mes objectifs hebdomadaires et mes rituels de tâches quotidiens. GPT structure les objectifs dans Notion, Telegram délivre les rappels. Usage quotidien.",
+        apps:[["🔀","n8n"],["✨","GPT / OpenAI"],["📓","Notion"],["📨","Telegram"]],
+        flow:{ input:{icon:"🎯",label:"Objectifs & rituels",note:"Intentions hebdo et tâches du jour"}, engine:{icon:"✨",label:"GPT + 3 sous-workflows",note:"Daily Brief · Weekly Plan · Sunday check-in"}, output:{icon:"📨",label:"Plan + rappels",note:"Notion structure, Telegram relance"}, source:"Usage quotidien" },
+        subworkflows:[["Daily Brief","Le point du matin : tâches du jour poussées sur Telegram."],["Weekly Plan","GPT structure les objectifs de la semaine dans Notion."],["Sunday check-in","Bilan hebdo et préparation de la semaine suivante."]],
+        guard:"IF weekday avant le LLM · Clean JSON après · Wait pour la synchro.",
+        aphorism:"The smarter the model, the more disciplined the harness needs to be.",
+        loom:null
+      }
+    ],
+    EN: [
+      {
+        id:"stock", badge:"01", short:"Stock Automation",
+        name:"Stock", accent:"Automation",
+        tagline:"Conversational assistant · Club Sportif de Cergy",
+        sub:"Sports equipment management — 1,300+ members",
+        need:"The club manually manages pack distributions (jerseys, shorts, gear) for 1,300 members across 10+ categories. Checking whether a member received their pack, reviewing remaining stock or knowing which size to order meant digging through several unstructured Excel files.",
+        solution:"A conversational assistant wired to a structured Google Sheets database: coaches ask questions in natural language and the flow extracts, filters and returns the data in seconds — with no direct file access.",
+        apps:[["📊","Google Sheets"],["⚙️","Apps Script"],["💬","HTML Chatbot"],["🤖","AI Agent"]],
+        flow:{ input:{icon:"💬",label:"Coach question",note:"Natural language, typed in the chat"}, engine:{icon:"🤖",label:"AI Agent + Switch",note:"Multi-domain routing, session memory, deterministic CRUD scripts"}, output:{icon:"✅",label:"Instant answer",note:"Sentence or table, depending on context"}, source:"Google Sheets (6 tabs)" },
+        skills:[
+          {t:"AI Agent & memory",items:["AI Agent node + Window Buffer Memory (3 turns)","Structured system prompt → controlled JSON","LLM-driven multi-domain routing","Auto CLARIFY when a pronoun has no antecedent"]},
+          {t:"Data & scripts",items:["Per-tab Google Sheets reads (6 sheets)","Deterministic CRUD scripts — zero hallucination","Levenshtein filter for typo tolerance","Name-ambiguity handling in code"]},
+          {t:"Flow architecture",items:["Multi-level Switch (3 routing layers)","Global Static Data (cross-message context)","Intentional READ / WRITE split (V1 → V2)","Adaptive Output Formatter (sentence / table)"]},
+          {t:"Robustness & prod",items:["Published, live workflow (draft vs published)","Error fallback on unknown domain","Automatic stock-out detection","Session memory isolated per sessionId"]}
+        ],
+        stats:[["6","Google Sheets tabs"],["15+","Active nodes"],["1,300+","Members managed"]],
+        loom:null
+      },
+      {
+        id:"jarvis", badge:"02", short:"Jarvis",
+        name:"Jarvis", accent:"Productivity Agent",
+        tagline:"Personal Productivity Agent",
+        sub:"Driving weekly goals & daily rituals",
+        need:"Holding weekly goals and daily rituals takes discipline: without nudges or structure, intentions get lost between tools and everyday notifications.",
+        solution:"An agent that runs my weekly goals and daily task rituals. GPT structures the goals in Notion, Telegram delivers the reminders. Daily use.",
+        apps:[["🔀","n8n"],["✨","GPT / OpenAI"],["📓","Notion"],["📨","Telegram"]],
+        flow:{ input:{icon:"🎯",label:"Goals & rituals",note:"Weekly intentions and daily tasks"}, engine:{icon:"✨",label:"GPT + 3 sub-workflows",note:"Daily Brief · Weekly Plan · Sunday check-in"}, output:{icon:"📨",label:"Plan + reminders",note:"Notion structures, Telegram nudges"}, source:"Daily use" },
+        subworkflows:[["Daily Brief","Morning briefing: today's tasks pushed to Telegram."],["Weekly Plan","GPT structures the week's goals inside Notion."],["Sunday check-in","Weekly review and prep for the week ahead."]],
+        guard:"IF weekday before the LLM · Clean JSON after · Wait for the sync.",
+        aphorism:"The smarter the model, the more disciplined the harness needs to be.",
+        loom:null
+      }
+    ]
+  };
+  // Emplacements à venir (onglets fantômes)
+  const SOON_IDS = ["s3","s4","s5"];
+
+  // Ressources / one-pagers — liens externes (ouvrent un nouvel onglet)
+  const RES = {
+    FR: [
+      { tag:"Cheatsheet", title:"n8n Cheatsheet", desc:"Aide-mémoire des nœuds, expressions et patterns n8n.", url:"https://n8n-cheatsheet.netlify.app/" },
+      { tag:"Cheatsheet", title:"Git Cheatsheet", desc:"Commandes Git essentielles : init, add, commit, push, pull, branches, merge.", url:"assets/documents/git-cheatsheet.html" }
+    ],
+    EN: [
+      { tag:"Cheatsheet", title:"n8n Cheatsheet", desc:"Quick reference for n8n nodes, expressions and patterns.", url:"https://n8n-cheatsheet.netlify.app/" },
+      { tag:"Cheatsheet", title:"Git Cheatsheet", desc:"Essential Git commands: init, add, commit, push, pull, branches, merge.", url:"assets/documents/git-cheatsheet.html" }
+    ]
+  };
+
+  let LANG = 'FR';
+  let ACTIVE = 'stock';
+
+  function loomEmbed(url){ return url ? url.replace('/share/','/embed/').split('?')[0] : null; }
+  function pill(icon,label){ return `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 text-[11px] font-semibold"><span aria-hidden="true">${icon}</span>${label}</span>`; }
+
+  function flowCard(kind,node,t){
+    const big = kind==='engine';
+    return `<div class="space-y-3${big?' sm:-translate-x-3 md:-translate-x-5':''}">
+      <p class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">${t}</p>
+      <div class="mx-auto ${big?'w-40 md:w-48 rounded-3xl bg-gradient-to-b from-[#EEF2FF] to-white border-[#6366F1]/20 shadow-xl px-4 py-5':'w-32 md:w-36 rounded-2xl bg-white border-slate-100 shadow-lg px-4 py-4'} border flex flex-col items-center gap-2">
+        <div class="${big?'w-10 h-10 rounded-2xl bg-[#6366F1] text-white shadow-md':'w-8 h-8 rounded-xl bg-slate-100 text-slate-500'} flex items-center justify-center text-lg">${node.icon}</div>
+        <p class="${big?'text-[12px] font-black':'text-[11px] font-semibold'} text-slate-900 leading-tight text-center">${node.label}</p>
+        <p class="text-[10px] text-slate-500 leading-snug text-center">${node.note}</p>
+      </div></div>`;
+  }
+  function flowBlock(flow,ui){
+    return `<div class="rounded-3xl border border-[#6366F1]/20 bg-white shadow-sm ring-1 ring-[#6366F1]/5 px-5 sm:px-8 py-8 overflow-hidden relative">
+      <div class="absolute inset-0 dot-grid opacity-[0.04] pointer-events-none"></div>
+      <p class="relative z-10 text-center text-[9px] font-black uppercase tracking-[0.3em] text-slate-400 mb-6">${ui.flow}</p>
+      ${flow.source?`<div class="relative z-10 flex flex-wrap items-center justify-center gap-2 mb-7 text-[11px]">${pill("📊",flow.source)}<span class="text-slate-400">→</span><span class="px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#6366F1] font-black text-[10px] uppercase tracking-widest">n8n</span><span class="text-slate-400">→</span><span class="text-slate-600 font-medium">${flow.output.label}</span></div>`:''}
+      <div class="relative min-h-[210px]">
+        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 items-center gap-7 sm:gap-4 md:gap-8 text-center">
+          ${flowCard('input',flow.input,ui.input)}${flowCard('engine',flow.engine,ui.engine)}${flowCard('output',flow.output,ui.output)}
+        </div>
+        <div class="pointer-events-none absolute inset-0 hidden sm:flex items-center justify-center z-0">
+          <svg class="w-full h-[72px]" style="max-width:760px;"><line x1="14%" y1="50%" x2="86%" y2="50%" stroke="#475569" stroke-opacity="0.6" stroke-width="3" stroke-dasharray="5 6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.2s" repeatCount="indefinite" /></line></svg>
+        </div>
+      </div></div>`;
+  }
+  function loomBlock(loom,ui){
+    const embed = loomEmbed(loom);
+    if(embed){ return `<div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg bg-black w-full flex items-center justify-center min-h-[240px]"><div class="w-full aspect-video"><iframe src="${embed}" loading="lazy" allowfullscreen class="w-full h-full" style="border:0;"></iframe></div></div>`; }
+    return `<div class="rounded-3xl border border-slate-200 shadow-md bg-white loom-stripes w-full flex flex-col items-center justify-center gap-4 min-h-[280px] py-12">
+      <div class="play-pulse w-16 h-16 rounded-full bg-[#6366F1] shadow-xl shadow-[#6366F1]/30 flex items-center justify-center text-white text-2xl pl-1">▶</div>
+      <p class="text-[11px] font-black uppercase tracking-[0.25em] text-[#6366F1]">${ui.loomSoon}</p>
+      <p class="font-mono text-[10px] text-slate-400">${ui.loomNote}</p></div>`;
+  }
+  function skillsBlock(skills,ui){
+    return `<div><p class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4"><span class="w-5 h-5 rounded-full bg-[#6366F1]/10 flex items-center justify-center text-[#6366F1] text-xs">🧩</span>${ui.skills}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">${skills.map(s=>`<div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><p class="text-[11px] font-black uppercase tracking-[0.16em] text-slate-900 mb-3">${s.t}</p><ul class="space-y-2">${s.items.map(i=>`<li class="flex gap-2 text-[12.5px] text-slate-600 leading-snug"><span class="mt-[3px] w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#6366F1] to-emerald-500 shrink-0"></span><span>${i}</span></li>`).join('')}</ul></div>`).join('')}</div></div>`;
+  }
+  function statsBlock(stats){
+    return `<div class="grid grid-cols-3 gap-3">${stats.map(([v,l])=>`<div class="rounded-2xl border border-slate-200 bg-white shadow-sm px-3 py-5 text-center"><p class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500 leading-none">${v}</p><p class="mt-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400 leading-tight">${l}</p></div>`).join('')}</div>`;
+  }
+  function subworkflowsBlock(p,ui){
+    return `<div class="space-y-5"><div><p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-3">${ui.sub}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${p.subworkflows.map(([n,d])=>`<div class="rounded-2xl border border-slate-200 bg-slate-50 p-4"><p class="text-[12px] font-black text-slate-900 mb-1.5">${n}</p><p class="text-[12px] text-slate-600 leading-snug">${d}</p></div>`).join('')}</div></div>
+      <div class="rounded-2xl border border-[#6366F1]/20 bg-[#EEF2FF]/50 p-4"><p class="text-[10px] font-black uppercase tracking-[0.3em] text-[#6366F1] mb-2">${ui.guard}</p><p class="text-[13px] text-slate-700 font-medium">${p.guard}</p><p class="mt-3 text-[13px] italic text-slate-500 border-l-2 border-[#6366F1]/30 pl-3">“${p.aphorism}”</p></div></div>`;
+  }
+
+  function panelHtml(p,ui){
+    return `<article class="panel-in rounded-[2rem] border border-slate-200 bg-white/80 shadow-xl ring-1 ring-slate-200/60 overflow-hidden">
+      <div class="flex items-start gap-4 px-6 sm:px-9 pt-8 pb-6 border-b border-slate-100">
+        <div class="shrink-0 w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-lg shadow-lg">${p.badge}</div>
+        <div class="min-w-0">
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight leading-tight">${p.name} <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">${p.accent}</span></h2>
+          <p class="mt-1 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">${p.tagline}</p>
+          <p class="mt-2 text-sm text-slate-500">${p.sub}</p>
+        </div>
+      </div>
+      <div class="px-6 sm:px-9 py-8 space-y-8">
+        <!-- Haut : 2 colonnes — démo Loom (gauche, pleine hauteur) · besoin/solution + flow (droite) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+          <!-- GAUCHE : démo Loom encadrée, étirée pour s'aligner haut→bas avec la colonne de droite -->
+          <div class="flex">
+            ${loomBlock(p.loom,ui)}
+          </div>
+          <!-- DROITE : besoin / solution au-dessus de l'architecture du flow -->
+          <div class="space-y-5">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5"><p class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2"><span class="w-5 h-5 rounded-full bg-amber-400/15 flex items-center justify-center text-amber-600 text-xs">🎯</span>${ui.need}</p><p class="text-[13.5px] text-slate-600 leading-relaxed">${p.need}</p></div>
+            <div class="rounded-2xl border border-emerald-200/70 bg-emerald-50/40 p-5"><p class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-2"><span class="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center text-emerald-600 text-xs">✅</span>${ui.solution}</p><p class="text-[13.5px] text-slate-600 leading-relaxed">${p.solution}</p></div>
+            ${flowBlock(p.flow,ui)}
+          </div>
+        </div>
+        <!-- En dessous (pleine largeur) : apps connectées · compétences · stats -->
+        <div><p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-3">${ui.apps}</p><div class="flex flex-wrap gap-2">${p.apps.map(a=>pill(a[0],a[1])).join('')}</div></div>
+        ${p.skills?skillsBlock(p.skills,ui):''}
+        ${p.subworkflows?subworkflowsBlock(p,ui):''}
+        ${p.stats?statsBlock(p.stats):''}
+      </div>
+    </article>`;
+  }
+
+  function tabsHtml(ui){
+    const list = PROJECTS[LANG];
+    let html = list.map(p=>{
+      const on = p.id===ACTIVE;
+      return `<button type="button" data-tab="${p.id}" class="group shrink-0 flex items-center gap-2.5 px-4 py-3 border-b-2 transition-all ${on?'border-[#6366F1]':'border-transparent hover:border-slate-200'}">
+        <span class="w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black ${on?'bg-[#6366F1] text-white shadow':'bg-slate-100 text-slate-400 group-hover:text-slate-600'}">${p.badge}</span>
+        <span class="text-[12px] sm:text-[13px] font-black uppercase tracking-wide ${on?'text-slate-900':'text-slate-400 group-hover:text-slate-700'}">${p.short}</span>
+      </button>`;
+    }).join('');
+    html += `<div class="w-px self-center h-7 bg-slate-200 mx-1 shrink-0"></div>`;
+    html += SOON_IDS.map(()=>`<div class="shrink-0 flex items-center gap-2 px-4 py-3 border-b-2 border-transparent opacity-60 cursor-not-allowed select-none">
+      <span class="w-6 h-6 rounded-lg flex items-center justify-center text-slate-300 text-sm border border-dashed border-slate-300">＋</span>
+      <span class="text-[12px] sm:text-[13px] font-black uppercase tracking-wide text-slate-300">${ui.soon}</span></div>`).join('');
+    return html;
+  }
+
+  function resourcesHtml(ui){
+    const cards = RES[LANG].map(r=>{
+      const isExt = /^https?:/i.test(r.url);
+      // One-pager local : on propage la query string courante (token d'aperçu) ;
+      // vide en production → lien propre. Lien externe : URL telle quelle.
+      const href = isExt ? r.url : (r.url + location.search);
+      return `<a href="${href}" target="_blank" rel="noopener" class="group block rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:border-[#6366F1]/30 hover:-translate-y-0.5 transition-all p-5">
+      <div class="flex items-start justify-between gap-3 mb-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#6366F1] text-[9px] font-black uppercase tracking-[0.16em]">${r.tag}</span>
+        <span class="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-[#6366F1] group-hover:text-white group-hover:border-[#6366F1] transition-all text-sm">↗</span>
+      </div>
+      <p class="text-[15px] font-black text-slate-900 leading-tight">${r.title}</p>
+      <p class="mt-1 text-[12.5px] text-slate-500 leading-snug">${r.desc}</p>
+    </a>`;
+    }).join('');
+    const ghost = `<div class="rounded-2xl border-2 border-dashed border-slate-300 bg-white/40 p-5 flex flex-col items-center justify-center text-center gap-2 min-h-[120px]">
+      <span class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400">＋</span>
+      <p class="text-[12px] font-bold text-slate-400">${ui.resSoon}</p></div>`;
+    return cards + ghost;
+  }
+
+  function render(){
+    const ui = UI[LANG];
+    document.documentElement.lang = LANG.toLowerCase();
+    document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(ui[k]!==undefined) el.innerHTML=ui[k]; });
+    document.getElementById('lang-label').textContent = LANG;
+    document.getElementById('tabs').innerHTML = tabsHtml(ui);
+    const p = PROJECTS[LANG].find(x=>x.id===ACTIVE) || PROJECTS[LANG][0];
+    // Loom LAZY : on ne rend que le projet actif → une seule iframe vit à la fois
+    document.getElementById('panel').innerHTML = panelHtml(p, ui);
+    document.getElementById('resources').innerHTML = resourcesHtml(ui);
+    if (location.hash !== '#auto/'+ACTIVE) history.replaceState(null,'','#auto/'+ACTIVE);
+  }
+
+  function setActive(id){
+    if (!PROJECTS[LANG].some(p=>p.id===id)) return;
+    ACTIVE = id;
+    render();
+  }
+
+  document.getElementById('tabs').addEventListener('click', e=>{
+    const btn = e.target.closest('[data-tab]');
+    if (btn) setActive(btn.getAttribute('data-tab'));
+  });
+  document.getElementById('btn-lang').addEventListener('click', ()=>{ LANG = LANG==='FR'?'EN':'FR'; render(); });
+  window.addEventListener('hashchange', ()=>{ const m=(location.hash.match(/^#auto\/(\w+)/)||[])[1]; if(m && m!==ACTIVE) setActive(m); });
+
+  // Popup one-pager : charge le fichier autonome et l'injecte en Shadow DOM
+  // (isolation des styles → pas d'iframe). Les liens externes (http…) gardent
+  // leur ouverture native en nouvel onglet.
+  (function(){
+    var modal = document.getElementById('op-modal');
+    var host  = document.getElementById('op-host');
+    var shadow = host.attachShadow ? host.attachShadow({ mode:'open' }) : null;
+    var cache = {};
+
+    function show(){ modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function close(){ modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+
+    function openOnePager(url){
+      if(!shadow){ window.open(url,'_blank'); return; }       // navigateur sans Shadow DOM
+      if(cache[url]){ shadow.innerHTML = cache[url]; show(); return; }
+      fetch(url).then(function(r){ return r.text(); }).then(function(html){
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        // Polices : on les ajoute au <head> principal (le Shadow DOM peut les utiliser)
+        doc.querySelectorAll('link[rel="stylesheet"][href*="fonts.googleapis"]').forEach(function(l){
+          document.head.appendChild(l.cloneNode());
+        });
+        var styles = Array.prototype.map.call(doc.querySelectorAll('style'), function(s){ return s.textContent; }).join('\n');
+        var body = doc.body ? doc.body.innerHTML : html;
+        var adapter = ':host{display:block;background:#0d0f14;color:#e2e8f0;font-family:\'JetBrains Mono\',monospace;padding:32px 24px;}';
+        var out = '<style>'+adapter+'</style><style>'+styles+'</style>'+body;
+        cache[url] = out;
+        shadow.innerHTML = out;
+        show();
+      }).catch(function(){ window.open(url,'_blank'); });
+    }
+
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('#resources a');
+      if(a){
+        var url = a.getAttribute('href');
+        if(/^https?:/i.test(url)) return;      // lien externe → nouvel onglet natif
+        e.preventDefault();
+        openOnePager(url);
+        return;
+      }
+      if(e.target.closest('[data-op-close]')) close();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+  })();
+
+  // Deep-link au chargement
+  const initId = (location.hash.match(/^#auto\/(\w+)/)||[])[1];
+  if (initId && PROJECTS.FR.some(p=>p.id===initId)) ACTIVE = initId;
+  render();
+  </script>
+</body>
+</html>

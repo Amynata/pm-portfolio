@@ -41,11 +41,13 @@
         </svg>
       </button>
       <nav id="desktop-nav" class="hidden md:flex items-center gap-2 lg:gap-4 text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-slate-600" aria-label="Navigation principale">
+        <button type="button" id="btn-formation" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Formation</button>
+        <button type="button" id="btn-cv" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">CV</button>
+        <button type="button" id="btn-contact" class="bg-slate-900 text-white px-4 lg:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all min-h-[2.5rem]">Me contacter</button>
+        <div class="h-5 w-px bg-slate-200 mx-1 shrink-0" aria-hidden="true"></div>
         <button type="button" id="btn-lang" class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full transition-all text-slate-800 min-h-[2.5rem]">
           <span aria-hidden="true">🌐</span><span id="lang-label">FR</span>
         </button>
-        <button type="button" id="btn-formation" class="hover:text-[#818CF8] px-2 py-2 transition-all min-h-[2.5rem]">Formation</button>
-        <button type="button" id="btn-contact" class="bg-slate-900 text-white px-4 lg:px-5 py-2 rounded-full shadow-lg hover:bg-[#818CF8] transition-all min-h-[2.5rem]">Me contacter</button>
       </nav>
     </div>
   </header>
@@ -117,15 +119,15 @@
                 id="btn-hero-projects"
                 class="hero-cta-dash hero-cta-dash--projects"
               >
-                Mes projets
+                Projets produit
               </button>
-              <button
-                type="button"
-                id="btn-hero-cv"
-                class="hero-cta-dash hero-cta-dash--cv"
+              <a
+                href="#auto/stock"
+                id="btn-hero-automations"
+                class="hero-cta-dash hero-cta-dash--projects"
               >
-                Mon CV
-              </button>
+                <span>Workflows <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-emerald-500">n8n</span></span>
+              </a>
             </div>
           </div>
         </div>
@@ -1899,6 +1901,87 @@
       <div class="p-6 md:p-10 space-y-8" id="formation-modal-body"></div>
     </div>
   </div>
+
+  <!-- ============================================================
+       VUE WORKFLOWS n8n — iframe plein-cadre entre header & footer fixes.
+       Source unique : "automatisations-n8n.html" (aucun contenu dupliqué).
+       Ouverture en fondu, URL #workflow, bouton retour navigateur + lien partageable.
+       La vue embarquée masque son propre header/footer (détection window.self !== window.top)
+       et renvoie un postMessage('workflow-close') au parent pour le lien "Accueil".
+       ============================================================ -->
+  <style>
+    :root { --wf-header-h: 88px; --wf-footer-h: 0px; }
+    #workflow-view{
+      position: fixed; left: 0; right: 0;
+      top: var(--wf-header-h); bottom: var(--wf-footer-h);
+      z-index: 40;                       /* sous le header fixe (z-50) */
+      background: #FDFBF7;
+      opacity: 0; pointer-events: none;
+      transition: opacity .45s ease;
+    }
+    #workflow-view.is-open{ opacity: 1; pointer-events: auto; }
+    #workflow-frame{ width: 100%; height: 100%; border: 0; display: block; background: #FDFBF7; }
+    /* Vue ouverte : footer épinglé en bas, accueil figé en arrière-plan. */
+    body.workflow-open{ overflow: hidden; }
+    body.workflow-open footer.portfolio-footer-glow{
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; margin: 0;
+    }
+  </style>
+  <div id="workflow-view" aria-hidden="true">
+    <iframe id="workflow-frame" title="Workflows n8n" loading="lazy"></iframe>
+  </div>
+  <script>
+    (function () {
+      var SRC = 'automatisations-n8n.html';
+      var view = document.getElementById('workflow-view');
+      var frame = document.getElementById('workflow-frame');
+      var trigger = document.getElementById('btn-hero-automations');
+      var header = document.querySelector('header.site-header') || document.querySelector('header');
+      var footer = document.querySelector('footer.portfolio-footer-glow') || document.querySelector('footer');
+      var loaded = false;
+
+      function measure(){
+        var root = document.documentElement.style;
+        if (header) root.setProperty('--wf-header-h', header.offsetHeight + 'px');
+        if (footer) root.setProperty('--wf-footer-h', footer.offsetHeight + 'px');
+      }
+      function openView(push){
+        measure();
+        if (!loaded){ frame.src = SRC; loaded = true; }
+        document.body.classList.add('workflow-open');
+        requestAnimationFrame(function(){ view.classList.add('is-open'); });
+        view.setAttribute('aria-hidden', 'false');
+        if (push && location.hash !== '#workflow'){
+          history.pushState({ wf: 1 }, '', '#workflow');
+        }
+      }
+      function closeView(){
+        view.classList.remove('is-open');
+        view.setAttribute('aria-hidden', 'true');
+        window.setTimeout(function(){ document.body.classList.remove('workflow-open'); }, 450);
+      }
+      function syncFromHash(){
+        if (location.hash === '#workflow'){ openView(false); } else { closeView(); }
+      }
+
+      if (trigger){
+        trigger.addEventListener('click', function(e){ e.preventDefault(); openView(true); });
+      }
+      // Retour demandé depuis l'iframe (lien "Accueil" du workflow)
+      window.addEventListener('message', function(e){
+        if (e && e.data && e.data.type === 'workflow-close'){
+          if (location.hash === '#workflow'){ history.back(); } else { closeView(); }
+        }
+      });
+      // Boutons précédent / suivant du navigateur
+      window.addEventListener('popstate', syncFromHash);
+      window.addEventListener('resize', function(){
+        if (document.body.classList.contains('workflow-open')) measure();
+      });
+      // Lien direct partagé : ...#workflow ouvre la vue au chargement
+      if (location.hash === '#workflow'){ openView(false); }
+    })();
+  </script>
 
   <!-- Cache-busting du bundle JS pour refléter immédiatement les mises à jour de données (ex: niveau outil). -->
   <script type="module" src="main.js?v=20260331-2"></script>

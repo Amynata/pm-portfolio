@@ -2045,3 +2045,67 @@ a {
   }
 }
 
+
+/* ============================================================================
+   À AJOUTER à la fin de  styles.css
+   Animations & textures de la vue Automatisations n8n.
+   (Préfixées n8n- pour ne rien percuter dans le reste du site.)
+============================================================================ */
+
+/* Texture rayée du placeholder vidéo Loom */
+.n8n-loom-stripes {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.06) 0,
+    rgba(99, 102, 241, 0.06) 1px,
+    transparent 1px,
+    transparent 11px
+  );
+}
+
+/* Trame de points en fond du bloc "Architecture du flow" */
+.n8n-dot-grid {
+  background-image: radial-gradient(#0f172a 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Pastille "play" qui flotte doucement */
+@keyframes n8nFloaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.n8n-play-pulse { animation: n8nFloaty 3.2s ease-in-out infinite; }
+
+/* Apparition du panneau projet au changement d'onglet */
+@keyframes n8nPanelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.n8n-panel-in { animation: n8nPanelIn 0.4s cubic-bezier(.22, 1, .36, 1) both; }
+
+/* Barre d'onglets : masquer la scrollbar horizontale */
+.n8n-tabs-scroll::-webkit-scrollbar { height: 0; }
+.n8n-tabs-scroll { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .n8n-play-pulse,
+  .n8n-panel-in { animation: none; }
+}
+
+/* ============================================================================
+   Popup one-pager (vue n8n) : contenu d'une page autonome injecté en Shadow DOM
+   (styles isolés, pas d'iframe). z-index 200 > overlay #n8n-view (125).
+============================================================================ */
+.n8n-op-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.n8n-op-modal.is-open { opacity: 1; pointer-events: auto; }
+.n8n-op-backdrop { position: absolute; inset: 0; background: rgba(8,10,15,.62); backdrop-filter: blur(4px); }
+.n8n-op-panel { position: relative; z-index: 1; display: flex; flex-direction: column; width: 100%; max-width: 960px; max-height: 90vh; border-radius: 20px; overflow: hidden; background: #0d0f14; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); transform: translateY(10px) scale(.985); transition: transform .25s ease; }
+.n8n-op-modal.is-open .n8n-op-panel { transform: none; }
+.n8n-op-host { display: block; overflow: auto; }
+.n8n-op-close { position: absolute; top: 14px; right: 14px; z-index: 5; width: 36px; height: 36px; border-radius: 999px; border: 1px solid #2a3140; background: rgba(19,22,30,.85); color: #94a3b8; cursor: pointer; font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: color .15s, border-color .15s; }
+.n8n-op-close:hover { color: #fff; border-color: #475569; }
+
+@media (prefers-reduced-motion: reduce) {
+  .n8n-op-modal,
+  .n8n-op-panel { transition: none; }
+}

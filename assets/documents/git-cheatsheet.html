@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Cheat Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --border: #1e2330;
+    --accent: #f97316;
+    --accent2: #3b82f6;
+    --green: #22c55e;
+    --purple: #a78bfa;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --tag-bg: #1a1f2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+
+  .logo-block h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .logo-block p {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent));
+  }
+
+  .card-init { --card-accent: var(--purple); }
+  .card-add  { --card-accent: var(--green); }
+  .card-commit { --card-accent: var(--accent); }
+  .card-push { --card-accent: var(--accent2); }
+  .card-pull { --card-accent: #06b6d4; }
+  .card-checkout { --card-accent: #f43f5e; }
+  .card-merge { --card-accent: #eab308; }
+
+  .card-number {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .cmd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 12px;
+    display: block;
+    background: var(--tag-bg);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 4px;
+    margin-top: 14px;
+  }
+
+  .definition {
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  .when {
+    font-size: 0.78rem;
+    color: var(--text);
+    line-height: 1.5;
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  .example-block {
+    margin-top: 4px;
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .example-line {
+    font-size: 0.75rem;
+    color: var(--green);
+    line-height: 1.8;
+  }
+
+  .example-line .prompt {
+    color: var(--muted);
+    user-select: none;
+  }
+
+  .example-line .comment {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .card-wide {
+    grid-column: span 2;
+  }
+
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .card-wide { grid-column: span 1; }
+    .logo-block h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo-block">
+      <h1>git /cmds</h1>
+      <p>Cheat sheet — commandes essentielles</p>
+    </div>
+    <span class="badge">v 2.x · français</span>
+  </header>
+
+  <div class="grid">
+
+    <!-- git init -->
+    <div class="card card-init">
+      <div class="card-number">01</div>
+      <code class="cmd">git init</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Initialise un nouveau dépôt Git local dans le dossier courant. Crée le répertoire caché <code>.git/</code> qui contient tout l'historique.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Au tout début d'un projet, une seule fois, avant tout autre commande Git.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>mkdir mon-projet && cd mon-projet</div>
+        <div class="example-line"><span class="prompt">$ </span>git init</div>
+        <div class="example-line"><span class="comment">→ Initialized empty Git repository in .git/</span></div>
+      </div>
+    </div>
+
+    <!-- git add -->
+    <div class="card card-add">
+      <div class="card-number">02</div>
+      <code class="cmd">git add .</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Ajoute tous les fichiers modifiés ou nouveaux à la zone de staging (l'index). Le <code>.</code> signifie "tout le dossier courant".</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Après avoir modifié ou créé des fichiers, juste avant de faire un <code>commit</code>.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git add .</div>
+        <div class="example-line"><span class="comment">→ Tous les fichiers sont prêts à être commités</span></div>
+        <div class="example-line"><span class="comment">→ Pour un seul fichier : git add index.html</span></div>
+      </div>
+    </div>
+
+    <!-- git commit -->
+    <div class="card card-commit">
+      <div class="card-number">03</div>
+      <code class="cmd">git commit -m "message"</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Enregistre un snapshot de la zone de staging dans l'historique. Le <code>-m</code> permet d'écrire le message directement en ligne.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Après un <code>git add</code>, quand une fonctionnalité ou une correction est terminée. Un commit = une unité logique de travail.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git commit -m "feat: ajout page contact"</div>
+        <div class="example-line"><span class="comment">→ [main 3a4f1b2] feat: ajout page contact</span></div>
+      </div>
+    </div>
+
+    <!-- git push -->
+    <div class="card card-push">
+      <div class="card-number">04</div>
+      <code class="cmd">git push origin &lt;branche&gt;</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Envoie les commits locaux vers le dépôt distant (GitHub, GitLab…). <code>origin</code> est le nom par défaut du remote.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Après un ou plusieurs commits, pour partager son travail ou sauvegarder en ligne.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git push origin main</div>
+        <div class="example-line"><span class="comment">→ Envoie la branche main sur GitHub</span></div>
+        <div class="example-line"><span class="prompt">$ </span>git push origin feature/login</div>
+        <div class="example-line"><span class="comment">→ Envoie une branche feature</span></div>
+      </div>
+    </div>
+
+    <!-- git pull -->
+    <div class="card card-pull">
+      <div class="card-number">05</div>
+      <code class="cmd">git pull</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Récupère les dernières modifications du dépôt distant et les fusionne automatiquement dans la branche locale. Équivaut à <code>fetch</code> + <code>merge</code>.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">En début de session de travail, ou avant de pusher, pour être à jour avec les changements de l'équipe.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git pull</div>
+        <div class="example-line"><span class="comment">→ Récupère et merge la branche courante</span></div>
+        <div class="example-line"><span class="prompt">$ </span>git pull origin main</div>
+        <div class="example-line"><span class="comment">→ Récupère explicitement depuis main</span></div>
+      </div>
+    </div>
+
+    <!-- git checkout -->
+    <div class="card card-checkout">
+      <div class="card-number">06</div>
+      <code class="cmd">git checkout &lt;branche&gt;</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Bascule vers une autre branche existante. Avec <code>-b</code>, crée une nouvelle branche et bascule dessus directement.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Pour changer de contexte de travail : passer sur une feature, corriger un bug sur main, ou créer une nouvelle branche.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git checkout main</div>
+        <div class="example-line"><span class="comment">→ Bascule sur la branche main</span></div>
+        <div class="example-line"><span class="prompt">$ </span>git checkout -b feature/navbar</div>
+        <div class="example-line"><span class="comment">→ Crée + bascule sur feature/navbar</span></div>
+      </div>
+    </div>
+
+    <!-- git merge -->
+    <div class="card card-merge card-wide">
+      <div class="card-number">07</div>
+      <code class="cmd">git merge &lt;branche&gt;</code>
+
+      <div class="section-label">Définition</div>
+      <p class="definition">Fusionne l'historique d'une autre branche dans la branche courante. Les commits de la branche source sont intégrés dans la branche de destination.</p>
+
+      <div class="section-label">Quand l'utiliser</div>
+      <p class="when">Quand une feature est terminée et validée, pour l'intégrer dans <code>main</code>. Toujours se placer sur la branche de destination avant de merger.</p>
+
+      <div class="section-label">Exemple</div>
+      <div class="example-block">
+        <div class="example-line"><span class="prompt">$ </span>git checkout main <span class="comment">← on se place sur main d'abord</span></div>
+        <div class="example-line"><span class="prompt">$ </span>git merge feature/navbar <span class="comment">← on intègre la feature dans main</span></div>
+        <div class="example-line"><span class="comment">→ Merge made by the 'recursive' strategy.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Git Cheat Sheet · commandes du quotidien
+  </footer>
+
+</div>
+</body>
+</html>

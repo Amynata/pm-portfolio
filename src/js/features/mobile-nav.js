@@ -43,7 +43,7 @@ export function wireMobileNav(options) {
     ['mobile-nav-lang', 'btn-lang'],
     ['mobile-nav-formation', 'btn-formation'],
     ['mobile-nav-projects', 'btn-hero-projects'],
-    ['mobile-nav-cv', 'btn-hero-cv'],
+    ['mobile-nav-cv', 'btn-cv'],
     ['mobile-nav-contact', 'btn-contact'],
   ].forEach(function (pair) {
     var m = document.getElementById(pair[0]);
